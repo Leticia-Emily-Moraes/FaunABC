@@ -1,0 +1,63 @@
+import { ScrollView } from "react-native";
+import styled from "styled-components/native";
+
+export const ContainerScroll = styled(ScrollView)`
+    height: 100%;
+    width: 100%;
+    background-color: ${(props) => props.theme.colors.bg};
+`;
+export const Container = styled.View`
+    padding: 50px 10px;
+    background-color: ${(props) => props.theme.colors.bg};
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+`;
+export const ContainerInputs = styled.View`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+`;
+
+export const ContainerEntrarCom = styled.View`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 80%;
+`;
+
+export const ContainerButtonsEntrarCom = styled.View`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+`;
+
+export const TextoNormal = styled.Text`
+    color: ${(props) => props.theme.colors.text};
+    font-family: "Inter-Bold";
+    text-align: center;
+    font-size: ${(props) => props.theme.fontsSize.textoNormal};
+`;
+
+export const TextoTitulo = styled.Text`
+    color: ${(props) => props.theme.colors.text};
+    font-family: "Inter-Bold";
+    text-align: center;
+    font-size: ${(props) => props.theme.fontsSize.textoTitulo};
+`;
+
+export const TextError = styled.Text`
+    color: red;
+    font-family: 'Inter-Regular';
+    font-size: ${(props) => props.theme.fontsSize.textoMenor};
+`;

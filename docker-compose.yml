@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+    db:
+        image: mysql:8.0
+        container_name: mysql-faunaABC
+        environment:
+            MYSQL_ROOT_PASSWORD: RootFaunaAbc@1324
+            MYSQL_DATABASE: faunaABC
+            MYSQL_BASE: user
+            MYSQL_PASSWORD: FaunaAbc.1234
+        volumes:
+            - ./database/bancoDeDados.sql:/docker-entrypoint-initdb.d/bancoDeDados.sql
+        ports:
+            - "3306:3306"
+        networks:
+            - fauna-network
+
+    backend:
+        build:
+            context: ./backend
+            dockerfile: Dockerfile
+        container_name: express-backend
+        volumes:
+            - ./backend/src:/app/src
+        ports:
+            - "3001:3001"
+        depends_on:
+            - db
+        networks:
+            - fauna-network
+
+networks:
+    fauna-network:
+        driver: bridge

@@ -1,0 +1,21 @@
+{
+	"expo": {
+		"name": "app",
+		"slug": "app",
+		"version": "1.0.0",
+		"orientation": "portrait",
+		"icon": "",
+		"userInterfaceStyle": "light",
+		"splash": {},
+		"ios": {
+			"supportsTablet": true
+		},
+		"android": {
+			"adaptiveIcon": {}
+		},
+		"web": {
+			"favicon": ""
+		},
+		"assetBundlePatterns": ["**/*", "./assets/fonts/**/*"]
+	}
+}
