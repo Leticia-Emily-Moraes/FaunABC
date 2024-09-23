@@ -12,7 +12,7 @@ FLUSH PRIVILEGES;
 
 -- Cadastro de pessoas físicas
 CREATE TABLE CadastroPfisico (
-    IdPFisico INT AUTO_INCREMENT PRIMARY KEY,
+    IdPFisico VARCHAR(20) PRIMARY KEY,
     PrimeiroNome VARCHAR(50) NOT NULL,
     Sobrenome VARCHAR(50) NOT NULL,
     DataDeNascimento DATE NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE CadastroPfisico (
 
 -- Cadastro de ONGs
 CREATE TABLE CadastroONG (
-    IdONG INT AUTO_INCREMENT PRIMARY KEY,
+    IdONG VARCHAR(20) PRIMARY KEY,
     NomeONG VARCHAR(100) NOT NULL,
     Email VARCHAR(150) NOT NULL UNIQUE,
     Telefone VARCHAR(15) NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE CadastroResponsavel (
 
 -- Cadastro de biólogos
 CREATE TABLE CadastroBiologo (
-    IdProfissionais INT AUTO_INCREMENT PRIMARY KEY,
+    IdProfissionais VARCHAR(20) PRIMARY KEY,
     PrimeiroNome VARCHAR(50) NOT NULL,
     Sobrenome VARCHAR(50) NOT NULL,
     Email VARCHAR(100) NOT NULL UNIQUE,
@@ -73,14 +73,12 @@ CREATE TABLE CadastroBiologo (
 -- Tabela de login que associa diferentes usuários
 CREATE TABLE Login (
     IdLogin INT AUTO_INCREMENT PRIMARY KEY,
-    IdOng INT,
-    IdPessoal INT,
-    IdResponsavel INT,
-    IdBiologo INT,
+    IdOng VARCHAR(20),
+    IdPessoal VARCHAR(20),
+    IdBiologo VARCHAR(20),
     FOREIGN KEY (IdOng) REFERENCES CadastroONG (IdONG),
     FOREIGN KEY (IdBiologo) REFERENCES CadastroBiologo (IdProfissionais),
-    FOREIGN KEY (IdPessoal) REFERENCES CadastroPfisico (IdPFisico),
-    FOREIGN KEY (IdResponsavel) REFERENCES CadastroResponsavel (IdCadRes)
+    FOREIGN KEY (IdPessoal) REFERENCES CadastroPfisico (IdPFisico)
 );
 
 -- Cadastro de endereços
@@ -91,8 +89,48 @@ CREATE TABLE Endereco (
     Bairro VARCHAR(50) NOT NULL,
     Cidade VARCHAR(50) NOT NULL,
     Cep VARCHAR(8) NOT NULL,
-    IdUser INT,
-    IdOng INT,
+    IdUser VARCHAR(20),
+    IdOng VARCHAR(20),
     FOREIGN KEY (IdUser) REFERENCES CadastroPfisico (IdPFisico),
     FOREIGN KEY (IdOng) REFERENCES CadastroONG (IdONG)
 );
+
+DELIMITER //
+
+CREATE TRIGGER apos_insert_user_padrao
+BEFORE INSERT ON CadastroPfisico
+FOR EACH ROW
+BEGIN
+	DECLARE max_id INT;
+    
+    SELECT COALESCE(MAX(CAST(SUBSTRING(IdPFisico, 2) AS UNSIGNED)), 0) INTO max_id
+    FROM CadastroPfisico;
+    
+    SET NEW.IdPFisico = CONCAT('P', LPAD(max_id + 1, 5, '0'));
+END//
+
+CREATE TRIGGER apos_insert_user_ong
+BEFORE INSERT ON CadastroONG
+FOR EACH ROW
+BEGIN
+	DECLARE max_id INT;
+    
+    SELECT COALESCE(MAX(CAST(SUBSTRING(IdONG, 2) AS UNSIGNED)), 0) INTO max_id
+    FROM CadastroONG;
+    
+    SET NEW.IdONG = CONCAT('O', LPAD(max_id + 1, 5, '0'));
+END//
+
+CREATE TRIGGER apos_insert_user_bio
+BEFORE INSERT ON CadastroBiologo
+FOR EACH ROW
+BEGIN
+	DECLARE max_id INT;
+    
+    SELECT COALESCE(MAX(CAST(SUBSTRING(IdProfissionais, 2) AS UNSIGNED)), 0) INTO max_id
+    FROM CadastroBiologo;
+    
+    SET NEW.IdProfissionais = CONCAT('B', LPAD(max_id + 1, 5, '0'));
+END//
+
+DELIMITER ;
