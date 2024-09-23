@@ -17,10 +17,7 @@ export function CadastroUserProvider({ children }) {
 		cadastroResponsavel: {
 			primeiroNome: "",
 			sobrenome: "",
-			dataDeNascimento: "",
 			celular: "",
-			telefone: "",
-			cpf: "",
 			nivelParental: "",
 		},
 		endereco: {
@@ -43,7 +40,7 @@ export function UseCadastroUser() {
 	const context = useContext(CadastroUserContext);
 	if (!context) {
 		throw new Error(
-			"useCadastro deve ser usado dentro de um CadastroProvider",
+			"useCadastro deve ser usado dentro de um CadastroProvider"
 		);
 	}
 	return context;
