@@ -1,9 +1,9 @@
 import React from "react";
-import IconFolha from "../../assets/imgs/Folha.svg";
+import { Folha } from "../../assets/imgs";
 
 function IconeFolha() {
 	return (
-		<IconFolha width={40} height={40} />
+		<Folha width={40} height={40} />
 	);
 }
 
