@@ -11,7 +11,8 @@ import {
 import Button from "../../components/button";
 import InputEmail from "../../components/inputEmail";
 import InputSenha from "../../components/inputSenha";
-import Icon from "../../components/iconFolha";
+import IconeFolha from "../../components/iconFolha";
+
 import ButtonRedondo from "../../components/buttonsRedondos";
 import apple from "../../assets/imgs/apple.png";
 import facebook from "../../assets/imgs/facebook.png";
@@ -81,7 +82,7 @@ function Login({ navigation }) {
 					<ButtonRedondo img={apple} />
 				</ContainerButtonsEntrarCom>
 			</ContainerEntrarCom>
-			<Icon />
+			<IconeFolha />
 		</Container>
 	);
 }

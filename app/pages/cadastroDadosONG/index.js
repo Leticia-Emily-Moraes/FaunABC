@@ -16,7 +16,8 @@ import InputSenha from "../../components/inputSenha";
 import InputCNPJ from "../../components/inputCNPJ";
 import InputINSS from "../../components/inputINSS";
 import InputTelefone from "../../components/inputTelefone";
-import Icon from "../../components/iconFolha";
+import IconeFolha from "../../components/iconFolha";
+
 import ButtonRedondo from "../../components/buttonsRedondos";
 import apple from "../../assets/imgs/apple.png";
 import facebook from "../../assets/imgs/facebook.png";
@@ -46,7 +47,16 @@ function CadastroDadosOng({ navigation }) {
 		}
 	};
 	const verificandoPreenchimento = () => {
-		if (!nomeOng || !email || !telefone || !celular || !cnpj || !inss || !senha || !confirmaSenha) {
+		if (
+			!nomeOng ||
+			!email ||
+			!telefone ||
+			!celular ||
+			!cnpj ||
+			!inss ||
+			!senha ||
+			!confirmaSenha
+		) {
 			setErrorMensagem("Todos os campos devem estar preenchidos");
 			return;
 		}
@@ -58,68 +68,70 @@ function CadastroDadosOng({ navigation }) {
 	return (
 		<ContainerScroll>
 			<Container>
-			<TextoTitulo>Cadastre os dados da ONG</TextoTitulo>
-			{errorMensagem && <TextError>{errorMensagem}</TextError>}
-			<ContainerInputs>
-				<InputText
-					TituloDoInput="Nome da Ong:"
-					value={nomeOng}
-					onChangeText={setNomeOng}
-					placeholder="Nome da Ong"
-				/>
-				<InputEmail
-					value={email}
-					onChangeText={setEmail}
-				/>
+				<TextoTitulo>Cadastre os dados da ONG</TextoTitulo>
+				{errorMensagem && <TextError>{errorMensagem}</TextError>}
+				<ContainerInputs>
+					<InputText
+						TituloDoInput="Nome da Ong:"
+						value={nomeOng}
+						onChangeText={setNomeOng}
+						placeholder="Nome da Ong"
+					/>
+					<InputEmail
+						value={email}
+						onChangeText={setEmail}
+					/>
 
-				<InputTelefone
-					TituloDoInput="Telefone:"
-					placeholder="Digite seu numero de telefone"
-					value={telefone}
-					onChangeTelefone={setTelefone}
+					<InputTelefone
+						TituloDoInput="Telefone:"
+						placeholder="Digite seu numero de telefone"
+						value={telefone}
+						onChangeTelefone={setTelefone}
+					/>
+					<InputTelefone
+						TituloDoInput="Celular:"
+						placeholder="Digite seu numero de celular"
+						value={celular}
+						onChangeTelefone={setCelular}
+					/>
+					<InputCNPJ
+						value={cnpj}
+						onChangeCPF={setCnpj}
+					/>
+					<InputINSS
+						value={inss}
+						onChangeCPF={setInss}
+					/>
+					<InputSenha
+						value={senha}
+						onChangeText={setSenha}
+						secureTextEntry={true}
+					/>
+					<InputSenha
+						TituloDoInput="Confirme a senha:"
+						value={confirmaSenha}
+						onChangeText={handleConfirmarSenhaChange}
+						placeholder="Confirmar senha"
+						secureTextEntry={true}
+					/>
+					{!isSenhaValida && (
+						<TextError>{senhaErrorMessage}</TextError>
+					)}
+				</ContainerInputs>
+				<Button
+					title="Cadastrar"
+					onPress={verificandoPreenchimento}
 				/>
-				<InputTelefone
-					TituloDoInput="Celular:"
-					placeholder="Digite seu numero de celular"
-					value={celular}
-					onChangeTelefone={setCelular}
-				/>
-				<InputCNPJ
-					value={cnpj}
-					onChangeCPF={setCnpj}
-				/>
-				<InputINSS
-					value={inss}
-					onChangeCPF={setInss}
-				/>
-				<InputSenha
-					value={senha}
-					onChangeText={setSenha}
-					secureTextEntry={true}
-				/>
-				<InputSenha
-					TituloDoInput="Confirme a senha:"
-					value={confirmaSenha}
-					onChangeText={handleConfirmarSenhaChange}
-					placeholder="Confirmar senha"
-					secureTextEntry={true}
-				/>
-				{!isSenhaValida && <TextError>{senhaErrorMessage}</TextError>}
-			</ContainerInputs>
-			<Button
-				title="Cadastrar"
-				onPress={verificandoPreenchimento}
-			/>
-			<ContainerEntrarCom>
-				<TextoNormal>Cadastrar com:</TextoNormal>
-				<ContainerButtonsEntrarCom>
-					<ButtonRedondo img={facebook} />
-					<ButtonRedondo img={google} />
-					<ButtonRedondo img={apple} />
-				</ContainerButtonsEntrarCom>
-			</ContainerEntrarCom>
-			<Icon />
-		</Container>
+				<ContainerEntrarCom>
+					<TextoNormal>Cadastrar com:</TextoNormal>
+					<ContainerButtonsEntrarCom>
+						<ButtonRedondo img={facebook} />
+						<ButtonRedondo img={google} />
+						<ButtonRedondo img={apple} />
+					</ContainerButtonsEntrarCom>
+				</ContainerEntrarCom>
+				<IconeFolha />
+			</Container>
 		</ContainerScroll>
 	);
 }

@@ -1,8 +1,9 @@
-import React, { useContext, useState, useEffect} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Container, ContainerText, TextoNormal, TextoTitulo } from "./style";
 import Button from "../../components/button";
 import Logo from "../../components/logoPadrao";
-import Icon from "../../components/iconFolha";
+import IconeFolha from "../../components/iconFolha";
+
 import { PerfilContext } from "../../context/perfilContext";
 
 const ConfirmacaoDeCadastro = ({ navigation }) => {
@@ -11,9 +12,13 @@ const ConfirmacaoDeCadastro = ({ navigation }) => {
 
 	useEffect(() => {
 		if (perfil === "1") {
-			setSubtitulo("Faça o login para aproveitar o máximo da nossa plataforma");
+			setSubtitulo(
+				"Faça o login para aproveitar o máximo da nossa plataforma"
+			);
 		} else if (perfil === "2" || perfil === "3") {
-			setSubtitulo("Período para análise: 7 dias, assim que analisado receberá um e-mail.");
+			setSubtitulo(
+				"Período para análise: 7 dias, assim que analisado receberá um e-mail."
+			);
 		}
 	}, [perfil]);
 	return (
@@ -21,15 +26,13 @@ const ConfirmacaoDeCadastro = ({ navigation }) => {
 			<Logo />
 			<ContainerText>
 				<TextoTitulo>Dados cadastrados com Sucesso!</TextoTitulo>
-				<TextoNormal>
-					{subtitulo}
-				</TextoNormal>
+				<TextoNormal>{subtitulo}</TextoNormal>
 			</ContainerText>
 			<Button
 				title="Ir para login"
 				onPress={() => navigation.navigate("Login")}
 			/>
-			<Icon />
+			<IconeFolha />
 		</Container>
 	);
 };

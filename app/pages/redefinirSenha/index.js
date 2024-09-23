@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import {
-	Container,
-	ContainerInputs,
-	TextoTitulo,
-	TextError,
-} from "./style";
+import { Container, ContainerInputs, TextoTitulo, TextError } from "./style";
 import Button from "../../components/button";
 import InputSenha from "../../components/inputSenha";
-import Icon from "../../components/iconFolha";
+import IconeFolha from "../../components/iconFolha";
 
 function RedefinirSenha({ navigation }) {
 	const [senha, setSenha] = useState("");
@@ -59,7 +54,7 @@ function RedefinirSenha({ navigation }) {
 				title="Redefinir"
 				onPress={verificandoPreenchimento}
 			/>
-			<Icon />
+			<IconeFolha />
 		</Container>
 	);
 }

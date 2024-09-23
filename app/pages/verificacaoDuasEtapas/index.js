@@ -9,7 +9,8 @@ import {
 } from "./style";
 import Button from "../../components/button";
 import Logo from "../../components/logoPadrao";
-import Icon from "../../components/iconFolha";
+import IconeFolha from "../../components/iconFolha";
+
 import InputNumero from "../../components/inputNumero";
 import Link from "../../components/link";
 
@@ -28,9 +29,9 @@ const VerificacaoDuasEtapas = ({ navigation, route }) => {
 			setMensagemErro("Por favor, insira o código de verificação.");
 			return;
 		} else {
-			if(isPasswordReset){
+			if (isPasswordReset) {
 				navigation.navigate(" ");
-			}else{
+			} else {
 				navigation.navigate("PaginaPrincipal");
 			}
 		}
@@ -76,7 +77,7 @@ const VerificacaoDuasEtapas = ({ navigation, route }) => {
 				title="Verificar"
 				onPress={handleVerification}
 			/>
-			<Icon />
+			<IconeFolha />
 		</Container>
 	);
 };

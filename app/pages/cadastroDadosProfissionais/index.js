@@ -11,7 +11,7 @@ import InputTelefone from "../../components/inputTelefone";
 import InputPadrao from "../../components/inputPadrao";
 import InputCPF from "../../components/inputCPF";
 import InputDataDeNascimento from "../../components/inputDataDeNascimento";
-import Icon from "../../components/iconFolha";
+import IconeFolha from "../../components/iconFolha";
 
 function CadastroDadosProfissionais({ navigation }) {
 	const [dataDeNascimento, setDataDeNascimento] = useState(new Date());
@@ -64,7 +64,7 @@ function CadastroDadosProfissionais({ navigation }) {
 				title="Confirmar"
 				onPress={verificandoPreenchimento}
 			/>
-			<Icon />
+			<IconeFolha />
 		</Container>
 	);
 }
