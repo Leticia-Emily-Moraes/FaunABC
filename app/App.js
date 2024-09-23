@@ -6,6 +6,9 @@ import { ThemeProvider as StyledThemeProvider } from "styled-components/native";
 import { PerfilProvider } from "./context/perfilContext";
 import { ProvedorFonte, UseFonte } from "./context/fonteContext";
 import { ThemeProvider, useTheme } from "./context/themeContext";
+import { CadastroUserProvider } from "./context/cadastroUserContext";
+import { CadastroProfissionalProvider } from "./context/cadastroProfissionalContext";
+import { CadastroOngProvider } from "./context/cadastroOngContext";
 import { LoadingContainer } from "./style";
 
 function MainApp() {
@@ -30,7 +33,13 @@ function App() {
 		<ThemeProvider>
 			<ProvedorFonte>
 				<PerfilProvider>
-					<MainApp />
+					<CadastroUserProvider>
+						<CadastroOngProvider>
+							<CadastroProfissionalProvider>
+								<MainApp />
+							</CadastroProfissionalProvider>
+						</CadastroOngProvider>
+					</CadastroUserProvider>
 				</PerfilProvider>
 			</ProvedorFonte>
 		</ThemeProvider>
