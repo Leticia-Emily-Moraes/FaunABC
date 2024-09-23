@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { UseCadastroUser } from "../../context/cadastroUserContext"
 import {
 	Container,
 	ContainerInputs,
@@ -6,42 +7,59 @@ import {
 	TextoTitulo,
 	TextError,
 } from "./style";
-import Button from "../../components/button";
-import InputTelefone from "../../components/inputTelefone";
-import InputCPF from "../../components/inputCPF";
-import InputDataDeNascimento from "../../components/inputDataDeNascimento";
-import Icon from "../../components/iconFolha";
+import {
+	Button,
+	InputTelefone,
+	InputCPF,
+	InputDataDeNascimento,
+	IconeFolha,
+} from "../../components";
 
 function CadastroDadosPessoaisUser({ navigation }) {
+	const { dadosCadastroUser, setDadosCadastroUser } = UseCadastroUser();
 	const [dataDeNascimento, setDataDeNascimento] = useState(new Date());
 	const [telefone, setTelefone] = useState("");
 	const [celular, setCelular] = useState("");
 	const [cpf, setCpf] = useState("");
 	const [errorMensagem, setErrorMensagem] = useState("");
 
-	
-	const calcularIdade = () =>{
+	const calcularIdade = () => {
 		const hoje = new Date();
 		const dataNascimento = new Date(dataDeNascimento);
 		let idade = hoje.getFullYear() - dataNascimento.getFullYear();
 		const diferencaDeMes = hoje.getMonth() - dataNascimento.getMonth();
-		
-		if (diferencaDeMes < 0 || (diferencaDeMes === 0 && hoje.getDate() < dataNascimento.getDate())) {
+
+		if (
+			diferencaDeMes < 0 ||
+			(diferencaDeMes === 0 && hoje.getDate() < dataNascimento.getDate())
+		) {
 			idade--;
 		}
-		
+
 		return idade;
-	}
-	
+	};
+
 	const verificandoPreenchimento = () => {
 		if (!dataDeNascimento || !celular || !cpf) {
 			setErrorMensagem("Todos os campos devem estar preenchidos");
 			return;
 		} else {
 			const idade = calcularIdade(dataDeNascimento);
+
+			setDadosCadastroUser((prev) => ({
+				...prev,
+				cadastroPfisico : {
+					...prev.cadastroPfisico,
+					dataDeNascimento,
+					telefone,
+					celular,
+					cpf,
+				}
+			}));
+
 			setErrorMensagem("");
 			navigation.navigate("CadastroDadosEmergenciasUser", {
-				idade: idade
+				idade: idade,
 			});
 		}
 	};
@@ -74,7 +92,7 @@ function CadastroDadosPessoaisUser({ navigation }) {
 				title="Confirmar"
 				onPress={verificandoPreenchimento}
 			/>
-			<Icon />
+			<IconeFolha />
 		</Container>
 	);
 }

@@ -1,44 +1,81 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Container, TextoTitulo, ContainerInputs, TextError } from "./style";
-import InputCEP from "../../components/inputCEP";
-import InputText from "../../components/inputText";
-import InputNumero from "../../components/inputNumero";
-import Button from "../../components/button";
-import Icon from "../../components/iconFolha";
+import {
+	Button,
+	InputCEP,
+	InputText,
+	InputNumero,
+	IconeFolha,
+} from "../../components";
 import { PerfilContext } from "../../context/perfilContext";
+import { UseCadastroUser } from "../../context/cadastroUserContext";
+import { UseCadastroOng } from "../../context/cadastroOngContext";
+
 function CadastroEndereco({ navigation }) {
-	const [cep, setCep] = useState("");
+	const { dadosCadastroUser, setDadosCadastroUser } = UseCadastroUser();
+	const { dadosCadastroOng, setDadosCadastroOng } = UseCadastroOng();
+	const { perfil } = useContext(PerfilContext);
+
+	const getDadosDoPerfil = (key) =>
+		perfil === 1
+			? dadosCadastroUser.endereco[key]
+			: dadosCadastroOng.endereco[key];
+
+	const [cep, setCep] = useState(getDadosDoPerfil("cep"));
 	const [address, setAddress] = useState(null);
-	const [endereco, setEndereco] = useState("");
-	const [numero, setNumero] = useState("");
-	const [bairro, setBairro] = useState("");
-	const [cidade, setCidade] = useState("");
+	const [endereco, setEndereco] = useState(getDadosDoPerfil("logradouro"));
+	const [numero, setNumero] = useState(getDadosDoPerfil("numero"));
+	const [bairro, setBairro] = useState(getDadosDoPerfil("bairro"));
+	const [cidade, setCidade] = useState(getDadosDoPerfil("cidade"));
 	const [isRioGrandeDaSerra, setIsRioGrandeDaSerra] = useState(false);
 	const [errorMensagem, setErrorMensagem] = useState("");
 	const [mensagemTitulo, setmensagemTitulo] = useState("");
-	const { perfil } = useContext(PerfilContext);
 
 	useEffect(() => {
-		if (perfil === "1") {
+		if (perfil === 1) {
 			setmensagemTitulo("Cadastre seu endereço");
-		} else if (perfil === "2") {
+		} else if (perfil === 2) {
 			setmensagemTitulo("Cadastre o endereço da ONG");
 		}
 	}, [perfil]);
 
+	const handleChange = (setter, key, value) => {
+		setter(value);
+		if (perfil === 1) {
+			setDadosCadastroUser((prev) => ({
+				...prev,
+				endereco: {
+					...prev.endereco,
+					[key]: value,
+				},
+			}));
+		} else {
+			setDadosCadastroOng((prev) => ({
+				...prev,
+				endereco: {
+					...prev.endereco,
+					[key]: value,
+				},
+			}));
+		}
+	};
+
 	const handleAddressFound = (addressData) => {
 		if (addressData) {
 			setAddress(addressData);
-			setEndereco(addressData.logradouro);
-			setBairro(addressData.bairro);
-			setCidade(addressData.localidade);
-			setIsRioGrandeDaSerra(addressData.logradouro === "" && addressData.bairro === "");
+			handleChange(setEndereco, "logradouro", addressData.logradouro);
+			handleChange(setBairro, "bairro", addressData.bairro);
+			handleChange(setCidade, "cidade", addressData.localidade);
+			setIsRioGrandeDaSerra(
+				addressData.logradouro === "" && addressData.bairro === ""
+			);
 		} else {
-			setEndereco("");
-			setBairro("");
-			setCidade("");
+			handleChange(setEndereco, "logradouro", "");
+			handleChange(setBairro, "bairro", "");
+			handleChange(setCidade, "cidade", "");
 		}
 	};
+	
 
 	useEffect(() => {
 		if (cep.length !== 8) {
@@ -55,11 +92,13 @@ function CadastroEndereco({ navigation }) {
 			return;
 		}
 
-		if (perfil === "1") {
-			navigation.navigate("CadastroDadosPessoaisUser");
-		} else if (perfil === "2") {
-			navigation.navigate("ConfirmacaoDeCadastro");
-		}
+		console.log(
+			"Dados cadastrados: ",
+			perfil === 1 ? dadosCadastroUser : dadosCadastroOng
+		);
+		navigation.navigate(
+			perfil === 1 ? "CadastroDadosPessoaisUser" : "ConfirmacaoDeCadastro"
+		);
 	};
 
 	return (
@@ -69,32 +108,33 @@ function CadastroEndereco({ navigation }) {
 			<ContainerInputs>
 				<InputCEP
 					value={cep}
-					onChangeText={setCep}
+					onChangeText={(text) => handleChange(setCep, "cep", text)}
 					onAddressFound={handleAddressFound}
 				/>
 				<InputText
 					TituloDoInput="Endereço:"
 					value={endereco}
+					onChangeText={(text) => handleChange(setEndereco, "logradouro", text)}
 					isEditable={isRioGrandeDaSerra}
 					placeholder="Endereço"
 				/>
 				<InputNumero
 					TituloDoInput="Número:"
 					value={numero}
-					onChangeNumber={setNumero}
+					onChangeNumber={(text) => handleChange(setNumero, "numero", text)}
 					placeholder="Número"
 				/>
 				<InputText
 					TituloDoInput="Bairro:"
 					value={bairro}
-					onChangeText={setBairro}
+					onChangeText={(text) => handleChange(setBairro, "bairro", text)}
 					isEditable={isRioGrandeDaSerra}
 					placeholder="Bairro"
 				/>
 				<InputText
 					TituloDoInput="Cidade:"
 					value={cidade}
-					onChangeText={setCidade}
+					onChangeText={(text) => handleChange(setCidade, "cidade", text)}
 					isEditable={false}
 					placeholder="Cidade"
 				/>
@@ -103,7 +143,7 @@ function CadastroEndereco({ navigation }) {
 				title="Confirmar"
 				onPress={verificandoPreenchimento}
 			/>
-			<Icon />
+			<IconeFolha />
 		</Container>
 	);
 }

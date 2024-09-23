@@ -1,4 +1,7 @@
 import React, { useState, useContext } from "react";
+import { PerfilContext } from "../../context/perfilContext";
+import { UseCadastroUser } from "../../context/cadastroUserContext";
+import { UseCadastroProfissional } from "../../context/cadastroProfissionalContext";
 import {
 	Container,
 	ContainerInputs,
@@ -8,31 +11,53 @@ import {
 	ContainerButtonsEntrarCom,
 	TextError,
 } from "./style";
-import { UseCadastroUser } from "../../context/cadastroUserContext";
-import Button from "../../components/button";
-import InputText from "../../components/inputText";
-import InputEmail from "../../components/inputEmail";
-import InputSenha from "../../components/inputSenha";
-import Icon from "../../components/iconFolha";
-import ButtonRedondo from "../../components/buttonsRedondos";
-import apple from "../../assets/imgs/apple.png";
-import facebook from "../../assets/imgs/facebook.png";
-import google from "../../assets/imgs/google.png";
-import { PerfilContext } from "../../context/perfilContext";
+import {
+	Button,
+	ButtonsRedondos,
+	InputText,
+	InputEmail,
+	InputSenha,
+	IconeFolha,
+} from "../../components";
+import { Apple, Facebook, Google } from "../../assets/imgs";
 
 function CadastroDadosUser({ navigation }) {
 	const { dadosCadastroUser, setDadosCadastroUser } = UseCadastroUser();
-	const [pNome, setPNome] = useState(
-		perfil === 1 ? dadosCadastroUser.cadastroPfisico.primeiroNome : "",
-	);
-	const [sobrenome, setSobrenome] = useState("");
-	const [email, setEmail] = useState("");
-	const [senha, setSenha] = useState("");
+	const { dadosCadastroProfissional, setDadosCadastroProfissional } =
+		UseCadastroProfissional();
+	const { perfil } = useContext(PerfilContext);
+
+	const getDadosDoPerfil = (key) =>
+		perfil === 1
+			? dadosCadastroUser.cadastroPfisico[key]
+			: dadosCadastroProfissional.cadastroProfissional[key];
+
+	const [pNome, setPNome] = useState(getDadosDoPerfil("primeiroNome"));
+	const [sobrenome, setSobrenome] = useState(getDadosDoPerfil("sobrenome"));
+	const [email, setEmail] = useState(getDadosDoPerfil("email"));
+	const [senha, setSenha] = useState(getDadosDoPerfil("senha"));
 	const [confirmaSenha, setConfirmaSenha] = useState("");
 	const [isSenhaValida, setIsSenhaValida] = useState(true);
 	const [senhaErrorMessage, setSenhaErrorMessage] = useState("");
 	const [errorMensagem, setErrorMensagem] = useState("");
-	const { perfil } = useContext(PerfilContext);
+
+	const handleChange = (setter, key, value) => {
+		setter(value);
+		if (perfil === 1) {
+			setDadosCadastroUser((prev) => ({
+				...prev,
+				cadastroPfisico: { ...prev.cadastroPfisico, [key]: value },
+			}));
+		} else {
+			setDadosCadastroProfissional((prev) => ({
+				...prev,
+				cadastroProfissional: {
+					...prev.cadastroProfissional,
+					[key]: value,
+				},
+			}));
+		}
+	};
 
 	const handleConfirmarSenhaChange = (text) => {
 		setConfirmaSenha(text);
@@ -51,12 +76,13 @@ function CadastroDadosUser({ navigation }) {
 			return;
 		}
 		if (isSenhaValida) {
-			console.log(perfil);
-			if (perfil === 1) {
-				navigation.navigate("CadastroEndereco");
-			} else if (perfil === "3") {
-				navigation.navigate("CadastroDadosProfissionais");
-			}
+			console.log(
+				"Dados cadastrados: ",
+				perfil === 1 ? dadosCadastroUser : dadosCadastroProfissional
+			);
+			navigation.navigate(
+				perfil === 1 ? "CadastroEndereco" : "CadastroDadosProfissionais"
+			);
 		}
 	};
 
@@ -68,22 +94,30 @@ function CadastroDadosUser({ navigation }) {
 				<InputText
 					TituloDoInput="Primeiro nome:"
 					value={pNome}
-					onChangeText={setPNome}
+					onChangeText={(text) =>
+						handleChange(setPNome, "primeiroNome", text)
+					}
 					placeholder="Primeiro nome"
 				/>
 				<InputText
 					TituloDoInput="Sobrenome:"
 					value={sobrenome}
-					onChangeText={setSobrenome}
+					onChangeText={(text) =>
+						handleChange(setSobrenome, "sobrenome", text)
+					}
 					placeholder="Sobrenome"
 				/>
 				<InputEmail
 					value={email}
-					onChangeText={setEmail}
+					onChangeText={(text) =>
+						handleChange(setEmail, "email", text)
+					}
 				/>
 				<InputSenha
 					value={senha}
-					onChangeText={setSenha}
+					onChangeText={(text) =>
+						handleChange(setSenha, "senha", text)
+					}
 					secureTextEntry={true}
 				/>
 				<InputSenha
@@ -102,12 +136,12 @@ function CadastroDadosUser({ navigation }) {
 			<ContainerEntrarCom>
 				<TextoNormal>Cadastrar com:</TextoNormal>
 				<ContainerButtonsEntrarCom>
-					<ButtonRedondo img={facebook} />
-					<ButtonRedondo img={google} />
-					<ButtonRedondo img={apple} />
+					<ButtonsRedondos img={Facebook} />
+					<ButtonsRedondos img={Google} />
+					<ButtonsRedondos img={Apple} />
 				</ContainerButtonsEntrarCom>
 			</ContainerEntrarCom>
-			<Icon />
+			<IconeFolha />
 		</Container>
 	);
 }

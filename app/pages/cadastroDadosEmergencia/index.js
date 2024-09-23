@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	Container,
 	ContainerInputs,
@@ -7,14 +7,19 @@ import {
 	TextError,
 	ContainerTitulos,
 } from "./style";
-import Button from "../../components/button";
-import InputTelefone from "../../components/inputTelefone";
-import InputText from "../../components/inputText";
-import SelectNivelParental from "../../components/selectNivelParental";
-import Icon from "../../components/iconFolha";
+import {
+	Button,
+	InputTelefone,
+	InputText,
+	SelectNivelParental,
+	IconeFolha,
+} from "../../components";
+import { UseCadastroUser } from "../../context/cadastroUserContext";
 
 function CadastroDadosEmergenciasUser({ navigation, route }) {
 	const idade = route.params;
+
+	const { dadosCadastroUser, setDadosCadastroUser } = UseCadastroUser();
 	const [pNomePessoaEmergencia, setPNomePessoaEmergencia] = useState("");
 	const [sobrenomePessoaEmergencia, setSobrenomePessoaEmergencia] =
 		useState("");
@@ -32,6 +37,16 @@ function CadastroDadosEmergenciasUser({ navigation, route }) {
 			setErrorMensagem("Todos os campos devem estar preenchidos");
 			return;
 		} else {
+			setDadosCadastroUser((prev) => ({
+				...prev,
+				cadastroResponsavel: {
+					...prev.cadastroResponsavel,
+					primeiroNome: pNomePessoaEmergencia,
+					sobrenome: sobrenomePessoaEmergencia,
+					celular: celularPessoaEmergencia,
+					nivelParental: nivelParental,
+				},
+			}));
 			setErrorMensagem("");
 			navigation.navigate("ConfirmacaoDeCadastro");
 		}
@@ -79,7 +94,7 @@ function CadastroDadosEmergenciasUser({ navigation, route }) {
 				title="Confirmar"
 				onPress={verificandoPreenchimento}
 			/>
-			<Icon />
+			<IconeFolha />
 		</Container>
 	);
 }
