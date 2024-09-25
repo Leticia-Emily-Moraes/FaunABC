@@ -9,9 +9,9 @@ function EscolhaPerfil({ navigation }) {
 	const { perfil, setPerfil } = useContext(PerfilContext);
 
 	const handleCaminhoCadastro = () => {
-		if (perfil === "1") {
+		if (perfil === 1) {
             navigation.navigate("CadastroDadosUser");
-		} else if (perfil === "2") {
+		} else if (perfil === 2) {
             navigation.navigate("CadastroDadosOng");
 		} else {
             navigation.navigate("CadastroDadosUser");
@@ -24,9 +24,9 @@ function EscolhaPerfil({ navigation }) {
 			<TextoGrande>Escolha o tipo de perfil para cadastro</TextoGrande>
 			<Radio
 				options={[
-					{ label: "Pessoal", value: "1" },
-					{ label: "ONG", value: "2" },
-					{ label: "Profissional", value: "3" },
+					{ label: "Pessoal", value: 1 },
+					{ label: "ONG", value: 2 },
+					{ label: "Profissional", value: 3 },
 				]}
 				valorCheckado={perfil}
 				onChange={setPerfil}
