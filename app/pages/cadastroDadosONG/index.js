@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { UseCadastroOng } from "../../context/cadastroOngContext";
 import {
 	ContainerScroll,
 	Container,
@@ -24,6 +25,7 @@ import facebook from "../../assets/imgs/facebook.png";
 import google from "../../assets/imgs/google.png";
 
 function CadastroDadosOng({ navigation }) {
+	const { dadosCadastroOng, setDadosCadastroOng } = UseCadastroOng();
 	const [nomeOng, setNomeOng] = useState("");
 	const [email, setEmail] = useState("");
 	const [telefone, setTelefone] = useState("");
@@ -50,7 +52,6 @@ function CadastroDadosOng({ navigation }) {
 		if (
 			!nomeOng ||
 			!email ||
-			!telefone ||
 			!celular ||
 			!cnpj ||
 			!inss ||
@@ -58,9 +59,33 @@ function CadastroDadosOng({ navigation }) {
 			!confirmaSenha
 		) {
 			setErrorMensagem("Todos os campos devem estar preenchidos");
+			console.log(
+				nomeOng,
+				email,
+				celular,
+				cnpj,
+				inss,
+				senha,
+				confirmaSenha
+			);
 			return;
 		}
 		if (isSenhaValida) {
+			setDadosCadastroOng((prev) => ({
+				...prev,
+				CadastroOng: {
+					...prev.CadastroOng,
+					NomeOng: nomeOng,
+					email: email,
+					telefone: telefone,
+					celular: celular,
+					cnpj: cnpj,
+					inss: inss,
+					senha: senha,
+				},
+			}));
+			setErrorMensagem("");
+			console.log(dadosCadastroOng);
 			navigation.navigate("CadastroEndereco");
 		}
 	};
@@ -96,11 +121,11 @@ function CadastroDadosOng({ navigation }) {
 					/>
 					<InputCNPJ
 						value={cnpj}
-						onChangeCPF={setCnpj}
+						onChangeCNPJ={setCnpj}
 					/>
 					<InputINSS
 						value={inss}
-						onChangeCPF={setInss}
+						onChangeINSS={setInss}
 					/>
 					<InputSenha
 						value={senha}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
 	Container,
 	ContainerInputs,
@@ -6,14 +6,18 @@ import {
 	TextoTitulo,
 	TextError,
 } from "./style";
+import { formatarData } from "../../helpers/helpers";
 import Button from "../../components/button";
 import InputTelefone from "../../components/inputTelefone";
 import InputPadrao from "../../components/inputPadrao";
 import InputCPF from "../../components/inputCPF";
 import InputDataDeNascimento from "../../components/inputDataDeNascimento";
 import IconeFolha from "../../components/iconFolha";
+import { UseCadastroProfissional } from "../../context/cadastroProfissionalContext";
 
 function CadastroDadosProfissionais({ navigation }) {
+	const { dadosCadastroProfissional, setDadosCadastroProfissional } =
+		UseCadastroProfissional();
 	const [dataDeNascimento, setDataDeNascimento] = useState(new Date());
 	const [telefone, setTelefone] = useState("");
 	const [celular, setCelular] = useState("");
@@ -26,6 +30,20 @@ function CadastroDadosProfissionais({ navigation }) {
 			setErrorMensagem("Todos os campos devem estar preenchidos");
 			return;
 		} else {
+			const dataFormatada = formatarData(dataDeNascimento);
+
+			setDadosCadastroProfissional((prev) => ({
+				...prev,
+				cadastroProfissional: {
+					...prev.cadastroProfissional,
+					dataDeNascimento: dataFormatada,
+					telefone,
+					celular,
+					cpf,
+					registroProfissional,
+				},
+			}));
+			setErrorMensagem("");
 			navigation.navigate("ConfirmacaoDeCadastro");
 		}
 	};
@@ -56,7 +74,7 @@ function CadastroDadosProfissionais({ navigation }) {
 				<InputPadrao
 					TituloDoInput="Registro Profissional (CRBio, CRMV):"
 					value={registroProfissional}
-					onChangeNumber={setRegistroProfissional}
+					onChangeText={setRegistroProfissional}
 					placeholder="Seu registro profissional"
 				/>
 			</ContainerInputs>

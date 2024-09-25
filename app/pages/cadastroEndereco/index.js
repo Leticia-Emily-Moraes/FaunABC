@@ -20,7 +20,6 @@ function CadastroEndereco({ navigation }) {
 		perfil === 1
 			? dadosCadastroUser.endereco[key]
 			: dadosCadastroOng.endereco[key];
-
 	const [cep, setCep] = useState(getDadosDoPerfil("cep"));
 	const [address, setAddress] = useState(null);
 	const [endereco, setEndereco] = useState(getDadosDoPerfil("logradouro"));
@@ -34,7 +33,7 @@ function CadastroEndereco({ navigation }) {
 	useEffect(() => {
 		if (perfil === 1) {
 			setmensagemTitulo("Cadastre seu endereço");
-		} else if (perfil === 2) {
+		} else{
 			setmensagemTitulo("Cadastre o endereço da ONG");
 		}
 	}, [perfil]);
@@ -75,7 +74,6 @@ function CadastroEndereco({ navigation }) {
 			handleChange(setCidade, "cidade", "");
 		}
 	};
-	
 
 	useEffect(() => {
 		if (cep.length !== 8) {
@@ -91,11 +89,6 @@ function CadastroEndereco({ navigation }) {
 			setErrorMensagem("Todos os campos devem estar preenchidos");
 			return;
 		}
-
-		console.log(
-			"Dados cadastrados: ",
-			perfil === 1 ? dadosCadastroUser : dadosCadastroOng
-		);
 		navigation.navigate(
 			perfil === 1 ? "CadastroDadosPessoaisUser" : "ConfirmacaoDeCadastro"
 		);
@@ -114,27 +107,35 @@ function CadastroEndereco({ navigation }) {
 				<InputText
 					TituloDoInput="Endereço:"
 					value={endereco}
-					onChangeText={(text) => handleChange(setEndereco, "logradouro", text)}
+					onChangeText={(text) =>
+						handleChange(setEndereco, "logradouro", text)
+					}
 					isEditable={isRioGrandeDaSerra}
 					placeholder="Endereço"
 				/>
 				<InputNumero
 					TituloDoInput="Número:"
 					value={numero}
-					onChangeNumber={(text) => handleChange(setNumero, "numero", text)}
+					onChangeNumber={(text) =>
+						handleChange(setNumero, "numero", text)
+					}
 					placeholder="Número"
 				/>
 				<InputText
 					TituloDoInput="Bairro:"
 					value={bairro}
-					onChangeText={(text) => handleChange(setBairro, "bairro", text)}
+					onChangeText={(text) =>
+						handleChange(setBairro, "bairro", text)
+					}
 					isEditable={isRioGrandeDaSerra}
 					placeholder="Bairro"
 				/>
 				<InputText
 					TituloDoInput="Cidade:"
 					value={cidade}
-					onChangeText={(text) => handleChange(setCidade, "cidade", text)}
+					onChangeText={(text) =>
+						handleChange(setCidade, "cidade", text)
+					}
 					isEditable={false}
 					placeholder="Cidade"
 				/>

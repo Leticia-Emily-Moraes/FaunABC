@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { UseCadastroUser } from "../../context/cadastroUserContext"
+import { UseCadastroUser } from "../../context/cadastroUserContext";
+import { formatarData } from "../../helpers/helpers";
 import {
 	Container,
 	ContainerInputs,
@@ -44,17 +45,18 @@ function CadastroDadosPessoaisUser({ navigation }) {
 			setErrorMensagem("Todos os campos devem estar preenchidos");
 			return;
 		} else {
+			const dataFormatada = formatarData(dataDeNascimento);
 			const idade = calcularIdade(dataDeNascimento);
 
 			setDadosCadastroUser((prev) => ({
 				...prev,
-				cadastroPfisico : {
+				cadastroPfisico: {
 					...prev.cadastroPfisico,
-					dataDeNascimento,
+					dataDeNascimento: dataFormatada,
 					telefone,
 					celular,
 					cpf,
-				}
+				},
 			}));
 
 			setErrorMensagem("");
