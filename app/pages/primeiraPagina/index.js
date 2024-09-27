@@ -6,43 +6,48 @@ import {
 	ContainerButtonsEntrarCom,
 	TextoNormal,
 } from "./style";
-import Button from "../../components/button";
-import Logo from "../../components/logoPadrao";
-import ButtonRedondo from "../../components/buttonsRedondos";
-import apple from "../../assets/imgs/apple.png";
-import facebook from "../../assets/imgs/facebook.png";
-import google from "../../assets/imgs/google.png";
-import ToggleTheme from "../../components/toggleTheme";
-import IconeFolha from "../../components/iconFolha"
+
+import {
+	Button,
+	LogoPadrao,
+	ButtonsRedondos,
+	IconeFolha,
+	ToggleTheme,
+} from "../../components";
+
+import { Apple, Facebook, Google } from "../../assets/imgs";
 
 const PrimeiraPagina = ({ navigation }) => {
 	return (
 		<Container>
 			<ToggleTheme />
-			<Logo />
+			<LogoPadrao />
 			<ContainerButtons>
 				<Button
+					isFull={true}
 					title="Cadastre-se"
 					onPress={() => navigation.navigate("EscolhaPerfil")}
 				/>
 				<Button
+					isFull={true}
 					title="Entrar"
 					onPress={() => navigation.navigate("Login")}
 				/>
 				<ContainerEntrarCom>
 					<TextoNormal>Entrar com:</TextoNormal>
 					<ContainerButtonsEntrarCom>
-						<ButtonRedondo img={facebook} />
-						<ButtonRedondo img={google} />
-						<ButtonRedondo img={apple} />
+						<ButtonsRedondos img={Facebook} />
+						<ButtonsRedondos img={Google} />
+						<ButtonsRedondos img={Apple} />
 					</ContainerButtonsEntrarCom>
 				</ContainerEntrarCom>
-				<Button 
-				title="Sem Logar" 
-				// onPress={() => navigation.navigate("")}
+				<Button
+					isFull={true}
+					title="Sem Logar"
+					// onPress={() => navigation.navigate("")}
 				/>
 			</ContainerButtons>
-			<IconeFolha/>
+			<IconeFolha />
 		</Container>
 	);
 };

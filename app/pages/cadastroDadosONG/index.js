@@ -10,20 +10,18 @@ import {
 	ContainerButtonsEntrarCom,
 	TextError,
 } from "./style";
-import Button from "../../components/button";
-import InputText from "../../components/inputText";
-import InputEmail from "../../components/inputEmail";
-import InputSenha from "../../components/inputSenha";
-import InputCNPJ from "../../components/inputCNPJ";
-import InputINSS from "../../components/inputINSS";
-import InputTelefone from "../../components/inputTelefone";
-import IconeFolha from "../../components/iconFolha";
-
-import ButtonRedondo from "../../components/buttonsRedondos";
-import apple from "../../assets/imgs/apple.png";
-import facebook from "../../assets/imgs/facebook.png";
-import google from "../../assets/imgs/google.png";
-
+import {
+	Button,
+	InputText,
+	InputEmail,
+	InputSenha,
+	InputCNPJ,
+	InputINSS,
+	InputTelefone,
+	IconeFolha,
+	ButtonsRedondos,
+} from "../../components";
+import { Apple, Facebook, Google } from "../../assets/imgs";
 function CadastroDadosOng({ navigation }) {
 	const { dadosCadastroOng, setDadosCadastroOng } = UseCadastroOng();
 	const [nomeOng, setNomeOng] = useState("");
@@ -150,9 +148,9 @@ function CadastroDadosOng({ navigation }) {
 				<ContainerEntrarCom>
 					<TextoNormal>Cadastrar com:</TextoNormal>
 					<ContainerButtonsEntrarCom>
-						<ButtonRedondo img={facebook} />
-						<ButtonRedondo img={google} />
-						<ButtonRedondo img={apple} />
+						<ButtonsRedondos img={Facebook} />
+						<ButtonsRedondos img={Google} />
+						<ButtonsRedondos img={Apple} />
 					</ContainerButtonsEntrarCom>
 				</ContainerEntrarCom>
 				<IconeFolha />

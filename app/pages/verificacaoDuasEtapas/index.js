@@ -7,12 +7,14 @@ import {
 	TextoMenosEnface,
 	TextError,
 } from "./style";
-import Button from "../../components/button";
-import Logo from "../../components/logoPadrao";
-import IconeFolha from "../../components/iconFolha";
 
-import InputNumero from "../../components/inputNumero";
-import Link from "../../components/link";
+import {
+	Button,
+	LogoPadrao,
+	IconeFolha,
+	InputNumero,
+	Link,
+} from "../../components";
 
 const VerificacaoDuasEtapas = ({ navigation, route }) => {
 	const { email, isPasswordReset } = route.params;
@@ -30,7 +32,7 @@ const VerificacaoDuasEtapas = ({ navigation, route }) => {
 			return;
 		} else {
 			if (isPasswordReset) {
-				navigation.navigate(" ");
+				navigation.navigate("Login");      
 			} else {
 				navigation.navigate("PaginaPrincipal");
 			}
@@ -40,7 +42,7 @@ const VerificacaoDuasEtapas = ({ navigation, route }) => {
 	return (
 		<Container>
 			<TextoTitulo>Verificação em duas etapas</TextoTitulo>
-			<Logo size={125} />
+			<LogoPadrao size={125} />
 			<ContainerMenor>
 				<TextoNormal>
 					Código de verificação enviado para:

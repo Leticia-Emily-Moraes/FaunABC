@@ -8,22 +8,23 @@ import {
 	ContainerButtonsEntrarCom,
 	TextError,
 } from "./style";
-import Button from "../../components/button";
-import InputEmail from "../../components/inputEmail";
-import InputSenha from "../../components/inputSenha";
-import IconeFolha from "../../components/iconFolha";
 
-import ButtonRedondo from "../../components/buttonsRedondos";
-import apple from "../../assets/imgs/apple.png";
-import facebook from "../../assets/imgs/facebook.png";
-import google from "../../assets/imgs/google.png";
-import Logo from "../../components/logoPadrao";
-import Link from "../../components/link";
+import {
+	Button,
+	InputEmail,
+	InputSenha,
+	IconeFolha,
+	ButtonsRedondos,
+	LogoPadrao,
+	Link
+} from "../../components";
+import { Apple, Facebook, Google } from "../../assets/imgs";
 
 function Login({ navigation }) {
 	const [email, setEmail] = useState("");
 	const [senha, setSenha] = useState("");
 	const [mensagemErro, setMensagemErro] = useState("");
+	const [isPasswordReset, setIsPasswordReset] = useState("");
 
 	const haveEmail = () => {
 		if (email) {
@@ -48,7 +49,7 @@ function Login({ navigation }) {
 	};
 	return (
 		<Container>
-			<Logo />
+			<LogoPadrao />
 			<TextoTitulo>Login</TextoTitulo>
 			<InputEmail
 				value={email}
@@ -77,9 +78,9 @@ function Login({ navigation }) {
 			<ContainerEntrarCom>
 				<TextoNormal>Entrar com:</TextoNormal>
 				<ContainerButtonsEntrarCom>
-					<ButtonRedondo img={facebook} />
-					<ButtonRedondo img={google} />
-					<ButtonRedondo img={apple} />
+					<ButtonsRedondos img={Facebook} />
+					<ButtonsRedondos img={Google} />
+					<ButtonsRedondos img={Apple} />
 				</ContainerButtonsEntrarCom>
 			</ContainerEntrarCom>
 			<IconeFolha />

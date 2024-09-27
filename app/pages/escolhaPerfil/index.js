@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
 import { Container, TextoGrande, ContainerButton } from "./style";
-import Logo from "../../components/logoPadrao";
-import Radio from "../../components/radioButton";
-import Button from "../../components/button";
 import { PerfilContext } from "../../context/perfilContext";
+import { Button, RadioButton, LogoPadrao} from "../../components"
 
 function EscolhaPerfil({ navigation }) {
 	const { perfil, setPerfil } = useContext(PerfilContext);
@@ -20,9 +18,9 @@ function EscolhaPerfil({ navigation }) {
 
 	return (
 		<Container>
-			<Logo />
+			<LogoPadrao />
 			<TextoGrande>Escolha o tipo de perfil para cadastro</TextoGrande>
-			<Radio
+			<RadioButton
 				options={[
 					{ label: "Pessoal", value: 1 },
 					{ label: "ONG", value: 2 },

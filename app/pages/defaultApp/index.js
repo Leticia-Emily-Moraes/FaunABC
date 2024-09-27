@@ -1,7 +1,6 @@
 import React from "react";
 import { Container } from "./style";
-import NavSuperior from "../../components/navSuperior";
-import NavPrincipal from "../../components/navPrincipal";
+import { NavSuperior, NavPrincipal } from "../../components";
 import "react-native-gesture-handler";
 
 function Default() {

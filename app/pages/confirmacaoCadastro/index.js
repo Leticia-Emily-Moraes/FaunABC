@@ -1,9 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Container, ContainerText, TextoNormal, TextoTitulo } from "./style";
-import Button from "../../components/button";
-import Logo from "../../components/logoPadrao";
-import IconeFolha from "../../components/iconFolha";
-
+import { Button, LogoPadrao, IconeFolha } from "../../components";
 import { PerfilContext } from "../../context/perfilContext";
 
 const ConfirmacaoDeCadastro = ({ navigation }) => {
@@ -11,11 +8,11 @@ const ConfirmacaoDeCadastro = ({ navigation }) => {
 	const [subtitulo, setSubtitulo] = useState("");
 
 	useEffect(() => {
-		if (perfil === "1") {
+		if (perfil === 1) {
 			setSubtitulo(
 				"Faça o login para aproveitar o máximo da nossa plataforma"
 			);
-		} else if (perfil === "2" || perfil === "3") {
+		} else if (perfil === 2 || perfil === 3) {
 			setSubtitulo(
 				"Período para análise: 7 dias, assim que analisado receberá um e-mail."
 			);
@@ -23,7 +20,7 @@ const ConfirmacaoDeCadastro = ({ navigation }) => {
 	}, [perfil]);
 	return (
 		<Container>
-			<Logo />
+			<LogoPadrao />
 			<ContainerText>
 				<TextoTitulo>Dados cadastrados com Sucesso!</TextoTitulo>
 				<TextoNormal>{subtitulo}</TextoNormal>

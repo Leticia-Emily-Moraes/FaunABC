@@ -33,7 +33,7 @@ function CadastroEndereco({ navigation }) {
 	useEffect(() => {
 		if (perfil === 1) {
 			setmensagemTitulo("Cadastre seu endereço");
-		} else{
+		} else {
 			setmensagemTitulo("Cadastre o endereço da ONG");
 		}
 	}, [perfil]);

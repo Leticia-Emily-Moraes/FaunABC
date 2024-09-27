@@ -12,7 +12,7 @@ export const ContainerRButton = styled.View`
 export const RadioButtonText = styled.Text`
 	color: ${(props) => props.theme.colors.textRadioButton};
 	font-family: "Inter-Bold";
-	font-size: 16px;
+	font-size: ${(props) => props.theme.fontsSize.textoNormal};
 `;
 
 export const RadioButton = styled.TouchableOpacity`
@@ -22,9 +22,9 @@ export const RadioButton = styled.TouchableOpacity`
 	align-items: center;
 	width: 80%;
 	height: 60px;
-	padding: 10px 50px;
+	padding: 10px 60px;
 	gap: 20px;
-	border-radius: 5px;
+	border-radius: 20px;
 	background-color: ${(props) => props.theme.colors.bgRadioButton};
 `;
 

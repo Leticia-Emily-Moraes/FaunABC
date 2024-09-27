@@ -38,8 +38,9 @@ export const TextoNormal = styled.Text`
 export const TextoTitulo = styled.Text`
     color: ${(props) => props.theme.colors.text};
     font-family: "Inter-Bold";
-    font-size: ${(props) => props.theme.fontsSize.textoTitulo};
     text-align: center;
+    font-size: ${(props) => props.theme.fontsSize.textoTitulo};
+    max-width: 100%;
 `;
 
 export const TextError = styled.Text`

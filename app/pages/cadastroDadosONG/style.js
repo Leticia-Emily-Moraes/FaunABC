@@ -54,6 +54,7 @@ export const TextoTitulo = styled.Text`
     font-family: "Inter-Bold";
     text-align: center;
     font-size: ${(props) => props.theme.fontsSize.textoTitulo};
+    max-width: 80%;
 `;
 
 export const TextError = styled.Text`

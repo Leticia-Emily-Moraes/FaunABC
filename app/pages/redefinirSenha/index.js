@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Container, ContainerInputs, TextoTitulo, TextError } from "./style";
-import Button from "../../components/button";
-import InputSenha from "../../components/inputSenha";
-import IconeFolha from "../../components/iconFolha";
+import { Button, InputSenha, IconeFolha } from "../../components"
 
 function RedefinirSenha({ navigation }) {
 	const [senha, setSenha] = useState("");

@@ -12,7 +12,7 @@ function NavPrincipal() {
 	return (
 		<Tab.Navigator
 			screenOptions={({ route }) => ({
-				tabBarIcon: ({ color, size }) => {
+				tabBarIcon: ({ color }) => {
 					if (route.name === "Home") {
 						return (
 							<Octicons
@@ -64,8 +64,6 @@ function NavPrincipal() {
 					borderTopLeftRadius: 10,
 					borderTopRightRadius: 10,
 					height: 50,
-					// paddingBottom: 10,
-					// paddingTop: 10,
 				},
 			})}
 		>

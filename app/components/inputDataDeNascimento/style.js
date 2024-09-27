@@ -13,7 +13,7 @@ export const Container = styled.View`
 export const Label = styled.Text`
 	color: ${(props) => props.theme.colors.text};
 	font-family: "Inter-Bold";
-	font-size: 16px;
+	font-size: ${(props) => props.theme.fontsSize.textoNormal};
 	align-self: flex-start;
 `;
 export const Placeholder = styled.Text`

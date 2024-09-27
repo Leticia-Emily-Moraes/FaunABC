@@ -7,12 +7,14 @@ import {
 	TextError,
 } from "./style";
 import { formatarData } from "../../helpers/helpers";
-import Button from "../../components/button";
-import InputTelefone from "../../components/inputTelefone";
-import InputPadrao from "../../components/inputPadrao";
-import InputCPF from "../../components/inputCPF";
-import InputDataDeNascimento from "../../components/inputDataDeNascimento";
-import IconeFolha from "../../components/iconFolha";
+import {
+	Button,
+	InputTelefone,
+	InputPadrao,
+	InputCPF,
+	InputDataDeNascimento,
+	IconeFolha,
+} from "../../components";
 import { UseCadastroProfissional } from "../../context/cadastroProfissionalContext";
 
 function CadastroDadosProfissionais({ navigation }) {
