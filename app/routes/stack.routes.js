@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 export function Router() {
 	return (
 		<Stack.Navigator
-			initialRouteName="Default"
+			initialRouteName="PrimeiraPagina"
 			screenOptions={{ headerShown: false }}
 		>
 			<Stack.Screen
