@@ -7,7 +7,7 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: RootFaunaAbc@1324
             MYSQL_DATABASE: faunaABC
-            MYSQL_BASE: user
+            MYSQL_USER: user
             MYSQL_PASSWORD: FaunaAbc.1234
         volumes:
             - ./database/bancoDeDados.sql:/docker-entrypoint-initdb.d/bancoDeDados.sql
