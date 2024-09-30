@@ -40,11 +40,7 @@ CREATE TABLE CadastroResponsavel (
     IdCadRes INT AUTO_INCREMENT PRIMARY KEY,
     PrimeiroNome VARCHAR(50) NOT NULL,
     Sobrenome VARCHAR(50) NOT NULL,
-    DataDeNascimento DATE NOT NULL,
     Celular VARCHAR(15) NOT NULL,
-    Telefone VARCHAR(15),
-    CPF VARCHAR(11) NOT NULL UNIQUE,
-    IdUser INT,
     NivelParental ENUM(
         'MaeMadastra',
         'PaiPadrasto',
@@ -53,6 +49,7 @@ CREATE TABLE CadastroResponsavel (
         'FilhoFilha',
         'ResponsavelLegal'
     ) NOT NULL,
+    IdUser VARCHAR(20) NOT NULL,
     FOREIGN KEY (IdUser) REFERENCES CadastroPfisico (IdPFisico)
 );
 
