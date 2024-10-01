@@ -19,7 +19,7 @@ import { UseCadastroUser } from "../../context/cadastroUserContext";
 function CadastroDadosEmergenciasUser({ navigation, route }) {
 	const idade = route.params;
 
-	const { dadosCadastroUser, setDadosCadastroUser } = UseCadastroUser();
+	const { dadosCadastroUser, setDadosCadastroUser, handleSubmit } = UseCadastroUser();
 	const [pNomePessoaEmergencia, setPNomePessoaEmergencia] = useState("");
 	const [sobrenomePessoaEmergencia, setSobrenomePessoaEmergencia] =
 		useState("");
@@ -27,7 +27,7 @@ function CadastroDadosEmergenciasUser({ navigation, route }) {
 	const [nivelParental, setNivelParental] = useState("");
 	const [errorMensagem, setErrorMensagem] = useState("");
 
-	const verificandoPreenchimento = () => {
+	const verificandoPreenchimento = async () => {
 		if (
 			!pNomePessoaEmergencia ||
 			!sobrenomePessoaEmergencia ||
@@ -47,8 +47,14 @@ function CadastroDadosEmergenciasUser({ navigation, route }) {
 					nivelParental: nivelParental,
 				},
 			}));
+
 			setErrorMensagem("");
-			navigation.navigate("ConfirmacaoDeCadastro");
+			try {
+				await handleSubmit();
+				navigation.navigate("ConfirmacaoDeCadastro");
+			} catch (error) {
+				console.error(error);
+			}
 		}
 	};
 
