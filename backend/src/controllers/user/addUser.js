@@ -1,33 +1,69 @@
 const db = require("../../config/db");
+const bcrypt = require("bcryptjs");
 
-const createCadastroUser = (req, res) => {
+const formatarData = (data) => {
+	const partes = data.split("/");
+	return `${partes[2]}-${partes[1]}-${partes[0]}`;
+};
+
+const formatarTelefone = (telefone) => {
+	return telefone.replace(/\D/g, "").substring(0, 15);
+};
+
+const formatarCPF = (cpf) => {
+	return cpf.replace(/\D/g, "").substring(0, 11);
+};
+
+const createCadastroUser = async (req, res) => {
 	const {
-		PrimeiroNome,
-		Sobrenome,
-		DataDeNascimento,
-		Email,
-		CPF,
-		Celular,
-		Telefone,
-		Senha,
-		Responsavel,
-		Endereco,
+		cadastroPfisico: {
+			primeiroNome,
+			sobrenome,
+			dataDeNascimento,
+			email,
+			cpf,
+			celular,
+			telefone,
+			senha,
+		},
+		cadastroResponsavel: {
+			primeiroNome: primeiroNomeRes,
+			sobrenome: sobrenomeRes,
+			celular: celularRes,
+			nivelParental,
+		},
+		endereco: { logradouro, numero, bairro, cidade, cep },
 	} = req.body;
 
+	const dataFormatada = formatarData(dataDeNascimento);
+	const cpfFormatado = formatarCPF(cpf);
+	const celularFormatado = formatarTelefone(celular);
+	const telefoneFormatado = formatarTelefone(telefone);
+	const celularResFormatado = formatarTelefone(celularRes);
+
+	const senhaHash = await bcrypt.hash(senha, 10);
+
 	if (
-		!PrimeiroNome ||
-		!Sobrenome ||
-		!DataDeNascimento ||
-		!Email ||
-		!CPF ||
-		!Celular ||
-		!Senha ||
-		!Responsavel ||
-		!Endereco
+		!primeiroNome ||
+		!sobrenome ||
+		!dataFormatada ||
+		!email ||
+		!cpfFormatado ||
+		!celularFormatado ||
+		!senhaHash ||
+		!primeiroNomeRes ||
+		!sobrenomeRes ||
+		!celularResFormatado ||
+		!nivelParental ||
+		!logradouro ||
+		!numero ||
+		!bairro ||
+		!cidade ||
+		!cep
 	) {
 		return res
 			.status(400)
-			.json({ error: "Todos os campos são obrigatórios" });
+			.json({ error: "Todos os campos são obrigatórios!" });
 	}
 
 	db.beginTransaction((err) => {
@@ -38,19 +74,19 @@ const createCadastroUser = (req, res) => {
 		}
 
 		const sqlUser = `
-        INSERT INTO CadastroPfisico (PrimeiroNome, Sobrenome, DataDeNascimento, Email, CPF, Celular, Telefone, Senha)
-        VALUES (?,?,?,?,?,?,?,?)`;
+            INSERT INTO CadastroPfisico (PrimeiroNome, Sobrenome, DataDeNascimento, Email, CPF, Celular, Telefone, Senha)
+            VALUES (?,?,?,?,?,?,?,?)`;
 		db.query(
 			sqlUser,
 			[
-				PrimeiroNome,
-				Sobrenome,
-				DataDeNascimento,
-				Email,
-				CPF,
-				Celular,
-				Telefone,
-				Senha,
+				primeiroNome,
+				sobrenome,
+				dataFormatada,
+				email,
+				cpfFormatado,
+				celularFormatado,
+				telefoneFormatado,
+				senhaHash,
 			],
 			(err, result) => {
 				if (err) {
@@ -61,67 +97,88 @@ const createCadastroUser = (req, res) => {
 					});
 				}
 
-				const idUser = result.insertId;
-
-				const { PrimeiroNomeRes, SobrenomeRes, CelularRes, NivelParental } =
-					Responsavel;
-
-				const sqlResponsavel = `
-            INSERT INTO CadastroResponsavel (PrimeiroNome, Sobrenome, Celular, NivelParental, IdUser)
-            VALUES (?,?,?,?,?)`;
-
-				db.query(
-					sqlResponsavel,
-					[
-						PrimeiroNomeRes,
-						SobrenomeRes,
-						CelularRes,
-						NivelParental,
-						idUser,
-					],
-					(err, result) => {
-						if (err) {
-							return db.rollback(() => {
-								res.status(500).json({
-									error: "Erro ao criar CadastroResponsavel: " + err.message,
-								});
+				const sqlSelectId = `SELECT IdPFisico FROM CadastroPfisico WHERE Email = ?`;
+				db.query(sqlSelectId, [email], (err, result) => {
+					if (err) {
+						return res
+							.status(500)
+							.json({
+								error: "Erro ao obter ID: " + err.message,
 							});
-						}
+					}
 
-						const { Logradouro, Numero, Bairro, Cidade, Cep } = Endereco;
+					const idUser = result[0].IdPFisico;
+					console.log(idUser);
 
-						const sqlEndereco = `
-                        INSERT INTO Endereco (Logradouro, Numero, Bairro, Cidade, Cep, IdUser)
-                        VALUES (?,?,?,?,?,?)`;
+					const sqlResponsavel = `
+                INSERT INTO CadastroResponsavel (PrimeiroNome, Sobrenome, Celular, NivelParental, IdUser)
+                VALUES (?,?,?,?,?)`;
 
-						db.query(
-							sqlEndereco,
-							[Logradouro, Numero, Bairro, Cidade, Cep, idUser],
-							(err, result) => {
-								if (err) {
-									return db.rollback(() => {
-										res.status(500).json({
-											error: "Erro ao criar Endereço: " + err.message,
-										});
-									});
-								}
-								db.commit((err) => {
-									if (err) {
-										return db.rollback(() => {
-											res.status(500).json({
-												error: "Erro ao finalizar transação: " + err.message,
-											});
-										});
-									}
-									res.status(201).json({
-										message: "Cadastro criado com sucesso!",
+					db.query(
+						sqlResponsavel,
+						[
+							primeiroNomeRes,
+							sobrenomeRes,
+							celularResFormatado,
+							nivelParental,
+							idUser,
+						],
+						(err, result) => {
+							if (err) {
+								return db.rollback(() => {
+									res.status(500).json({
+										error:
+											"Erro ao criar CadastroResponsavel: " +
+											err.message,
 									});
 								});
 							}
-						);
-					}
-				);
-			}
+
+							const sqlEndereco = `
+                        INSERT INTO Endereco (Logradouro, Numero, Bairro, Cidade, Cep, IdUser)
+                        VALUES (?,?,?,?,?,?)`;
+
+							db.query(
+								sqlEndereco,
+								[
+									logradouro,
+									numero,
+									bairro,
+									cidade,
+									cep,
+									idUser,
+								],
+								(err, result) => {
+									if (err) {
+										return db.rollback(() => {
+											res.status(500).json({
+												error:
+													"Erro ao criar Endereço: " +
+													err.message,
+											});
+										});
+									}
+									db.commit((err) => {
+										if (err) {
+											return db.rollback(() => {
+												res.status(500).json({
+													error:
+														"Erro ao finalizar transação: " +
+														err.message,
+												});
+											});
+										}
+										res.status(201).json({
+											message:
+												"Cadastro criado com sucesso!",
+										});
+									});
+								},
+							);
+						},
+					);
+				});
+			},
 		);
 	});
 };
