@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
+import { enviarDadosUser } from "../service/api/apiCadUser";
 
 const CadastroUserContext = createContext();
 
@@ -28,9 +29,19 @@ export function CadastroUserProvider({ children }) {
 			cep: "",
 		},
 	});
+
+	const handleSubmit = async () => {
+		try {
+			console.log("Dados que serão enviados:", dadosCadastroUser);
+			await enviarDadosUser(dadosCadastroUser);
+			console.log("Dados enviados com sucesso");
+		} catch (error) {
+			console.error("Erro ao enviar os dados: ", error);
+		}
+	};
 	return (
 		<CadastroUserContext.Provider
-			value={{ dadosCadastroUser, setDadosCadastroUser }}
+			value={{ dadosCadastroUser, setDadosCadastroUser, handleSubmit }}
 		>
 			{children}
 		</CadastroUserContext.Provider>
