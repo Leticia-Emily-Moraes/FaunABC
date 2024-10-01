@@ -45,9 +45,11 @@ CREATE TABLE CadastroResponsavel (
         'MaeMadastra',
         'PaiPadrasto',
         'TioTia',
-        'AvoAva',
+        'AvoAvoa',
         'FilhoFilha',
-        'ResponsavelLegal'
+        'ResponsavelLegal',
+        'IrmaoIrma',
+        'Outro'
     ) NOT NULL,
     IdUser VARCHAR(20) NOT NULL,
     FOREIGN KEY (IdUser) REFERENCES CadastroPfisico (IdPFisico)
@@ -101,7 +103,8 @@ BEGIN
 	DECLARE max_id INT;
     
     SELECT COALESCE(MAX(CAST(SUBSTRING(IdPFisico, 2) AS UNSIGNED)), 0) INTO max_id
-    FROM CadastroPfisico;
+    FROM CadastroPfisico
+    FOR UPDATE;
     
     SET NEW.IdPFisico = CONCAT('P', LPAD(max_id + 1, 5, '0'));
 END//
@@ -113,7 +116,8 @@ BEGIN
 	DECLARE max_id INT;
     
     SELECT COALESCE(MAX(CAST(SUBSTRING(IdONG, 2) AS UNSIGNED)), 0) INTO max_id
-    FROM CadastroONG;
+    FROM CadastroONG
+    FOR UPDATE;
     
     SET NEW.IdONG = CONCAT('O', LPAD(max_id + 1, 5, '0'));
 END//
@@ -125,7 +129,8 @@ BEGIN
 	DECLARE max_id INT;
     
     SELECT COALESCE(MAX(CAST(SUBSTRING(IdProfissionais, 2) AS UNSIGNED)), 0) INTO max_id
-    FROM CadastroBiologo;
+    FROM CadastroBiologo
+    FOR UPDATE;
     
     SET NEW.IdProfissionais = CONCAT('B', LPAD(max_id + 1, 5, '0'));
 END//
