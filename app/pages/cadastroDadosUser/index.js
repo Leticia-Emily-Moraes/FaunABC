@@ -76,10 +76,6 @@ function CadastroDadosUser({ navigation }) {
 			return;
 		}
 		if (isSenhaValida) {
-			console.log(
-				"Dados cadastrados: ",
-				perfil === 1 ? dadosCadastroUser : dadosCadastroProfissional
-			);
 			navigation.navigate(
 				perfil === 1 ? "CadastroEndereco" : "CadastroDadosProfissionais"
 			);
