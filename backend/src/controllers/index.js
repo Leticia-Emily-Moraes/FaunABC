@@ -1,5 +1,7 @@
-const createCadastroUser = require('./user/addUser');
+const createCadastroUser = require("./user/addUser");
+const createCadastroBio = require("./profissional/addProfissional");
 
 module.exports = {
-	createCadastroUser
+	createCadastroUser,
+	createCadastroBio,
 };
