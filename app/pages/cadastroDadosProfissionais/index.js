@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
 	Container,
 	ContainerInputs,
-	TextoNormal,
 	TextoTitulo,
 	TextError,
 } from "./style";
@@ -18,35 +17,45 @@ import {
 import { UseCadastroProfissional } from "../../context/cadastroProfissionalContext";
 
 function CadastroDadosProfissionais({ navigation }) {
-	const { dadosCadastroProfissional, setDadosCadastroProfissional } =
-		UseCadastroProfissional();
+	const {
+		dadosCadastroProfissional,
+		setDadosCadastroProfissional,
+		handleSubmit,
+	} = UseCadastroProfissional();
 	const [dataDeNascimento, setDataDeNascimento] = useState(new Date());
-	const [telefone, setTelefone] = useState("");
-	const [celular, setCelular] = useState("");
-	const [cpf, setCpf] = useState("");
-	const [registroProfissional, setRegistroProfissional] = useState("");
+	const [telefone, setTelefone] = useState(dadosCadastroProfissional.cadastroProfissional.telefone);
+	const [celular, setCelular] = useState(dadosCadastroProfissional.cadastroProfissional.celular);
+	const [cpf, setCpf] = useState(dadosCadastroProfissional.cadastroProfissional.cpf);
+	const [registroProfissional, setRegistroProfissional] = useState(dadosCadastroProfissional.cadastroProfissional.registroProfissional);
 	const [errorMensagem, setErrorMensagem] = useState("");
 
-	const verificandoPreenchimento = () => {
-		if (!dataDeNascimento || !celular || !cpf) {
+	const verificandoPreenchimento = async () => {
+		if (!dataDeNascimento || !celular || !cpf || !registroProfissional) {
 			setErrorMensagem("Todos os campos devem estar preenchidos");
 			return;
 		} else {
 			const dataFormatada = formatarData(dataDeNascimento);
 
-			setDadosCadastroProfissional((prev) => ({
-				...prev,
+			const novosDadosCadastro = {
+				...dadosCadastroProfissional,
 				cadastroProfissional: {
-					...prev.cadastroProfissional,
+					...dadosCadastroProfissional.cadastroProfissional,
 					dataDeNascimento: dataFormatada,
 					telefone,
 					celular,
 					cpf,
 					registroProfissional,
 				},
-			}));
-			setErrorMensagem("");
-			navigation.navigate("ConfirmacaoDeCadastro");
+			};
+
+			setDadosCadastroProfissional(novosDadosCadastro);
+			try {
+				await handleSubmit(novosDadosCadastro);
+				console.log(novosDadosCadastro);
+				navigation.navigate("ConfirmacaoDeCadastro");
+			} catch (error) {
+				console.error("Erro ao enviar os dados:", error);
+			}
 		}
 	};
 
@@ -60,14 +69,14 @@ function CadastroDadosProfissionais({ navigation }) {
 					onChangeData={setDataDeNascimento}
 				/>
 				<InputTelefone
-					value={telefone}
-					onChangeTelefone={setTelefone}
-				/>
-				<InputTelefone
 					TituloDoInput="Celular:"
 					placeholder="Digite seu numero de celular"
 					value={celular}
 					onChangeTelefone={setCelular}
+				/>
+				<InputTelefone
+					value={telefone}
+					onChangeTelefone={setTelefone}
 				/>
 				<InputCPF
 					value={cpf}
