@@ -103,8 +103,7 @@ BEGIN
 	DECLARE max_id INT;
     
     SELECT COALESCE(MAX(CAST(SUBSTRING(IdPFisico, 2) AS UNSIGNED)), 0) INTO max_id
-    FROM CadastroPfisico
-    FOR UPDATE;
+    FROM CadastroPfisico;
     
     SET NEW.IdPFisico = CONCAT('P', LPAD(max_id + 1, 5, '0'));
 END//
@@ -116,8 +115,7 @@ BEGIN
 	DECLARE max_id INT;
     
     SELECT COALESCE(MAX(CAST(SUBSTRING(IdONG, 2) AS UNSIGNED)), 0) INTO max_id
-    FROM CadastroONG
-    FOR UPDATE;
+    FROM CadastroONG;
     
     SET NEW.IdONG = CONCAT('O', LPAD(max_id + 1, 5, '0'));
 END//
@@ -129,8 +127,7 @@ BEGIN
 	DECLARE max_id INT;
     
     SELECT COALESCE(MAX(CAST(SUBSTRING(IdProfissionais, 2) AS UNSIGNED)), 0) INTO max_id
-    FROM CadastroBiologo
-    FOR UPDATE;
+    FROM CadastroBiologo;
     
     SET NEW.IdProfissionais = CONCAT('B', LPAD(max_id + 1, 5, '0'));
 END//
