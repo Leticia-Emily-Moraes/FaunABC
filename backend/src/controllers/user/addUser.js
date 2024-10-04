@@ -1,19 +1,6 @@
 const db = require("../../config/db");
 const bcrypt = require("bcryptjs");
 
-const formatarData = (data) => {
-	const partes = data.split("/");
-	return `${partes[2]}-${partes[1]}-${partes[0]}`;
-};
-
-const formatarTelefone = (telefone) => {
-	return telefone.replace(/\D/g, "").substring(0, 15);
-};
-
-const formatarCPF = (cpf) => {
-	return cpf.replace(/\D/g, "").substring(0, 11);
-};
-
 const createCadastroUser = async (req, res) => {
 	const {
 		cadastroPfisico: {
@@ -23,7 +10,7 @@ const createCadastroUser = async (req, res) => {
 			email,
 			cpf,
 			celular,
-			telefone,
+			telefone = "",
 			senha,
 		},
 		cadastroResponsavel: {
@@ -38,7 +25,7 @@ const createCadastroUser = async (req, res) => {
 	const dataFormatada = formatarData(dataDeNascimento);
 	const cpfFormatado = formatarCPF(cpf);
 	const celularFormatado = formatarTelefone(celular);
-	const telefoneFormatado = formatarTelefone(telefone);
+	const telefoneFormatado = telefone ? formatarTelefone(telefone) : null;
 	const celularResFormatado = formatarTelefone(celularRes);
 
 	const senhaHash = await bcrypt.hash(senha, 10);
@@ -100,11 +87,9 @@ const createCadastroUser = async (req, res) => {
 				const sqlSelectId = `SELECT IdPFisico FROM CadastroPfisico WHERE Email = ?`;
 				db.query(sqlSelectId, [email], (err, result) => {
 					if (err) {
-						return res
-							.status(500)
-							.json({
-								error: "Erro ao obter ID: " + err.message,
-							});
+						return res.status(500).json({
+							error: "Erro ao obter ID: " + err.message,
+						});
 					}
 
 					const idUser = result[0].IdPFisico;
@@ -181,6 +166,19 @@ const createCadastroUser = async (req, res) => {
 			},
 		);
 	});
+};
+
+const formatarData = (data) => {
+	const partes = data.split("/");
+	return `${partes[2]}-${partes[1]}-${partes[0]}`;
+};
+
+const formatarTelefone = (telefone) => {
+	return telefone ? telefone.replace(/\D/g, "").substring(0, 15) : "";
+};
+
+const formatarCPF = (cpf) => {
+	return cpf.replace(/\D/g, "").substring(0, 11);
 };
 
 module.exports = createCadastroUser;
