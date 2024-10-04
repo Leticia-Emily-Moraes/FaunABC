@@ -76,14 +76,14 @@ function CadastroDadosPessoaisUser({ navigation }) {
 					onChangeData={setDataDeNascimento}
 				/>
 				<InputTelefone
-					value={telefone}
-					onChangeTelefone={setTelefone}
-				/>
-				<InputTelefone
 					TituloDoInput="Celular:"
 					placeholder="Digite seu numero de celular"
 					value={celular}
 					onChangeTelefone={setCelular}
+				/>
+				<InputTelefone
+					value={telefone}
+					onChangeTelefone={setTelefone}
 				/>
 				<InputCPF
 					value={cpf}
