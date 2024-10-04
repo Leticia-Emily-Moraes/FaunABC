@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 
+import { enviarDadosBio } from "../service/api/apiCadBio";
 const CadastroProfissionalContext = createContext();
 
 export function CadastroProfissionalProvider({ children }) {
@@ -16,9 +17,24 @@ export function CadastroProfissionalProvider({ children }) {
 			registroProfissional: "",
 		},
 	});
+
+	const handleSubmit = async () => {
+		console.log("Enviando para API:", dadosCadastroProfissional);
+		try {
+			await enviarDadosBio(dadosCadastroProfissional);
+			console.log("Dados enviados com sucesso");
+		} catch (error) {
+			console.log("Erro ao enviar os dados: ", error);
+		}
+	};
+	
 	return (
 		<CadastroProfissionalContext.Provider
-			value={{ dadosCadastroProfissional, setDadosCadastroProfissional }}
+			value={{
+				dadosCadastroProfissional,
+				setDadosCadastroProfissional,
+				handleSubmit,
+			}}
 		>
 			{children}
 		</CadastroProfissionalContext.Provider>
