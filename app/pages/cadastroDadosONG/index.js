@@ -104,18 +104,17 @@ function CadastroDadosOng({ navigation }) {
 						value={email}
 						onChangeText={setEmail}
 					/>
-
-					<InputTelefone
-						TituloDoInput="Telefone:"
-						placeholder="Digite seu numero de telefone"
-						value={telefone}
-						onChangeTelefone={setTelefone}
-					/>
 					<InputTelefone
 						TituloDoInput="Celular:"
 						placeholder="Digite seu numero de celular"
 						value={celular}
 						onChangeTelefone={setCelular}
+					/>
+					<InputTelefone
+						TituloDoInput="Telefone:"
+						placeholder="Digite seu numero de telefone"
+						value={telefone}
+						onChangeTelefone={setTelefone}
 					/>
 					<InputCNPJ
 						value={cnpj}
