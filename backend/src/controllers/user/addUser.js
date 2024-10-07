@@ -93,7 +93,6 @@ const createCadastroUser = async (req, res) => {
 					}
 
 					const idUser = result[0].IdPFisico;
-					console.log(idUser);
 
 					const sqlResponsavel = `
                 INSERT INTO CadastroResponsavel (PrimeiroNome, Sobrenome, Celular, NivelParental, IdUser)

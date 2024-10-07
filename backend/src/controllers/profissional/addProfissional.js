@@ -15,7 +15,6 @@ const formatarCPF = (cpf) => {
 };
 
 const createCadastroBio = async (req, res) => {
-	console.log(req.body);
 	const {
 		cadastroProfissional: {
 			primeiroNome,
@@ -29,16 +28,6 @@ const createCadastroBio = async (req, res) => {
 			registroProfissional,
 		} = {},
 	} = req.body;
-	console.log(
-		primeiroNome,
-		sobrenome,
-		dataDeNascimento,
-		email,
-		cpf,
-		celular,
-		senha,
-		registroProfissional,
-	);
 
 	const celularFormatado = formatarTelefone(celular);
 	const cpfFormatado = formatarCPF(cpf);
