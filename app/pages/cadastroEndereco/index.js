@@ -13,7 +13,8 @@ import { UseCadastroOng } from "../../context/cadastroOngContext";
 
 function CadastroEndereco({ navigation }) {
 	const { dadosCadastroUser, setDadosCadastroUser } = UseCadastroUser();
-	const { dadosCadastroOng, setDadosCadastroOng } = UseCadastroOng();
+	const { dadosCadastroOng, setDadosCadastroOng, handleSubmit } =
+		UseCadastroOng();
 	const { perfil } = useContext(PerfilContext);
 
 	const getDadosDoPerfil = (key) =>
@@ -84,14 +85,21 @@ function CadastroEndereco({ navigation }) {
 		}
 	}, [cep]);
 
-	const verificandoPreenchimento = () => {
+	const verificandoPreenchimento = async () => {
 		if (!cep || !endereco || !numero || !bairro || !cidade) {
 			setErrorMensagem("Todos os campos devem estar preenchidos");
 			return;
 		}
-		navigation.navigate(
-			perfil === 1 ? "CadastroDadosPessoaisUser" : "ConfirmacaoDeCadastro"
-		);
+		if (perfil === 2) {
+			try {
+				await handleSubmit();
+				navigation.navigate("ConfirmacaoDeCadastro");
+			} catch (error) {
+				console.error(error);
+			}
+		} else {
+			navigation.navigate("CadastroDadosPessoaisUser");
+		}
 	};
 
 	return (
