@@ -5,7 +5,7 @@ import Logo from "../../components/logoPadrao";
 import Avatar from "../../components/avatar";
 
 
-function PerfilOng () {
+function PerfilOng() {
     return(
         <Container>
             <Avatar/>
