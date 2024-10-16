@@ -1,16 +1,27 @@
 import styled from "styled-components/native";
 import { TouchableWithoutFeedback, Animated } from "react-native";
 
+export const Container = styled.View`
+	box-sizing: border-box;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`;
+
 export const ButtonAccordion = styled(TouchableWithoutFeedback)``;
 
 export const ButtonContainer = styled.View`
 	width: 80%;
 	height: 50px;
 	background-color: ${(props) => props.theme.colors.bgAccordionButton};
-	justify-content: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding: 0px 20px;
 	align-items: center;
 	border-radius: 20px;
-	margin: 0;
 `;
 
 export const TextButton = styled.Text`
@@ -24,8 +35,8 @@ export const AccordionContainer = styled(Animated.View)`
 	position: relative;
 	top: -50px;
 	z-index: -1;
+	padding: 0px 10px;
 	width: 80%;
-	padding: -5px 10px;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
