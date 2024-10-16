@@ -12,15 +12,15 @@ function TelefonesOffline() {
 					<TextoTitulo>Número de Emergência</TextoTitulo>
 				</ContainerText>
 				{NumsEmergenciaData.map((orgao) => (
-					<>
+					<React.Fragment key={orgao.id}>
 						<CardOrgaos
 							orgao={orgao.orgao}
 							regiao={orgao.regiao}
 							telefone={orgao.telefone}
 							imagem={orgao.imagem}
 						/>
-						<IconeFolha></IconeFolha>
-					</>
+						<IconeFolha key={`icone-${orgao.id}`} />
+					</React.Fragment>
 				))}
 			</ContentView>
 		</Container>
