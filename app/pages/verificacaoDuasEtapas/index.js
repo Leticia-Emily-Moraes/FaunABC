@@ -34,7 +34,7 @@ const VerificacaoDuasEtapas = ({ navigation, route }) => {
 			if (isPasswordReset) {
 				navigation.navigate("Login");      
 			} else {
-				navigation.navigate("PaginaPrincipal");
+				navigation.navigate("Default");
 			}
 		}
 	};

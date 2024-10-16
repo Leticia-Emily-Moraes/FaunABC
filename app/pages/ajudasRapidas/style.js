@@ -18,7 +18,7 @@ export const ContentView = styled.View`
 `;
 
 export const ContainerText = styled.Text`
-    background-color: ${(props) => props.theme.colors.textLink};
+    background-color: ${(props) => props.theme.colors.bgTitulo};
     width: 90%;
 	padding: 5px 25px;
 	display: flex;
@@ -28,7 +28,7 @@ export const ContainerText = styled.Text`
 	border-radius: 5px;
 `;
 export const TextoTitulo = styled.Text`
-    color: ${(props) => props.theme.colors.textButton};
+    color: ${(props) => props.theme.colors.textTitulo};
     font-family: "Inter-Bold";
     text-align: center;
     font-size: ${(props) => props.theme.fontsSize.textoTitulo};
