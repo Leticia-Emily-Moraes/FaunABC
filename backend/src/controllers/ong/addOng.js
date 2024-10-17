@@ -21,7 +21,6 @@ const createCadastroOng = async (req, res) => {
 
 	const celularFormatado = formatarTelefone(celular);
 	const telefoneFormatado = telefone ? formatarTelefone(telefone) : null;
-	const senhaHash = await bcrypt.hash(senha, 10);
 	const cnpjFormatado = formatarCNPJ(cnpj);
 	const inssFormatado = formatarINSS(inss);
 
@@ -31,94 +30,96 @@ const createCadastroOng = async (req, res) => {
 		!cnpjFormatado ||
 		!inssFormatado ||
 		!celularFormatado ||
-		!senhaHash ||
+		!senha ||
 		!logradouro ||
 		!numero ||
 		!bairro ||
 		!cidade ||
 		!cep
 	) {
-		return res
-			.status(400)
-			.json({ error: "Todos os campos são obrigatórios!" });
+		return res.status(400).json({ error: "Todos os campos são obrigatórios!" });
 	}
 
-	db.beginTransaction((err) => {
-		if (err) {
-			return res
-				.status(500)
-				.json({ error: "Erro ao iniciar transação: " + err.message });
-		}
+	try {
+		const senhaHash = await bcrypt.hash(senha, 10);
 
-		const sqlOng = `
-        INSERT INTO CadastroONG (NomeONG, Email, Telefone, Celular, CNPJ, INSS, Senha)
-        VALUES (?,?,?,?,?,?,?)`;
-		db.query(
-			sqlOng,
-			[
-				NomeOng,
-				email,
-				telefoneFormatado,
-				celularFormatado,
-				cnpjFormatado,
-				inssFormatado,
-				senhaHash,
-			],
-			(err, result) => {
-				if (err) {
-					return db.rollback(() => {
-						res.status(500).json({
-							error:
-								"Erro ao criar o CadastroOng: " + err.message,
-						});
-					});
-				}
-				const sqlSelectId = `SELECT IdONG FROM CadastroONG WHERE Email = ?`;
-				db.query(sqlSelectId, [email], (err, result) => {
+		db.beginTransaction((err) => {
+			if (err) {
+				return res.status(500).json({ error: "Erro ao iniciar transação: " + err.message });
+			}
+
+			const sqlOng = `
+				INSERT INTO CadastroONG (NomeONG, Email, Telefone, Celular, CNPJ, INSS, Senha)
+				VALUES (?,?,?,?,?,?,?)`;
+
+			db.query(
+				sqlOng,
+				[NomeOng, email, telefoneFormatado, celularFormatado, cnpjFormatado, inssFormatado, senhaHash],
+				(err, result) => {
 					if (err) {
-						return res.status(500).json({
-							error: "Erro ao obter ID: " + err.message,
+						return db.rollback(() => {
+							res.status(500).json({ error: "Erro ao criar o CadastroOng: " + err.message });
 						});
 					}
 
-					const IdOng = result[0].IdONG;
+					const sqlSelectId = `SELECT IdONG FROM CadastroONG WHERE Email = ?`;
+					db.query(sqlSelectId, [email], (err, result) => {
+						if (err) {
+							return db.rollback(() => {
+								res.status(500).json({ error: "Erro ao obter ID: " + err.message });
+							});
+						}
 
-					const sqlEndereco = `
-                        INSERT INTO Endereco (Logradouro, Numero, Bairro, Cidade, Cep, IdOng)
-                        VALUES (?,?,?,?,?,?)`;
-					db.query(
-						sqlEndereco,
-						[logradouro, numero, bairro, cidade, cep, IdOng],
-						(err, result) => {
-							if (err) {
-								return db.rollback(() => {
-									res.status(500).json({
-										error:
-											"Erro ao criar Endereço: " +
-											err.message,
-									});
-								});
-							}
-							db.commit((err) => {
+						const IdOng = result[0].IdONG;
+
+						const sqlEndereco = `
+							INSERT INTO Endereco (Logradouro, Numero, Bairro, Cidade, Cep, IdOng)
+							VALUES (?,?,?,?,?,?)`;
+
+						db.query(
+							sqlEndereco,
+							[logradouro, numero, bairro, cidade, cep, IdOng],
+							(err, result) => {
 								if (err) {
 									return db.rollback(() => {
-										res.status(500).json({
-											error:
-												"Erro ao finalizar transação: " +
-												err.message,
-										});
+										res.status(500).json({ error: "Erro ao criar Endereço: " + err.message });
 									});
 								}
-								res.status(201).json({
-									message: "Cadastro criado com sucesso!",
-								});
-							});
-						},
-					);
-				});
-			},
-		);
-	});
+
+								const sqlLogin = `
+									INSERT INTO Login (Usuario, Senha, TipoUsuario, IdOng)
+									VALUES (?,?,?,?)`;
+
+								db.query(
+									sqlLogin,
+									[email, senhaHash, "ONG", IdOng],
+									(err, result) => {
+										if (err) {
+											return db.rollback(() => {
+												res.status(500).json({ error: "Erro ao criar Login: " + err.message });
+											});
+										}
+
+										db.commit((err) => {
+											if (err) {
+												return db.rollback(() => {
+													res.status(500).json({ error: "Erro ao finalizar transação: " + err.message });
+												});
+											}
+
+											res.status(201).json({ message: "Cadastro criado com sucesso!" });
+										});
+									}
+								);
+							}
+						);
+					});
+				}
+			);
+		});
+	} catch (error) {
+		return res.status(500).json({ error: "Erro ao processar os dados: " + error.message });
+	}
 };
 
 module.exports = createCadastroOng;

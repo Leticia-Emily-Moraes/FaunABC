@@ -27,7 +27,6 @@ const createCadastroUser = async (req, res) => {
 	const celularFormatado = formatarTelefone(celular);
 	const telefoneFormatado = telefone ? formatarTelefone(telefone) : null;
 	const celularResFormatado = formatarTelefone(celularRes);
-
 	const senhaHash = await bcrypt.hash(senha, 10);
 
 	if (
@@ -87,17 +86,18 @@ const createCadastroUser = async (req, res) => {
 				const sqlSelectId = `SELECT IdPFisico FROM CadastroPfisico WHERE Email = ?`;
 				db.query(sqlSelectId, [email], (err, result) => {
 					if (err) {
-						return res.status(500).json({
-							error: "Erro ao obter ID: " + err.message,
+						return db.rollback(() => {
+							res.status(500).json({
+								error: "Erro ao obter ID: " + err.message,
+							});
 						});
 					}
 
 					const idUser = result[0].IdPFisico;
 
 					const sqlResponsavel = `
-                INSERT INTO CadastroResponsavel (PrimeiroNome, Sobrenome, Celular, NivelParental, IdUser)
-                VALUES (?,?,?,?,?)`;
-
+                    INSERT INTO CadastroResponsavel (PrimeiroNome, Sobrenome, Celular, NivelParental, IdUser)
+                    VALUES (?,?,?,?,?)`;
 					db.query(
 						sqlResponsavel,
 						[
@@ -121,7 +121,6 @@ const createCadastroUser = async (req, res) => {
 							const sqlEndereco = `
                         INSERT INTO Endereco (Logradouro, Numero, Bairro, Cidade, Cep, IdUser)
                         VALUES (?,?,?,?,?,?)`;
-
 							db.query(
 								sqlEndereco,
 								[
@@ -142,21 +141,42 @@ const createCadastroUser = async (req, res) => {
 											});
 										});
 									}
-									db.commit((err) => {
-										if (err) {
-											return db.rollback(() => {
-												res.status(500).json({
-													error:
-														"Erro ao finalizar transação: " +
-														err.message,
+
+									const sqlLogin = `
+                            INSERT INTO Login (Usuario, Senha, TipoUsuario, IdPessoal)
+                            VALUES (?,?,?,?)`;
+									db.query(
+										sqlLogin,
+										[email, senhaHash, "PFisico", idUser],
+										(err, result) => {
+											if (err) {
+												return db.rollback(() => {
+													res.status(500).json({
+														error:
+															"Erro ao criar Login: " +
+															err.message,
+													});
+												});
+											}
+
+											db.commit((err) => {
+												if (err) {
+													return db.rollback(() => {
+														res.status(500).json({
+															error:
+																"Erro ao finalizar transação: " +
+																err.message,
+														});
+													});
+												}
+
+												res.status(201).json({
+													message:
+														"Cadastro criado com sucesso!",
 												});
 											});
-										}
-										res.status(201).json({
-											message:
-												"Cadastro criado com sucesso!",
-										});
-									});
+										},
+									);
 								},
 							);
 						},
