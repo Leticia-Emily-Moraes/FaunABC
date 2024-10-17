@@ -72,12 +72,21 @@ CREATE TABLE CadastroBiologo (
 -- Tabela de login que associa diferentes usuários
 CREATE TABLE Login (
     IdLogin INT AUTO_INCREMENT PRIMARY KEY,
-    IdOng VARCHAR(20),
+    Usuario VARCHAR(150) NOT NULL UNIQUE,
+    Senha VARCHAR(60) NOT NULL,
+    TipoUsuario ENUM('PFisico', 'ONG', 'Biologo') NOT NULL, 
     IdPessoal VARCHAR(20),
+    IdOng VARCHAR(20),
     IdBiologo VARCHAR(20),
+    DataUltimoLogin DATETIME NOT NULL DEFAULT NOW(),
+    FOREIGN KEY (IdPessoal) REFERENCES CadastroPfisico (IdPFisico),
     FOREIGN KEY (IdOng) REFERENCES CadastroONG (IdONG),
     FOREIGN KEY (IdBiologo) REFERENCES CadastroBiologo (IdProfissionais),
-    FOREIGN KEY (IdPessoal) REFERENCES CadastroPfisico (IdPFisico)
+    CHECK (
+        (IdPessoal IS NOT NULL AND IdOng IS NULL AND IdBiologo IS NULL) OR
+        (IdPessoal IS NULL AND IdOng IS NOT NULL AND IdBiologo IS NULL) OR
+        (IdPessoal IS NULL AND IdOng IS NULL AND IdBiologo IS NOT NULL)
+    )
 );
 
 -- Cadastro de endereços
