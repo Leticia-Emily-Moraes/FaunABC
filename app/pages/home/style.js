@@ -67,5 +67,4 @@ export const Div = styled.View`
 	width: 157.5px;
 	height: 150px;
 	border-radius: 10px;
-	background-color: brown;
 `;

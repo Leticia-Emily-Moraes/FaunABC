@@ -2,6 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from "../../context/themeContext";
 import { Feather, Octicons, MaterialCommunityIcons } from "@expo/vector-icons";
+
 import Home from "../../pages/home";
 
 const Tab = createBottomTabNavigator();

@@ -10,11 +10,13 @@ import {
 	Title,
 	Div,
 } from "./style";
+import { NavSuperior } from "../../components";
+import { NavSuperior, NavPrincipal } from "../../components";
 import "react-native-gesture-handler";
-
 function Home() {
 	return (
 		<ContainerPP>
+			<NavSuperior/>
 			<ViewScroll>
 				<ContainerConteudo>
 					<ContainerConteudo1>

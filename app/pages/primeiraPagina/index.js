@@ -44,7 +44,7 @@ const PrimeiraPagina = ({ navigation }) => {
 				<Button
 					isFull={true}
 					title="Sem Logar"
-					// onPress={() => navigation.navigate("")}
+					//onPress={() => navigation.navigate("Home")}
 				/>
 			</ContainerButtons>
 			<IconeFolha />
