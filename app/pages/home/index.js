@@ -2,7 +2,6 @@ import React from "react";
 import { Container, ContainerComDoisBlocos, ContainerScroll } from "./style";
 import { ContainerComClick } from "../../components";
 import "react-native-gesture-handler";
-
 function Home() {
 	return (
 		<ContainerScroll>
