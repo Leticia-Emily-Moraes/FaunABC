@@ -3,6 +3,7 @@ export { default as AccordionOffline } from "./accordionOffline";
 export { default as Button } from "./button";
 export { default as ButtonsRedondos } from "./buttonsRedondos";
 export { default as CardOrgaos } from "./cardNumEmergencia";
+export { default as ContainerComClick } from "./containerComClick";
 export { default as IconeFolha } from "./iconFolha";
 export { default as InputCEP } from "./inputCEP";
 export { default as InputCNPJ } from "./inputCNPJ";
