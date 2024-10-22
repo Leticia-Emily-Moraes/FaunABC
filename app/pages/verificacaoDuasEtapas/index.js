@@ -16,6 +16,8 @@ import {
 	Link,
 } from "../../components";
 
+import { VerificaCodigo } from "../../service/api/apiVerificacaoDoCodigo";
+
 const VerificacaoDuasEtapas = ({ navigation, route }) => {
 	const { email, isPasswordReset } = route.params;
 	const [codigo, setCodigo] = useState("");
@@ -26,16 +28,26 @@ const VerificacaoDuasEtapas = ({ navigation, route }) => {
 	// 	setIsEmail(prevIsEmail => !prevIsEmail);
 	// };
 
-	const handleVerification = () => {
+	const handleVerification = async () => {
 		if (codigo.length === 0) {
 			setMensagemErro("Por favor, insira o código de verificação.");
 			return;
-		} else {
-			if (isPasswordReset) {
-				navigation.navigate("Login");      
+		}
+
+		try {
+			const resultado = await VerificaCodigo(email, codigo);
+
+			if (resultado.message === "Verificação concluída com sucesso!") {
+				if (isPasswordReset) {
+					navigation.navigate("Login");
+				} else {
+					navigation.navigate("Default");
+				}
 			} else {
-				navigation.navigate("Default");
+				setMensagemErro("Código de verificação incorreto");
 			}
+		} catch (error) {
+			setMensagemErro("Erro ao verificar código. Tente novamente");
 		}
 	};
 
