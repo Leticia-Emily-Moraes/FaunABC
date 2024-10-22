@@ -3,7 +3,7 @@ import axios from "axios";
 export const enviarDadosONG = async (dadosCadastroOng) => {
 	try {
 		const response = await axios.post(
-			"http://172.25.0.101:3001/api/addOng",
+			"http://192.168.200.156:3001/api/addOng",
 			dadosCadastroOng,
 			{
 				headers: {

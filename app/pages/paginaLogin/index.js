@@ -16,15 +16,16 @@ import {
 	IconeFolha,
 	ButtonsRedondos,
 	LogoPadrao,
-	Link
+	Link,
 } from "../../components";
 import { Apple, Facebook, Google } from "../../assets/imgs";
+import { Login as loginAPI } from "../../service/api/apiLogin";
 
 function Login({ navigation }) {
 	const [email, setEmail] = useState("");
 	const [senha, setSenha] = useState("");
 	const [mensagemErro, setMensagemErro] = useState("");
-	const [isPasswordReset, setIsPasswordReset] = useState("");
+	const [isPasswordReset, setIsPasswordReset] = useState(false);
 
 	const haveEmail = () => {
 		if (email) {
@@ -37,14 +38,22 @@ function Login({ navigation }) {
 		}
 	};
 
-	const handleVerification = () => {
-		if (email || senha) {
+	const handleVerification = async () => {
+		if (!email || !senha) {
+			setMensagemErro("Preencha os campos");
+			return;
+		}
+
+		try {
+			const data = await loginAPI(email, senha);
 			navigation.navigate("VerificacaoDuasEtapas", {
 				email: email,
 				isPasswordReset: isPasswordReset,
 			});
-		} else {
-			setMensagemErro("Preencha os campos");
+		} catch (error) {
+			setMensagemErro(
+				"Erro ao realizar login. Verifique suas credenciais."
+			);
 		}
 	};
 	return (

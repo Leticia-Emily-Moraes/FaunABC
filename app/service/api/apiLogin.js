@@ -1,10 +1,13 @@
 import axios from "axios";
 
-export const enviarDadosUser = async (dadosCadastroUser) => {
+export const Login = async (email,senha) => {
 	try {
 		const response = await axios.post(
-			"http://192.168.200.156:3001/api/addUser",
-			dadosCadastroUser,
+			"http://192.168.200.156:3001/api/loginUser",
+			{
+                email,
+                senha,
+            },
 			{
 				headers: {
 					"Content-Type": "application/json",

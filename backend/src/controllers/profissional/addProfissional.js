@@ -87,19 +87,50 @@ const createCadastroBio = async (req, res) => {
 						});
 					}
 
-					db.commit((err) => {
+					// Obtenha o Id do biólogo recém-criado
+					const sqlSelectId = `SELECT IdProfissionais FROM CadastroBiologo WHERE Email = ?`;
+					db.query(sqlSelectId, [email], (err, result) => {
 						if (err) {
 							return db.rollback(() => {
 								res.status(500).json({
-									error:
-										"Erro ao finalizar transação: " +
-										err.message,
+									error: "Erro ao obter ID: " + err.message,
 								});
 							});
 						}
-						res.status(201).json({
-							message: "Cadastro criado com sucesso!",
-						});
+
+						const idBiologo = result[0].IdProfissionais;
+
+						// Insira os dados na tabela de login
+						const sqlLogin = `
+						INSERT INTO Login (Usuario, Senha, TipoUsuario, IdBiologo)
+						VALUES (?,?,?,?)`;
+
+						db.query(
+							sqlLogin,
+							[email, senhaHash, 'Biologo', idBiologo],
+							(err, result) => {
+								if (err) {
+									return db.rollback(() => {
+										res.status(500).json({
+											error: "Erro ao criar login: " + err.message,
+										});
+									});
+								}
+
+								db.commit((err) => {
+									if (err) {
+										return db.rollback(() => {
+											res.status(500).json({
+												error: "Erro ao finalizar transação: " + err.message,
+											});
+										});
+									}
+									res.status(201).json({
+										message: "Cadastro de biólogo criado com sucesso!",
+									});
+								});
+							},
+						);
 					});
 				},
 			);
