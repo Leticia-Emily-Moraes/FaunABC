@@ -3,17 +3,17 @@ import styled from "styled-components/native";
 export const ButtonPrincipal = styled.TouchableOpacity`
 	display: flex;
 	width: ${(props) => (props.isFull === true ? "80%" : "auto")};
-	height: 30px;
 	padding: 3px 22px;
 	justify-content: center;
 	align-items: center;
-	gap: 10.4px;
 	border-radius: 15px;
-	background-color: ${(props) => props.theme.colors.bgButton};
+	background-color: ${(props) => 
+	props.isActive ? props.theme.colors.bgButtonActive : props.theme.colors.bgButton};
 `;
 
 export const ButtonText = styled.Text`
-	color: ${(props) => props.theme.colors.textButton};
+	color: ${(props) => 
+	props.isActive ? props.theme.colors.textButtonActive : props.theme.colors.textButton};
 	font-family: "Inter-Bold";
-	font-size: ${(props) => props.theme.fontsSize.textoMenor};
+	font-size: ${(props) => props.theme.fontsSize.TextoPequeno};
 `;
