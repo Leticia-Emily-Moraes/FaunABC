@@ -3,7 +3,7 @@ import { AccordionOffline, IconeFolha } from "../../components";
 import { Container, ContentView, ContainerText, TextoTitulo } from "./style";
 import "react-native-gesture-handler";
 
-function AjudasRapidas() {
+function AjudasRapidasOffline() {
 	return (
 		<Container>
 			<ContentView>
@@ -34,4 +34,4 @@ function AjudasRapidas() {
 	);
 }
 
-export default AjudasRapidas;
+export default AjudasRapidasOffline;

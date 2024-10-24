@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from "../../context/themeContext";
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
-import { TelefonesOffline, AjudasRapidas} from "../../pages";
+import { TelefonesOffline, AjudasRapidasOffline} from "../../pages";
 
 const Tab = createBottomTabNavigator();
 
@@ -45,7 +45,7 @@ function NavOffline() {
 		>
 			<Tab.Screen
 				name="Plus"
-				component={AjudasRapidas}
+				component={AjudasRapidasOffline}
 			/>
 			<Tab.Screen
 				name="Call"

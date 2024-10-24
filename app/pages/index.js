@@ -1,4 +1,5 @@
-export { default as AjudasRapidas } from "./ajudasRapidas";
+export { default as AjudasRapidasOffline } from "./ajudasRapidasOffline";
+export { default as AjudasRapidas } from "./ajudasRapida";
 export { default as CadastroDadosEmergenciasUser } from "./cadastroDadosEmergencia";
 export { default as CadastroDadosOng } from "./cadastroDadosONG";
 export { default as CadastroDadosPessoaisUser } from "./cadastroDadosPessoaisUser";
@@ -18,5 +19,6 @@ export { default as PerfilProfissional } from "./perfilProfissional";
 export { default as PerfilUsuario } from "./perfilUsuario";
 export { default as PrimeiraPagina } from "./primeiraPagina";
 export { default as RedefinirSenha } from "./redefinirSenha";
+export { default as TelefonesDeEmergencia } from "./telefonesDeEmergencia";
 export { default as VerificacaoDuasEtapas } from "./verificacaoDuasEtapas";
 
