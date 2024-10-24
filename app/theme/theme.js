@@ -13,6 +13,7 @@ export const lightTheme = {
   colors: {
     bg: "#F5FDEE",
     bgButton: "#537552",
+    bgButtonActive: "#008DC4",
     bgInput: "#BAD9A2",
     bgRadioButton: "#00524B",
     bgAccordionButton: "#00524B",
@@ -20,6 +21,7 @@ export const lightTheme = {
     bgTitulo: "#00524B",
     text: "#00524b",
     textButton: "#BAD9A2",
+    textButtonActive: "#002320",
     textRadioButton: "#BAD9A2",
     textAccordionButton: "#BAD9A2",
     textAccordionContainer: "#00524B",
@@ -43,6 +45,7 @@ export const darkTheme = {
   colors: {
     bg: "#002320",
     bgButton: "#BAD9A2",
+    bgButtonActive: "#008DC4",
     bgInput: "#537552",
     bgRadioButton: "#537552",
     bgAccordionButton: "#537552",
@@ -50,6 +53,7 @@ export const darkTheme = {
     bgTitulo: "#BAD9A2",
     text: "#BAD9A2",
     textButton: "#00524B",
+    textButtonActive: "#002320",
     textRadioButton: "#BAD9A2",
     textAccordionButton: "#BAD9A2",
     textAccordionContainer: "#00524B",
