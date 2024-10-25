@@ -1,30 +1,49 @@
 import React from "react";
-import { ContainerUp, BotaoPerfilUser, MenuButton } from "./style";
-import { InputSimples } from "../InputSimples/style";
-import { FontAwesome, AntDesign, Ionicons } from "@expo/vector-icons";
+import { ContainerUp, BotaoPerfilUser, MenuButton, InputSimples } from "./style";
+import {
+	AntDesign,
+	Ionicons,
+	MaterialCommunityIcons,
+	SimpleLineIcons,
+} from "@expo/vector-icons";
+import { useTheme } from "../../context/themeContext";
+import { useNavigation } from "@react-navigation/native";
 
 function NavSuperior() {
+	const { theme } = useTheme();
+	const navigation = useNavigation();
+
 	return (
 		<ContainerUp>
 			<BotaoPerfilUser>
-				<FontAwesome
-					name="user-circle-o"
-					size={24}
-					color="#537552"
+				<MaterialCommunityIcons
+					name="account-circle-outline"
+					size={40}
+					color={theme.colors.iconThemeColor}
 				/>
 			</BotaoPerfilUser>
 			<InputSimples>
 				<AntDesign
 					name="search1"
-					size={25}
+					size={30}
 					color="#537552"
 				/>
-			</InputSimples>
-			<MenuButton>
 				<Ionicons
+					name="camera-outline"
+					size={30}
+					color="black"
+				/>
+				<MaterialCommunityIcons
+					name="microphone-outline"
+					size={30}
+					color="black"
+				/>
+			</InputSimples>
+			<MenuButton onPress={() => navigation.openDrawer()}>
+				<SimpleLineIcons
 					name="menu"
-					size={24}
-					color="#537552"
+					size={40}
+					color={theme.colors.iconThemeColor}
 				/>
 			</MenuButton>
 		</ContainerUp>

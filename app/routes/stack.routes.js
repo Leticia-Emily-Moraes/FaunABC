@@ -1,12 +1,39 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { PrimeiraPagina, Home, CadastroDadosEmergenciasUser, CadastroDadosOng, CadastroDadosPessoaisUser, AjudasRapidas, CadastroDadosProfissionais, CadastroDadosUser, CadastroEndereco, ConfirmacaoDeCadastro, Default, DefaultOffline, EscolhaPerfil, Login, PerfilOng, PerfilPessoal, PerfilProfissional, PerfilUsuario, RedefinirSenha, TelefonesOffline, VerificacaoDuasEtapas } from "../pages";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+	PrimeiraPagina,
+	Home,
+	CadastroDadosEmergenciasUser,
+	CadastroDadosOng,
+	CadastroDadosPessoaisUser,
+	AjudasRapidas,
+	CadastroDadosProfissionais,
+	CadastroDadosUser,
+	CadastroEndereco,
+	ConfirmacaoDeCadastro,
+	Default,
+	DefaultOffline,
+	EscolhaPerfil,
+	Login,
+	PerfilOng,
+	PerfilPessoal,
+	PerfilProfissional,
+	PerfilUsuario,
+	RedefinirSenha,
+	TelefonesOffline,
+	VerificacaoDuasEtapas,
+} from "../pages";
+
+import CustomDrawerContent from "../components/drawerDefault";
+
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export function Router() {
 	return (
 		<Stack.Navigator
-			initialRouteName="Default"
+			initialRouteName="DefaultGeral"
 			screenOptions={{ headerShown: false }}
 		>
 			<Stack.Screen
@@ -62,13 +89,33 @@ export function Router() {
 				component={RedefinirSenha}
 			/>
 			<Stack.Screen
-				name="Default"
-				component={Default}
+				name="DefaultGeral"
+				component={RouterDrawer}
 			/>
 			<Stack.Screen
 				name="DefaultOffline"
 				component={DefaultOffline}
 			/>
 		</Stack.Navigator>
+	);
+}
+
+export function RouterDrawer() {
+	return (
+		<Drawer.Navigator
+			drawerPosition="right"
+			initialRouteName="Default"
+			screenOptions={{ headerShown: false, drawerType: "slide" }}
+			// drawerContent={(props) => <CustomDrawerContent {...props} />}
+		>
+			<Drawer.Screen
+				name="Default"
+				component={Default}
+			/>
+			<Drawer.Screen
+				name="Telefones Offline"
+				component={TelefonesOffline}
+			/>
+		</Drawer.Navigator>
 	);
 }
