@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from "../../context/themeContext";
 import { Feather, Octicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
-import Home from "../../pages/home";
+import {AjudasRapidas , Home, TelefonesDeEmergencia} from "../../pages";
 
 const Tab = createBottomTabNavigator();
 
@@ -74,11 +74,11 @@ function NavPrincipal() {
 			/>
 			<Tab.Screen
 				name="Alert"
-				component={() => null}
+				component={AjudasRapidas}
 			/>
 			<Tab.Screen
 				name="Call"
-				component={() => null}
+				component={TelefonesDeEmergencia}
 			/>
 			<Tab.Screen
 				name="Location"
