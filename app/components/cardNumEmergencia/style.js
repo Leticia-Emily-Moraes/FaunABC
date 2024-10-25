@@ -11,7 +11,7 @@ export const Container = styled.View`
 `;
 
 export const ContainerImagem = styled.View`
-	width: 40%;
+	width: 30%;
 	height: 100%;
 `;
 
@@ -38,12 +38,24 @@ export const ContainerDescricao = styled.View`
 	align-items: center;
 `;
 
+export const ContainerIcon = styled.View`
+	height: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+`;
+
 export const TituloDescricao = styled.Text`
 	color: ${(props) => props.theme.colors.text};
 	font-family: "Inter-Bold";
 	text-align: left;
 	font-size: ${(props) => props.theme.fontsSize.TextoPequeno};
 	flex-shrink: 0;
+`;
+
+export const ButtonIcon = styled.TouchableOpacity`
+	
 `;
 
 export const TextoDescricao = styled.Text`
