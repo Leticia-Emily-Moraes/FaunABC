@@ -1,18 +1,26 @@
 import React from "react";
-import { Text } from "react-native";
-import { Container } from "../escolhaPerfil/style";
-import Logo from "../../components/logoPadrao";
-import Avatar from "../../components/avatar";
-
+import { Container } from "./style";
+import SetaEsquerda from "../../components/elementosPagPerfil/iconSetaEsquerda";
+import { Avatar } from "../../components";
+import { Bandeirinha }from "../../components";
+import { ContainerTop } from "./style";
+import { ContainerAvatarFoto } from "./style";
+import { Text16 } from "./style";
+import {DivArredondada} from "../../components/elementosPagPerfil/divArredondada"
 
 function PerfilOng() {
-    return(
+    return (
         <Container>
+            <ContainerTop>
+            <SetaEsquerda/>
+            <Bandeirinha/>
+            </ContainerTop>
+            <ContainerAvatarFoto>
             <Avatar/>
-            <Text>Esse é o perfil de Ong</Text>
+            </ContainerAvatarFoto>
+            <Text16>Nome do usuário</Text16>
         </Container>
-    )
-
+    );
 };
 
 export default PerfilOng ;

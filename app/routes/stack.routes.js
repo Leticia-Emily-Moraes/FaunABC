@@ -6,7 +6,7 @@ const Stack = createStackNavigator();
 export function Router() {
 	return (
 		<Stack.Navigator
-			initialRouteName="Default"
+			initialRouteName="PerfilOng"
 			screenOptions={{ headerShown: false }}
 		>
 			<Stack.Screen
@@ -16,6 +16,10 @@ export function Router() {
 			<Stack.Screen
 				name="Home"
 				component={Home}
+			/>
+			<Stack.Screen
+				name="PerfilOng"
+				component={PerfilOng}
 			/>
 			<Stack.Screen
 				name="CadastroDadosUser"
