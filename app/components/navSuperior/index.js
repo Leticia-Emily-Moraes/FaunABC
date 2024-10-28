@@ -1,18 +1,29 @@
 import React from "react";
-import { ContainerUp, BotaoPerfilUser, MenuButton } from "./style";
-import { InputSimples } from "../InputSimples/style";
-import { FontAwesome, AntDesign, Ionicons } from "@expo/vector-icons";
+import {
+	ContainerUp,
+	BotaoPerfilUser,
+	MenuButton,
+	InputSimples,
+} from "./style";
+import {
+	AntDesign,
+	Ionicons,
+	MaterialCommunityIcons,
+	SimpleLineIcons,
+} from "@expo/vector-icons";
+import { useTheme } from "../../context/themeContext";
+import { useNavigation } from "@react-navigation/native";
 
 function NavSuperior() {
 	return (
 		<ContainerUp>
-			<BotaoPerfilUser>
-				<FontAwesome
-					name="user-circle-o"
-					size={24}
-					color="#537552"
+			<MenuButton onPress={() => navigation.openDrawer()}>
+				<SimpleLineIcons
+					name="menu"
+					size={40}
+					color={theme.colors.iconThemeColor}
 				/>
-			</BotaoPerfilUser>
+			</MenuButton>
 			<InputSimples>
 				<AntDesign
 					name="search1"
@@ -20,13 +31,13 @@ function NavSuperior() {
 					color="#537552"
 				/>
 			</InputSimples>
-			<MenuButton>
-				<Ionicons
-					name="menu"
-					size={24}
-					color="#537552"
+			<BotaoPerfilUser>
+				<MaterialCommunityIcons
+					name="account-circle-outline"
+					size={40}
+					color={theme.colors.iconThemeColor}
 				/>
-			</MenuButton>
+			</BotaoPerfilUser>
 		</ContainerUp>
 	);
 }

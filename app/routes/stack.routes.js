@@ -72,3 +72,22 @@ export function Router() {
 		</Stack.Navigator>
 	);
 }
+
+export function RouterDrawer() {
+	return (
+		<Drawer.Navigator
+			initialRouteName="Default"
+			screenOptions={{ headerShown: false, drawerType: "slide" }}
+			drawerContent={(props) => <CustomDrawerContent {...props} />}
+		>
+			<Drawer.Screen
+				name="Default"
+				component={Default}
+			/>
+			<Drawer.Screen
+				name="Telefones Offline"
+				component={TelefonesOffline}
+			/>
+		</Drawer.Navigator>
+	);
+}
