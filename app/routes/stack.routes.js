@@ -6,7 +6,7 @@ const Stack = createStackNavigator();
 export function Router() {
 	return (
 		<Stack.Navigator
-			initialRouteName="PerfilOng"
+			initialRouteName="Default"
 			screenOptions={{ headerShown: false }}
 		>
 			<Stack.Screen
@@ -67,7 +67,7 @@ export function Router() {
 			/>
 			<Stack.Screen
 				name="Default"
-				component={Default}
+				component={RouterDrawer}
 			/>
 			<Stack.Screen
 				name="DefaultOffline"
