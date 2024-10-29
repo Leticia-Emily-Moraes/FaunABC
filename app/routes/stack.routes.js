@@ -1,14 +1,42 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+	PrimeiraPagina,
+	Home,
+	CadastroDadosEmergenciasUser,
+	CadastroDadosOng,
+	CadastroDadosPessoaisUser,
+	AjudasRapidas,
+	CadastroDadosProfissionais,
+	CadastroDadosUser,
+	CadastroEndereco,
+	ConfirmacaoDeCadastro,
+	Default,
+	DefaultOffline,
+	EscolhaPerfil,
+	Login,
+	PerfilOng,
+	PerfilPessoal,
+	PerfilProfissional,
+	PerfilUsuario,
+	RedefinirSenha,
+	TelefonesOffline,
+	VerificacaoDuasEtapas,
+} from "../pages";
+
+import CustomDrawerContent from "../components/drawerDefault";
 import { PrimeiraPagina, Home, CadastroDadosEmergenciasUser, CadastroDadosOng, CadastroDadosPessoaisUser, AjudasRapidas, CadastroDadosProfissionais, CadastroDadosUser, CadastroEndereco, ConfirmacaoDeCadastro, Default, DefaultOffline, EscolhaPerfil, Login, PerfilOng, PerfilPessoal, PerfilProfissional, PerfilUsuario, RedefinirSenha, TelefonesOffline, VerificacaoDuasEtapas } from "../pages";
 import CriarAlerta from "../pages/fazerOcorrencia/index";
 import Alertas from "../pages/alertas";
+
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export function Router() {
 	return (
 		<Stack.Navigator
-			initialRouteName="CriarAlerta"
+			initialRouteName="DefaultGeral"
 			screenOptions={{ headerShown: false }}
 		>
 			<Stack.Screen
@@ -76,8 +104,8 @@ export function Router() {
 				component={RedefinirSenha}
 			/>
 			<Stack.Screen
-				name="Default"
-				component={Default}
+				name="DefaultGeral"
+				component={RouterDrawer}
 			/>
 			<Stack.Screen
 				name="DefaultOffline"

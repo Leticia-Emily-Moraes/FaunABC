@@ -15,6 +15,9 @@ import { useTheme } from "../../context/themeContext";
 import { useNavigation } from "@react-navigation/native";
 
 function NavSuperior() {
+	const { theme } = useTheme();
+	const navigation = useNavigation();
+
 	return (
 		<ContainerUp>
 			<MenuButton onPress={() => navigation.openDrawer()}>
@@ -27,8 +30,18 @@ function NavSuperior() {
 			<InputSimples>
 				<AntDesign
 					name="search1"
-					size={25}
+					size={30}
 					color="#537552"
+				/>
+				<Ionicons
+					name="camera-outline"
+					size={30}
+					color="black"
+				/>
+				<MaterialCommunityIcons
+					name="microphone-outline"
+					size={30}
+					color="black"
 				/>
 			</InputSimples>
 			<BotaoPerfilUser onPress={() => navigation.navigate("PerfilOng")}>
