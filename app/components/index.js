@@ -1,4 +1,4 @@
-export { default as Avatar } from "./avatar";
+export { default as Avatar } from "./elementosPagPerfil/avatar";
 export { default as AccordionOffline } from "./accordionOffline";
 export { default as Button } from "./button";
 export { default as ButtonsRedondos } from "./buttonsRedondos";
@@ -24,3 +24,5 @@ export { default as NavSuperior } from "./navSuperior";
 export { default as RadioButton } from "./radioButton";
 export { default as SelectNivelParental } from "./selectNivelParental";
 export { default as ToggleTheme } from "./toggleTheme";
+export {default as SetaEsquerda} from "./elementosPagPerfil/iconSetaEsquerda"
+export {default as Bandeirinha} from "./iconBookMark"

@@ -1,5 +1,10 @@
 import React from "react";
-import { ContainerUp, BotaoPerfilUser, MenuButton, InputSimples } from "./style";
+import {
+	ContainerUp,
+	BotaoPerfilUser,
+	MenuButton,
+	InputSimples,
+} from "./style";
 import {
 	AntDesign,
 	Ionicons,
@@ -15,13 +20,13 @@ function NavSuperior() {
 
 	return (
 		<ContainerUp>
-			<BotaoPerfilUser>
-				<MaterialCommunityIcons
-					name="account-circle-outline"
+			<MenuButton onPress={() => navigation.openDrawer()}>
+				<SimpleLineIcons
+					name="menu"
 					size={40}
 					color={theme.colors.iconThemeColor}
 				/>
-			</BotaoPerfilUser>
+			</MenuButton>
 			<InputSimples>
 				<AntDesign
 					name="search1"
@@ -39,13 +44,13 @@ function NavSuperior() {
 					color="black"
 				/>
 			</InputSimples>
-			<MenuButton onPress={() => navigation.openDrawer()}>
-				<SimpleLineIcons
-					name="menu"
+			<BotaoPerfilUser onPress={() => navigation.navigate("PerfilOng")}>
+				<MaterialCommunityIcons 
+					name="account-circle-outline"
 					size={40}
 					color={theme.colors.iconThemeColor}
 				/>
-			</MenuButton>
+			</BotaoPerfilUser>
 		</ContainerUp>
 	);
 }

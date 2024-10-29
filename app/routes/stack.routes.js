@@ -26,6 +26,9 @@ import {
 } from "../pages";
 
 import CustomDrawerContent from "../components/drawerDefault";
+import { PrimeiraPagina, Home, CadastroDadosEmergenciasUser, CadastroDadosOng, CadastroDadosPessoaisUser, AjudasRapidas, CadastroDadosProfissionais, CadastroDadosUser, CadastroEndereco, ConfirmacaoDeCadastro, Default, DefaultOffline, EscolhaPerfil, Login, PerfilOng, PerfilPessoal, PerfilProfissional, PerfilUsuario, RedefinirSenha, TelefonesOffline, VerificacaoDuasEtapas } from "../pages";
+import CriarAlerta from "../pages/fazerOcorrencia/index";
+import Alertas from "../pages/alertas";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -41,8 +44,20 @@ export function Router() {
 				component={PrimeiraPagina}
 			/>
 			<Stack.Screen
+				name="Alertas"
+				component={Alertas}
+			/>
+			<Stack.Screen
+				name="CriarAlerta"
+				component={CriarAlerta}
+			/>
+			<Stack.Screen
 				name="Home"
 				component={Home}
+			/>
+			<Stack.Screen
+				name="PerfilOng"
+				component={PerfilOng}
 			/>
 			<Stack.Screen
 				name="CadastroDadosUser"
@@ -103,10 +118,9 @@ export function Router() {
 export function RouterDrawer() {
 	return (
 		<Drawer.Navigator
-			drawerPosition="right"
 			initialRouteName="Default"
 			screenOptions={{ headerShown: false, drawerType: "slide" }}
-			// drawerContent={(props) => <CustomDrawerContent {...props} />}
+			drawerContent={(props) => <CustomDrawerContent {...props} />}
 		>
 			<Drawer.Screen
 				name="Default"

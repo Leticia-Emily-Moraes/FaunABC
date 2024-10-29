@@ -4,11 +4,23 @@ import { Container, Item, ItemText } from "./style";
 function CustomDrawerContent(props) {
 	return (
 		<Container>
-			<Item onPress={() => props.navigation.navigate("Home")}>
-				<ItemText>Home</ItemText>
+			<Item>
+				<ItemText>Sobre nós</ItemText>
 			</Item>
-			<Item onPress={() => props.navigation.navigate("Telefones Offline")}>
-				<ItemText>Telefones Offline</ItemText>
+			<Item>
+				<ItemText>Salvos</ItemText>
+			</Item>
+			<Item>
+				<ItemText>Tema</ItemText>
+			</Item>
+			<Item>
+				<ItemText>Desconectar conta</ItemText>
+			</Item>
+			<Item>
+				<ItemText>Mudar para conta profissional/comum</ItemText>
+			</Item>
+			<Item>
+				<ItemText>Ver tutorial</ItemText>
 			</Item>
 		</Container>
 	);

@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "../escolhaPerfil/style";
 import Logo from "../../components/logoPadrao";
-import Avatar from "../../components/avatar";
+import Avatar from "../../components/elementosPagPerfil/avatar";
 
 
 function PerfilProfissional () {
