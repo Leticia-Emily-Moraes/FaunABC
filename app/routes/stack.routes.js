@@ -1,17 +1,27 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { PrimeiraPagina, Home, CadastroDadosEmergenciasUser, CadastroDadosOng, CadastroDadosPessoaisUser, AjudasRapidas, CadastroDadosProfissionais, CadastroDadosUser, CadastroEndereco, ConfirmacaoDeCadastro, Default, DefaultOffline, EscolhaPerfil, Login, PerfilOng, PerfilPessoal, PerfilProfissional, PerfilUsuario, RedefinirSenha, TelefonesOffline, VerificacaoDuasEtapas } from "../pages";
+import CriarAlerta from "../pages/fazerOcorrencia/index";
+import Alertas from "../pages/alertas";
 const Stack = createStackNavigator();
 
 export function Router() {
 	return (
 		<Stack.Navigator
-			initialRouteName="PerfilOng"
+			initialRouteName="CriarAlerta"
 			screenOptions={{ headerShown: false }}
 		>
 			<Stack.Screen
 				name="PrimeiraPagina"
 				component={PrimeiraPagina}
+			/>
+			<Stack.Screen
+				name="Alertas"
+				component={Alertas}
+			/>
+			<Stack.Screen
+				name="CriarAlerta"
+				component={CriarAlerta}
 			/>
 			<Stack.Screen
 				name="Home"

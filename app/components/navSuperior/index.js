@@ -31,8 +31,8 @@ function NavSuperior() {
 					color="#537552"
 				/>
 			</InputSimples>
-			<BotaoPerfilUser>
-				<MaterialCommunityIcons
+			<BotaoPerfilUser onPress={() => navigation.navigate("PerfilOng")}>
+				<MaterialCommunityIcons 
 					name="account-circle-outline"
 					size={40}
 					color={theme.colors.iconThemeColor}
