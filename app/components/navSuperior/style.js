@@ -11,12 +11,30 @@ export const ContainerUp = styled.View`
 `;
 
 export const BotaoPerfilUser = styled.TouchableOpacity`
-	width: 25px;
-	height: 25px;
+	width: 40px;
+	height: 40px;
 `;
 
-
 export const MenuButton = styled.TouchableOpacity`
-	width: 25px;
-	height: 25px;
+	width: 40px;
+	height: 40px;
+`;
+
+export const InputSimples = styled.TextInput`
+	width: 250px;
+	height: 49px;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: ${(props) => props.theme.colors.bgInput};
+	margin-left: 25px;
+	margin-right: 25px;
+`;
+export const ViewInput = styled.View`
+	width: 250px;
+	height: 49px;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: ${(props) => props.theme.colors.bgInput};
+	margin-left: 25px;
+	margin-right: 25px;
 `;
