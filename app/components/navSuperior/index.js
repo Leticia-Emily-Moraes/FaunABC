@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-	ContainerUp,
-	BotaoPerfilUser,
-	MenuButton,
+	Container,
+	ButtonInterno,
+	ContainerInput,
 	InputSimples,
 } from "./style";
 import {
@@ -17,41 +17,68 @@ import { useNavigation } from "@react-navigation/native";
 function NavSuperior() {
 	const { theme } = useTheme();
 	const navigation = useNavigation();
+	const [inputText, setInputText] = useState("");
+
+	const handleBuscar = () => {
+		navigation.navigate("PesquisaAnimais", { searchText: inputText });
+	};
 
 	return (
-		<ContainerUp>
-			<MenuButton onPress={() => navigation.openDrawer()}>
+		<Container>
+			<ButtonInterno onPress={() => navigation.openDrawer()}>
 				<SimpleLineIcons
 					name="menu"
 					size={40}
 					color={theme.colors.iconThemeColor}
 				/>
-			</MenuButton>
-			<InputSimples>
-				<AntDesign
-					name="search1"
-					size={30}
-					color="#537552"
+			</ButtonInterno>
+			<ContainerInput>
+				<ButtonInterno
+					onPress={() => {
+						if (inputText === "") {
+							navigation.navigate("PesquisaAnimais");
+						} else {
+							handleBuscar();
+						}
+					}}
+				>
+					<AntDesign
+						name="search1"
+						size={30}
+						color="#BAD9A2"
+					/>
+				</ButtonInterno>
+				<InputSimples
+					value={inputText}
+					onPress={() => navigation.navigate("PesquisaAnimais")}
+					onChangeText={(text) => setInputText(text)}
+					onSubmitEditing={handleBuscar}
+					placeholder="Buscar"
+					placeholderTextColor="#BAD9A2"
 				/>
-				<Ionicons
-					name="camera-outline"
-					size={30}
-					color="black"
-				/>
+				{/* <ButtonInterno>
+					<Ionicons
+						name="camera-outline"
+						size={30}
+						color="#BAD9A2"
+					/>
+				</ButtonInterno> */}
+				{/* <ButtonInterno>
+					<MaterialCommunityIcons
+						name="microphone-outline"
+						size={30}
+						color="#BAD9A2"
+					/>
+				</ButtonInterno> */}
+			</ContainerInput>
+			<ButtonInterno onPress={() => navigation.navigate("PerfilOng")}>
 				<MaterialCommunityIcons
-					name="microphone-outline"
-					size={30}
-					color="black"
-				/>
-			</InputSimples>
-			<BotaoPerfilUser onPress={() => navigation.navigate("PerfilOng")}>
-				<MaterialCommunityIcons 
 					name="account-circle-outline"
 					size={40}
 					color={theme.colors.iconThemeColor}
 				/>
-			</BotaoPerfilUser>
-		</ContainerUp>
+			</ButtonInterno>
+		</Container>
 	);
 }
 
