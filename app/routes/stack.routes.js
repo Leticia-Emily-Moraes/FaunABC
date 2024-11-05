@@ -23,11 +23,13 @@ import {
 	RedefinirSenha,
 	TelefonesOffline,
 	VerificacaoDuasEtapas,
+	Alertas,
+	CriarAlerta,
+	PesquisaAnimais,
+	TelefonesDeEmergencia
 } from "../pages";
 
 import CustomDrawerContent from "../components/drawerDefault";
-import CriarAlerta from "../pages/fazerOcorrencia/index";
-import Alertas from "../pages/alertas";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();

@@ -29,6 +29,9 @@ export const ContainerAvatarFoto = styled.TouchableOpacity`
     height: 100px;
     flex-shrink: 0;
 `;
+export const ButtonInterno = styled.TouchableOpacity`
+    
+`;
 
 export const Text16 = styled.Text`
 	font-family: "Inter-Bold";
