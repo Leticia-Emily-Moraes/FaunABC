@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from "../../context/themeContext";
 import { Feather, Octicons, MaterialCommunityIcons } from "@expo/vector-icons";
 
-import {AjudasRapidas , Home, TelefonesDeEmergencia} from "../../pages";
+import {AjudasRapidas , Home, TelefonesDeEmergencia, Alertas, PesquisaAnimais} from "../../pages";
 
 const Tab = createBottomTabNavigator();
 
@@ -87,6 +87,13 @@ function NavPrincipal() {
 			<Tab.Screen
 				name="Email"
 				component={() => null}
+			/>
+			<Tab.Screen
+				name="PesquisaAnimais"
+				component={PesquisaAnimais}
+				options={{
+					tabBarButton: () => null,
+				}}
 			/>
 		</Tab.Navigator>
 	);
