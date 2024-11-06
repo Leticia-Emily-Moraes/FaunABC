@@ -24,4 +24,5 @@ export { default as PesquisaAnimais } from "./pesquisaAnimais";
 export { default as RedefinirSenha } from "./redefinirSenha";
 export { default as TelefonesDeEmergencia } from "./telefonesDeEmergencia";
 export { default as VerificacaoDuasEtapas } from "./verificacaoDuasEtapas";
+export { default as Animal } from "./animal";
 
