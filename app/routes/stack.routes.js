@@ -26,7 +26,8 @@ import {
 	Alertas,
 	CriarAlerta,
 	PesquisaAnimais,
-	TelefonesDeEmergencia
+	TelefonesDeEmergencia,
+	Animal
 } from "../pages";
 
 import CustomDrawerContent from "../components/drawerDefault";
@@ -111,6 +112,10 @@ export function Router() {
 			<Stack.Screen
 				name="DefaultOffline"
 				component={DefaultOffline}
+			/>
+			<Stack.Screen
+				name="AnimalDetalhes"
+				component={Animal}
 			/>
 		</Stack.Navigator>
 	);
