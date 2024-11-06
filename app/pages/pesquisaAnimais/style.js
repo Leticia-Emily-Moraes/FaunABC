@@ -30,7 +30,7 @@ export const TextoTitulo = styled.Text`
 	max-width: 80%;
 	text-transform: uppercase;
 `;
-export const CardAnimal = styled.View`
+export const CardAnimal = styled.TouchableOpacity`
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;

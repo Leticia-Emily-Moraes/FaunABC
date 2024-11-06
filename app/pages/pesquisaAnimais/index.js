@@ -9,13 +9,14 @@ import {
 	ImagemAnimal,
 	ContentCards,
 	ButtonVerMais,
-	TextoBotao
+	TextoBotao,
 } from "./style";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { animaisData } from "../../data/animais/data-animais";
 
 function PesquisaAnimais() {
 	const route = useRoute();
+	const navigation = useNavigation();
 	const [filteredAnimals, setFilteredAnimals] = useState(animaisData);
 	const [itemsToShow, setItemsToShow] = useState(10);
 
@@ -31,18 +32,19 @@ function PesquisaAnimais() {
 		setItemsToShow(itemsToShow + 10);
 	};
 
+	const handleAnimalClick = (animal) => {
+		navigation.navigate("AnimalDetalhes", { animal });
+	};
+
 	return (
 		<Container>
 			<ContentView>
 				<TextoTitulo>sugestões para você!</TextoTitulo>
 				<ContentCards>
 					{filteredAnimals.slice(0, itemsToShow).map((animal) => (
-						<CardAnimal key={animal.id}>
+						<CardAnimal key={animal.id} onPress={() => handleAnimalClick(animal)}>
 							<CardImagemAnimal>
-								<ImagemAnimal
-									source={animal.imagem}
-									resizeMode="cover"
-								/>
+								<ImagemAnimal source={animal.imagem} resizeMode="cover" />
 							</CardImagemAnimal>
 							<TextCard>{animal.nomePopular}</TextCard>
 						</CardAnimal>
