@@ -26,3 +26,4 @@ export { default as SelectNivelParental } from "./selectNivelParental";
 export { default as ToggleTheme } from "./toggleTheme";
 export {default as SetaEsquerda} from "./elementosPagPerfil/iconSetaEsquerda"
 export {default as Bandeirinha} from "./iconBookMark"
+export {default as ButtonGoBack} from "./buttonGoBack"

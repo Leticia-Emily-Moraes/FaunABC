@@ -1,139 +1,147 @@
-import React, { useState } from 'react';
-import { View, TextInput,  Text, StyleSheet } from 'react-native';
-import { Container } from './style';
-import { Input } from '../../components/inputText/style';
-import {Text16} from "../fazerOcorrencia/style"
-import { Button } from "../../components";
+import React, { useState, useEffect } from "react";
+import {
+	Container,
+	ViewContent,
+	ContainerTitulo,
+	TextoTitulo,
+	PickerWrapper,
+	Label,
+} from "./style";
+import {
+	ButtonGoBack,
+	InputText,
+	Button,
+	InputCEP,
+	InputNumero,
+} from "../../components";
+import { Picker } from "@react-native-picker/picker";
 
-function CriarAlerta ({ navigation }) {
-const [titulo, setTitulo] = useState('');
-const [subtitulo, setSubtitulo] = useState('');
+function CriarAlerta({ navigation }) {
+	const [titulo, setTitulo] = useState("");
+	const [cep, setCep] = useState("");
+	const [endereco, setEndereco] = useState("");
+	const [numero, setNumero] = useState("");
+	const [bairro, setBairro] = useState("");
+	const [cidade, setCidade] = useState("");
+	const [descricao, setDescricao] = useState("");
+	const [isRioGrandeDaSerra, setIsRioGrandeDaSerra] = useState(false);
+	const [tipoDoAlerta, setTipoDoAlerta] = useState("default");
 
-const enviarAlerta = () => {
-    if (titulo && subtitulo) {
-    navigation.navigate('Alertas', { titulo, subtitulo });
-    } else {
-    alert('Por favor, preencha todos os campos!');
-    }
-};
+	const handleAddressFound = (addressData) => {
+		if (addressData) {
+			setEndereco(addressData.logradouro || "");
+			setBairro(addressData.bairro || "");
+			setCidade(addressData.localidade || "");
+			setIsRioGrandeDaSerra(
+				!addressData.logradouro && !addressData.bairro
+			);
+		} else {
+			setEndereco("");
+			setBairro("");
+			setCidade("");
+			setIsRioGrandeDaSerra(false);
+		}
+	};
 
+	useEffect(() => {
+		if (cep.length !== 8) {
+			setEndereco("");
+			setBairro("");
+			setCidade("");
+			setIsRioGrandeDaSerra(false);
+		}
+	}, [cep]);
 
-return (
-    <Container>
-        <Text16>Título do Alerta:</Text16>
-            <Input
-			placeholder="Digite o caso"
-            value={titulo}
-            onChangeText={setTitulo}
-            />
-            <Text16>Subtítulo do Alerta:</Text16>
-    <Input
-			placeholder="Digite o subtítulo"
-            value={subtitulo}
-            onChangeText={setSubtitulo}
-    />
-    <Button title="Enviar Alerta" onPress={enviarAlerta} />
-    <Button title="Ver alertas" onPress={() => navigation.navigate("Alertas")} />
-    </Container>
-);
-};
+	return (
+		<Container>
+			<ViewContent>
+				<ContainerTitulo>
+					<ButtonGoBack />
+					<TextoTitulo>Adicionar Alerta</TextoTitulo>
+				</ContainerTitulo>
 
+				<InputText
+					TituloDoInput="Titulo do Alerta"
+					value={titulo}
+					onChangeText={setTitulo}
+					placeholder="Insira o título"
+				/>
+				<Label>Tipo da Ocorrência</Label>
+				<PickerWrapper>
+					<Picker
+						selectedValue={tipoDoAlerta}
+						onValueChange={(itemValue) =>
+							setTipoDoAlerta(itemValue)
+						}
+					>
+						<Picker.Item
+							key="default"
+							label="Selecione o tipo do alerta"
+							value=""
+						/>
+						<Picker.Item
+							label="Atropelamento"
+							value="Atropelamento"
+						/>
+						<Picker.Item
+							label="Surto Epidemiológico"
+							value="SurtoEpidemiologico"
+						/>
+						<Picker.Item
+							label="Época"
+							value="Epoca"
+						/>
+					</Picker>
+				</PickerWrapper>
+				<InputCEP
+					value={cep}
+					onChangeText={setCep}
+					onAddressFound={handleAddressFound}
+				/>
+
+				<InputText
+					TituloDoInput="Endereço:"
+					value={endereco}
+					onChangeText={setEndereco}
+					editable={isRioGrandeDaSerra}
+					placeholder="Endereço"
+				/>
+
+				<InputNumero
+					TituloDoInput="Número:"
+					value={numero}
+					onChangeNumber={setNumero}
+					placeholder="Número"
+				/>
+
+				<InputText
+					TituloDoInput="Bairro:"
+					value={bairro}
+					onChangeText={setBairro}
+					editable={isRioGrandeDaSerra}
+					placeholder="Bairro"
+				/>
+
+				<InputText
+					TituloDoInput="Cidade:"
+					value={cidade}
+					onChangeText={setCidade}
+					editable={false}
+					placeholder="Cidade"
+				/>
+				<InputText
+					TituloDoInput="Descrição:"
+					value={descricao}
+					onChangeText={setDescricao}
+					editable={false}
+					placeholder="Descreva o ocorrido"
+				/>
+				<Button
+					title="Confirmar"
+				/>
+			</ViewContent>
+		</Container>
+	);
+}
 
 export default CriarAlerta;
-
-//Código reserva
-/*
-import React, { useState } from "react";
-import { View, TextInput, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
-
-const CriarAlerta = ({ navigation }) => {
-  const [titulo, setTitulo] = useState('');
-  const [subtitulo, setSubtitulo] = useState('');
-  const [tituloValido, setTituloValido] = useState(true);
-  const [subtituloValido, setSubtituloValido] = useState(true);
-
-  const validarCampos = () => {
-    const isTituloValido = titulo.trim().length > 0;
-    const isSubtituloValido = subtitulo.trim().length > 0;
-    setTituloValido(isTituloValido);
-    setSubtituloValido(isSubtituloValido);
-    return isTituloValido && isSubtituloValido;
-  };
-
-  const enviarAlerta = () => {
-    if (validarCampos()) {
-      navigation.navigate('Alertas', { titulo, subtitulo });
-    } else {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos!');
-    }
-  };
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Título do Alerta:</Text>
-      <TextInput
-        style={[styles.input, !tituloValido && styles.inputError]}
-        placeholder="Digite o título"
-        value={titulo}
-        onChangeText={setTitulo}
-      />
-      {!tituloValido && <Text style={styles.errorMessage}>Este campo é obrigatório</Text>}
-      
-      <Text style={styles.label}>Subtítulo do Alerta:</Text>
-      <TextInput
-        style={[styles.input, !subtituloValido && styles.inputError]}
-        placeholder="Digite o subtítulo"
-        value={subtitulo}
-        onChangeText={setSubtitulo}
-      />
-      {!subtituloValido && <Text style={styles.errorMessage}>Este campo é obrigatório</Text>}
-      
-      <TouchableOpacity style={styles.button} onPress={enviarAlerta}>
-        <Text style={styles.buttonText}>Enviar Alerta</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Alertas")}>
-        <Text style={styles.buttonText}>Ver alertas</Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  input: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-  },
-  inputError: {
-    borderColor: 'red',
-  },
-  errorMessage: {
-    color: 'red',
-    fontSize: 12,
-    marginBottom: 10,
-  },
-  button: {
-    backgroundColor: '#007BFF',
-    padding: 10,
-    borderRadius: 5,
-    alignItems: 'center',
-    marginVertical: 5,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 16,
-  },
-});
-
-export default CriarAlerta;*/

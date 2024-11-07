@@ -1,13 +1,13 @@
 import axios from "axios";
 
-export const VerificaCodigo = async (email,codigoInserido) => {
+export const VerificaCodigo = async (email, codigoInserido) => {
 	try {
 		const response = await axios.post(
-			"http://192.168.200.156:3001/api/verificaCodigo",
+			"http://172.25.0.101:3001/api/verificaCodigo",
 			{
-                email,
-                codigoInserido,
-            },
+				email,
+				codigoInserido,
+			},
 			{
 				headers: {
 					"Content-Type": "application/json",

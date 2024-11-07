@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, FlatList } from "react-native";
+import React, { useState } from "react";
 import { AccordionOffline, IconeFolha, Button } from "../../components";
 import {
 	Container,
@@ -12,19 +11,8 @@ import {
 	AlertTitle,
 } from "./style";
 
-const AjudasRapidas = ({ route }) => {
+const AjudasRapidas = ({ route, navigation }) => {
 	const [isAlertas, setIsAlertas] = useState(true);
-	const [alertas, setAlertas] = useState([]);
-
-	useEffect(() => {
-		if (route.params) {
-			const { titulo, subtitulo } = route.params;
-			setAlertas((prevAlertas) => [
-				...prevAlertas,
-				{ titulo, subtitulo },
-			]);
-		}
-	}, [route.params]);
 
 	return (
 		<Container>
@@ -43,16 +31,10 @@ const AjudasRapidas = ({ route }) => {
 				</ContainerButtons>
 
 				<ContentViewAlertas isAlertas={isAlertas}>
-					<Text style={Title}>Lista de Alertas</Text>
-					<FlatList
-						data={alertas}
-						keyExtractor={(item, index) => index.toString()}
-						renderItem={({ item }) => (
-							<View style={AlertContainer}>
-								<Text style={AlertTitle}>{item.titulo}</Text>
-								<Text>{item.subtitulo}</Text>
-							</View>
-						)}
+					<Button
+						title="Adicionar Alerta"
+						onPress={() => navigation.navigate("CriarAlerta")}
+						isActive={isAlertas === false}
 					/>
 				</ContentViewAlertas>
 

@@ -3,10 +3,10 @@ import axios from "axios";
 export const ReenviarCodigo = async (email) => {
 	try {
 		const response = await axios.post(
-			"http://192.168.200.156:3001/api/reenviarCodigo",
+			"http://172.25.0.101:3001/api/reenviarCodigo",
 			{
-                email,
-            },
+				email,
+			},
 			{
 				headers: {
 					"Content-Type": "application/json",

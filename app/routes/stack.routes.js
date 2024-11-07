@@ -23,7 +23,6 @@ import {
 	RedefinirSenha,
 	TelefonesOffline,
 	VerificacaoDuasEtapas,
-	Alertas,
 	CriarAlerta,
 	PesquisaAnimais,
 	TelefonesDeEmergencia,
@@ -38,16 +37,12 @@ const Drawer = createDrawerNavigator();
 export function Router() {
 	return (
 		<Stack.Navigator
-			initialRouteName="DefaultGeral"
+			initialRouteName="CriarAlerta"
 			screenOptions={{ headerShown: false }}
 		>
 			<Stack.Screen
 				name="PrimeiraPagina"
 				component={PrimeiraPagina}
-			/>
-			<Stack.Screen
-				name="Alertas"
-				component={Alertas}
 			/>
 			<Stack.Screen
 				name="CriarAlerta"

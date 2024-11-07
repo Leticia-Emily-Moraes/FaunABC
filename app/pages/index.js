@@ -18,7 +18,6 @@ export { default as PerfilPessoal } from "./perfilPessoal";
 export { default as PerfilProfissional } from "./perfilProfissional";
 export { default as PerfilUsuario } from "./perfilUsuario";
 export { default as CriarAlerta } from "./fazerOcorrencia";
-export { default as Alertas } from "./alertas";
 export { default as PrimeiraPagina } from "./primeiraPagina";
 export { default as PesquisaAnimais } from "./pesquisaAnimais";
 export { default as RedefinirSenha } from "./redefinirSenha";

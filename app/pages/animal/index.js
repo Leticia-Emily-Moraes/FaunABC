@@ -10,8 +10,9 @@ import {
 	ContainerText,
 	TextoCard,
 } from "./style";
+import { ButtonGoBack } from "../../components";
 import { useTheme } from "../../context/themeContext";
-import { AntDesign, Entypo, Ionicons } from "@expo/vector-icons";
+import { Entypo, Ionicons } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 const Animal = () => {
@@ -25,13 +26,7 @@ const Animal = () => {
 		<Container>
 			<ViewContent>
 				<ContainerTitulo>
-					<ButtonInterno onPress={() => navigation.goBack()}>
-						<AntDesign
-							name="arrowleft"
-							size={40}
-							color={theme.colors.textButton}
-						/>
-					</ButtonInterno>
+					<ButtonGoBack></ButtonGoBack>
 					<TextoTitulo>{animal?.nomePopular}</TextoTitulo>
 				</ContainerTitulo>
 				<ViewContent>
