@@ -2,8 +2,9 @@ const createCadastroUser = require("./cadastro/addUser");
 const createCadastroBio = require("./cadastro/addProfissional");
 const createCadastroOng = require("./cadastro/addOng");
 const loginUser = require("./login/loginUsers");
-const verificarCodigo = require("./login/verificaDoisFatores")
-const reenviarCodigo = require("./login/reenviarCodigo")
+const verificarCodigo = require("./login/verificaDoisFatores");
+const reenviarCodigo = require("./login/reenviarCodigo");
+const createAlerta = require("./alertas/addAlerta");
 
 module.exports = {
 	createCadastroUser,
@@ -12,4 +13,5 @@ module.exports = {
 	loginUser,
 	verificarCodigo,
 	reenviarCodigo,
+	createAlerta,
 };

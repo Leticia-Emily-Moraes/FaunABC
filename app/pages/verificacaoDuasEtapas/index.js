@@ -15,10 +15,11 @@ import {
 	InputNumero,
 	Link,
 } from "../../components";
-
+import { useAuth } from "../../context/authContext";
 import { VerificaCodigo } from "../../service/api/apiVerificacaoDoCodigo";
 
 const VerificacaoDuasEtapas = ({ navigation, route }) => {
+	const { setUser } = useAuth();
 	const { email, isPasswordReset } = route.params;
 	const [codigo, setCodigo] = useState("");
 	const [isEmail, setIsEmail] = useState(true);
@@ -38,10 +39,12 @@ const VerificacaoDuasEtapas = ({ navigation, route }) => {
 			const resultado = await VerificaCodigo(email, codigo);
 
 			if (resultado.message === "Verificação concluída com sucesso!") {
+				const idLogin = resultado.idLogin;
 				if (isPasswordReset) {
 					navigation.navigate("Login");
 				} else {
-					navigation.navigate("Default");
+					setUser(idLogin);
+					navigation.navigate("DefaultGeral");
 				}
 			} else {
 				setMensagemErro("Código de verificação incorreto");

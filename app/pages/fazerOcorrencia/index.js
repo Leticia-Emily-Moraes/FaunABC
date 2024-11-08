@@ -14,9 +14,11 @@ import {
 	InputCEP,
 	InputNumero,
 } from "../../components";
+import { useAuth } from "../../context/authContext";
 import { Picker } from "@react-native-picker/picker";
+import { CriarAlerta } from "../../service/api/apiAddAlerta";
 
-function CriarAlerta({ navigation }) {
+function CriarAlertas({ navigation }) {
 	const [titulo, setTitulo] = useState("");
 	const [cep, setCep] = useState("");
 	const [endereco, setEndereco] = useState("");
@@ -26,6 +28,8 @@ function CriarAlerta({ navigation }) {
 	const [descricao, setDescricao] = useState("");
 	const [isRioGrandeDaSerra, setIsRioGrandeDaSerra] = useState(false);
 	const [tipoDoAlerta, setTipoDoAlerta] = useState("default");
+
+	const { idLogin } = useAuth();
 
 	const handleAddressFound = (addressData) => {
 		if (addressData) {
@@ -40,6 +44,29 @@ function CriarAlerta({ navigation }) {
 			setBairro("");
 			setCidade("");
 			setIsRioGrandeDaSerra(false);
+		}
+	};
+
+	const handleSubmit = async () => {
+		if (!titulo || tipoDoAlerta === "default" || !cep || !bairro || !cidade || !numero) {
+			alert("Todos os campos são obrigatórios!");
+			return;
+		}
+
+		const response = await CriarAlerta({
+			alerta: {
+				titulo,
+				tipoAlerta: tipoDoAlerta,
+				logradouro: endereco,
+				bairro,
+				cidade,
+				cep,
+				idAutor: idLogin,
+			},
+		});
+
+		if (response) {
+			alert(response.message);
 		}
 	};
 
@@ -138,10 +165,11 @@ function CriarAlerta({ navigation }) {
 				/>
 				<Button
 					title="Confirmar"
+					onPress={handleSubmit}
 				/>
 			</ViewContent>
 		</Container>
 	);
 }
 
-export default CriarAlerta;
+export default CriarAlertas;

@@ -1,4 +1,5 @@
 SET GLOBAL event_scheduler = ON;
+SET GLOBAL time_zone = 'America/Sao_Paulo';
 
 DROP DATABASE IF EXISTS faunaABC;
 CREATE DATABASE IF NOT EXISTS faunaABC;
@@ -105,6 +106,7 @@ CREATE TABLE IF NOT EXISTS Alerta (
 );
 
 DELIMITER //
+
 CREATE FUNCTION GerarIdPrefixed(prefix CHAR(1)) 
 RETURNS VARCHAR(20) 
 DETERMINISTIC
@@ -112,7 +114,7 @@ BEGIN
     DECLARE max_id INT;
     SET max_id = (SELECT COALESCE(MAX(CAST(SUBSTRING(IdPFisico, 2) AS UNSIGNED)), 0) FROM CadastroPfisico);
     RETURN CONCAT(prefix, LPAD(max_id + 1, 5, '0'));
-END;
+END //
 
 
 DELIMITER //

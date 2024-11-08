@@ -3,7 +3,7 @@ import axios from "axios";
 export const VerificaCodigo = async (email, codigoInserido) => {
 	try {
 		const response = await axios.post(
-			"http://172.25.0.101:3001/api/verificaCodigo",
+			"http://192.168.1.176:3001/api/verificaCodigo",
 			{
 				email,
 				codigoInserido,
