@@ -10,6 +10,7 @@ import { ThemeProvider, useTheme } from "./context/themeContext";
 import { CadastroUserProvider } from "./context/cadastroUserContext";
 import { CadastroProfissionalProvider } from "./context/cadastroProfissionalContext";
 import { CadastroOngProvider } from "./context/cadastroOngContext";
+import { AuthProvider } from "./context/authContext";
 import { LoadingContainer } from "./style";
 
 function MainApp() {
@@ -38,7 +39,9 @@ function App() {
 						<CadastroUserProvider>
 							<CadastroOngProvider>
 								<CadastroProfissionalProvider>
-									<MainApp />
+									<AuthProvider>
+										<MainApp />
+									</AuthProvider>
 								</CadastroProfissionalProvider>
 							</CadastroOngProvider>
 						</CadastroUserProvider>
