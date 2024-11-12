@@ -1,9 +1,10 @@
 import axios from "axios";
+import { API_BASE_URL } from "../../config/config"
 
 export const enviarDadosONG = async (dadosCadastroOng) => {
 	try {
 		const response = await axios.post(
-			"http://192.168.1.176:3001/api/addOng",
+			`${API_BASE_URL}/addOng`,
 			dadosCadastroOng,
 			{
 				headers: {

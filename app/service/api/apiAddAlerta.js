@@ -1,9 +1,10 @@
 import axios from "axios";
+import { API_BASE_URL } from "../../config/config"
 
 export const CriarAlerta = async (alertaData) => {
 	try {
 		const response = await axios.post(
-			"http://192.168.1.176:3001/api/addAlerta",
+			`${API_BASE_URL}/addAlerta`,
 			alertaData,
 			{
 				headers: {

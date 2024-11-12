@@ -84,18 +84,6 @@ export const animaisData = [
 		agressivo: "false",
 	},
 	{
-		id: 8,
-		imagem: require("./images/ischnocnemaguentheri.jpg"),
-		nomePopular: "Rã - do - folhiço",
-		nomeCientifico: "Ischnocnema guentheri",
-		familia: "Brachycephalidae",
-		habitat: "É encontrado no solo, podendo escalar pequenas folhas.",
-		habito: "Alimenta - se de pequenos invertebrados, pode se fingir de morto como defesa e seus filhotes não passam pela fase de girinos.\r\n",
-		caractGeral: "Possui um tamanho bem pequeno de 3,0cm.",
-		peconhento: "false",
-		agressivo: "false",
-	},
-	{
 		id: 9,
 		imagem: require("./images/buteoalbicaudatus.jpg"),
 		nomePopular: "Gavião - de - rabo - branco",
@@ -2770,20 +2758,6 @@ export const animaisData = [
 		habito: "Essa ave é geralmente observada solitária ou em pares e é mais ativa durante o dia. Costuma empoleirar - se em locais altos, como postes e árvores, onde pode avistar presas.",
 		caractGeral:
 			'O bem - te - vi é uma ave de tamanho médio, facilmente reconhecível pela sua plumagem amarela e preta, com uma característica cabeça negra. Possui um bico forte e robusto, ideal para capturar insetos, pequenos vertebrados e frutas. O nome "bem - te - vi" refere - se ao seu canto característico, que é bastante sonoro e se assemelha a sua própria denominação. Essa ave é conhecida por seu comportamento curioso e vigilante, sempre atenta ao ambiente ao redor. O bem - te - vi desempenha um papel importante no ecossistema, ajudando a controlar populações de insetos e contribuindo para a dinâmica do ambiente em que vive.',
-		peconhento: "false",
-		agressivo: "false",
-	},
-	{
-		id: 208,
-		imagem: require("./images/piayacayana.jpg"),
-		nomePopular: "Alma - de - gato",
-		nomeCientifico: "Piaya cayana ",
-		familia: "Piaya",
-		habitat:
-			"Essa espécie pode ser encontrada em bordas de mata e locais urbanos arborizados.",
-		habito: "Vive sozinha ou aos pares.",
-		caractGeral:
-			"Tem uma longa cauda e cerca de 40 a 50 cm de comprimento. Apresenta plumagem castanho - avermelhada, pescoço mais claro e peito e ventre acinzentados. A cauda é escura, com as pontas das retrizes esbranquiçadas. Além disso, possui bico amarelo e íris vermelha. Alimenta - se de artrópodes, frutos, ovos e pequenos vertebrados. A nidificação ocorre em um ninho com formato de tigela, no qual a fêmea coloca de três a seis ovos e incuba - os por cerca de 15 dias.",
 		peconhento: "false",
 		agressivo: "false",
 	},

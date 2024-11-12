@@ -48,7 +48,7 @@ function CriarAlertas({ navigation }) {
 	};
 
 	const handleSubmit = async () => {
-		if (!titulo || tipoDoAlerta === "default" || !cep || !bairro || !cidade || !numero) {
+		if (!titulo || tipoDoAlerta === "default" || !cep || !bairro || !cidade) {
 			alert("Todos os campos são obrigatórios!");
 			return;
 		}
@@ -67,6 +67,7 @@ function CriarAlertas({ navigation }) {
 
 		if (response) {
 			alert(response.message);
+			navigation.goBack()
 		}
 	};
 
