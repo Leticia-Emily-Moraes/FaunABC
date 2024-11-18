@@ -26,11 +26,11 @@ function ContainerComClick({ altura, largura, titulo, navigate,imagem /*destino*
 
 const styles = StyleSheet.create({
 	image: {
-		position: 'absolute', // Coloca a imagem ao fundo
-		width: '100%',        // Faz a imagem preencher a largura do contêiner
-		height: '100%',       // Faz a imagem preencher a altura do contêiner
-		borderRadius: 10,     // Aplica o borderRadius como no ButtonWrapper
-		resizeMode: 'cover',  // Mantém a proporção da imagem
+		position: 'absolute', 
+		width: '100%',        
+		height: '100%',
+		borderRadius: 10,     
+		resizeMode: 'cover',  
 	},
 });
 

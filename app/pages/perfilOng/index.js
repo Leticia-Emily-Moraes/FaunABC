@@ -37,7 +37,6 @@ function PerfilOng({ navigation }) {
 				<DivPerfilStyle>
 					<Text16Claro>@Nome do usuário</Text16Claro>
 				</DivPerfilStyle>
-				<TextoGrande>XX Ocorrências registradas</TextoGrande>
 				<Div2>
 					<TextoGrande>Ong</TextoGrande>
 					<MaterialIcons
