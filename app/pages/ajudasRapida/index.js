@@ -13,7 +13,8 @@ import {
 	ContainerCard,
 	ContainerTextCard,
 	TituloDescricao,
-	TextoDescricao
+	TextoDescricao,
+	TextoAlerta
 } from "./style";
 
 const AjudasRapidas = ({ route, navigation }) => {
@@ -27,6 +28,7 @@ const AjudasRapidas = ({ route, navigation }) => {
 			setError(result.error);
 		} else if (Array.isArray(result) && result.length > 0) {
 			setAlertas(result);
+			setError(null);
 		} else {
 			setAlertas([]);
 			setError("Nenhum alerta registrado nos últimos 7 dias.");
@@ -65,11 +67,11 @@ const AjudasRapidas = ({ route, navigation }) => {
 						onPress={() => navigation.navigate("CriarAlerta")}
 						isActive={isAlertas === false}
 					/>
-					{error && <TituloDescricao>{error}</TituloDescricao>}
+					{error && <TextoAlerta>{error}</TextoAlerta>}
 					{alertas.map((alerta, index) => (
 						<ContainerCard key={index}>
 							<ContainerImagemCard>
-								{/* Exibir imagem do alerta se houver */}
+								
 							</ContainerImagemCard>
 							<ContainerTextCard>
 								<ContainerDescricaoCard>

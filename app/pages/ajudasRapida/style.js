@@ -103,3 +103,11 @@ export const TextoDescricao = styled.Text`
 	word-wrap: break-word;
 	flex-grow: 1; 
 `;
+
+export const TextoAlerta= styled.Text`
+	color: ${(props) => props.theme.colors.text};
+	font-family: "Inter-Bold";
+	text-align: center;
+	font-size: ${(props) => props.theme.fontsSize.textoSemiGrande};
+	max-width: 80%;
+`;

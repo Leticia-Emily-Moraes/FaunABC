@@ -13,10 +13,6 @@ export { default as DefaultOffline } from "./defaultOff";
 export { default as EscolhaPerfil } from "./escolhaPerfil";
 export { default as Home } from "./home";
 export { default as Login } from "./paginaLogin";
-export { default as PerfilOng } from "./perfilOng";
-export { default as PerfilPessoal } from "./perfilPessoal";
-export { default as PerfilProfissional } from "./perfilProfissional";
-export { default as PerfilUsuario } from "./perfilUsuario";
 export { default as CriarAlerta } from "./fazerOcorrencia";
 export { default as PrimeiraPagina } from "./primeiraPagina";
 export { default as PesquisaAnimais } from "./pesquisaAnimais";
@@ -24,4 +20,5 @@ export { default as RedefinirSenha } from "./redefinirSenha";
 export { default as TelefonesDeEmergencia } from "./telefonesDeEmergencia";
 export { default as VerificacaoDuasEtapas } from "./verificacaoDuasEtapas";
 export { default as Animal } from "./animal";
+export { default as VerPerfil } from "./perfil";
 

@@ -6,6 +6,7 @@ const verificarCodigo = require("./login/verificaDoisFatores");
 const reenviarCodigo = require("./login/reenviarCodigo");
 const createAlerta = require("./alertas/addAlerta");
 const getAlertas = require("./alertas/verAlertas");
+const infosUsers = require("./perfils/trazerInfosPerfis");
 
 module.exports = {
 	createCadastroUser,
@@ -16,4 +17,5 @@ module.exports = {
 	reenviarCodigo,
 	createAlerta,
 	getAlertas,
+	infosUsers,
 };

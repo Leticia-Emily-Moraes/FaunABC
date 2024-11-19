@@ -1,9 +1,11 @@
 import React from "react";
 import { Container, Item, ItemText } from "./style";
+import { ToggleTheme } from "../index";
 
 function CustomDrawerContent(props) {
 	return (
 		<Container>
+			<ToggleTheme></ToggleTheme>
 			<Item>
 				<ItemText>Sobre nós</ItemText>
 			</Item>
@@ -11,17 +13,14 @@ function CustomDrawerContent(props) {
 				<ItemText>Salvos</ItemText>
 			</Item>
 			<Item>
-				<ItemText>Tema</ItemText>
-			</Item>
-			<Item>
 				<ItemText>Desconectar conta</ItemText>
 			</Item>
-			<Item>
+			{/* <Item>
 				<ItemText>Mudar para conta profissional/comum</ItemText>
-			</Item>
-			<Item>
+			</Item> */}
+			{/* <Item>
 				<ItemText>Ver tutorial</ItemText>
-			</Item>
+			</Item> */}
 		</Container>
 	);
 }

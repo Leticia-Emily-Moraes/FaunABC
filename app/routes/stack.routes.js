@@ -16,10 +16,7 @@ import {
 	DefaultOffline,
 	EscolhaPerfil,
 	Login,
-	PerfilOng,
-	PerfilPessoal,
-	PerfilProfissional,
-	PerfilUsuario,
+	VerPerfil,
 	RedefinirSenha,
 	TelefonesOffline,
 	VerificacaoDuasEtapas,
@@ -37,7 +34,7 @@ const Drawer = createDrawerNavigator();
 export function Router() {
 	return (
 		<Stack.Navigator
-			initialRouteName="Login"
+			initialRouteName="Perfil"
 			screenOptions={{ headerShown: false }}
 		>
 			<Stack.Screen
@@ -53,8 +50,8 @@ export function Router() {
 				component={Home}
 			/>
 			<Stack.Screen
-				name="PerfilOng"
-				component={PerfilOng}
+				name="Perfil"
+				component={VerPerfil}
 			/>
 			<Stack.Screen
 				name="CadastroDadosUser"

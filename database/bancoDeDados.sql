@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS CadastroResponsavel (
         'IrmaoIrma', 'Outro'
     ) NOT NULL,
     IdUser VARCHAR(20) NOT NULL,
-    FOREIGN KEY (IdUser) REFERENCES CadastroPfisico(IdPFisico)
+    FOREIGN KEY (IdUser) REFERENCES CadastroPfisico(IdPFisico) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS CadastroBiologo (
@@ -68,9 +68,9 @@ CREATE TABLE IF NOT EXISTS Login (
     IdOng VARCHAR(20),
     IdBiologo VARCHAR(20),
     DataUltimoLogin DATETIME NOT NULL DEFAULT NOW(),
-    FOREIGN KEY (IdPessoal) REFERENCES CadastroPfisico(IdPFisico),
-    FOREIGN KEY (IdOng) REFERENCES CadastroONG(IdONG),
-    FOREIGN KEY (IdBiologo) REFERENCES CadastroBiologo(IdProfissionais),
+    FOREIGN KEY (IdPessoal) REFERENCES CadastroPfisico(IdPFisico) ON DELETE CASCADE,
+    FOREIGN KEY (IdOng) REFERENCES CadastroONG(IdONG) ON DELETE CASCADE,
+    FOREIGN KEY (IdBiologo) REFERENCES CadastroBiologo(IdProfissionais) ON DELETE CASCADE,
     CHECK (
         (IdPessoal IS NOT NULL AND IdOng IS NULL AND IdBiologo IS NULL) OR
         (IdPessoal IS NULL AND IdOng IS NOT NULL AND IdBiologo IS NULL) OR
@@ -87,8 +87,8 @@ CREATE TABLE IF NOT EXISTS Endereco (
     Cep CHAR(8) NOT NULL,
     IdUser VARCHAR(20),
     IdOng VARCHAR(20),
-    FOREIGN KEY (IdUser) REFERENCES CadastroPfisico(IdPFisico),
-    FOREIGN KEY (IdOng) REFERENCES CadastroONG(IdONG)
+    FOREIGN KEY (IdUser) REFERENCES CadastroPfisico(IdPFisico) ON DELETE CASCADE,
+    FOREIGN KEY (IdOng) REFERENCES CadastroONG(IdONG) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Alerta (
@@ -102,43 +102,66 @@ CREATE TABLE IF NOT EXISTS Alerta (
     IsActive BOOLEAN NOT NULL DEFAULT TRUE,
     DataAlerta DATETIME NOT NULL DEFAULT NOW(),
     IdAutor INT,
-    FOREIGN KEY (IdAutor) REFERENCES Login(IdLogin)
+    FOREIGN KEY (IdAutor) REFERENCES Login(IdLogin) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Chats (	
+	IdChat INT AUTO_INCREMENT PRIMARY KEY,
+    IdBiologo VARCHAR(20) NOT NULL,
+    IdUsuario VARCHAR(20) NOT NULL,
+    Criado DATETIME NOT NULL DEFAULT NOW(),
+    FOREIGN KEY (IdUsuario) REFERENCES CadastroPfisico(IdPFisico) ON DELETE CASCADE,
+    FOREIGN KEY (IdBiologo) REFERENCES CadastroBiologo(IdProfissionais) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Mensagens (	
+	IdMensagem INT AUTO_INCREMENT PRIMARY KEY,
+    IdChat INT NOT NULL,
+    IdRemetente VARCHAR(20) NOT NULL,
+    Mensagem TEXT NOT NULL,
+    Enviada DATETIME NOT NULL DEFAULT NOW(),
+    lida BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (IdChat) REFERENCES Chats(IdChat) ON DELETE CASCADE,
+    FOREIGN KEY (IdRemetente) REFERENCES Login(IdLogin) ON DELETE CASCADE
 );
 
 DELIMITER //
 
-CREATE FUNCTION GerarIdPrefixed(prefix CHAR(1)) 
-RETURNS VARCHAR(20) 
-DETERMINISTIC
-BEGIN
-    DECLARE max_id INT;
-    SET max_id = (SELECT COALESCE(MAX(CAST(SUBSTRING(IdPFisico, 2) AS UNSIGNED)), 0) FROM CadastroPfisico);
-    RETURN CONCAT(prefix, LPAD(max_id + 1, 5, '0'));
-END //
-
-
-DELIMITER //
-
-CREATE TRIGGER trigger_id_CadastroPfisico
+CREATE TRIGGER apos_insert_user_padrao
 BEFORE INSERT ON CadastroPfisico
 FOR EACH ROW
 BEGIN
-    SET NEW.IdPFisico = GerarIdPrefixed('P');
-END //
+	DECLARE max_id INT;
+    
+    SELECT COALESCE(MAX(CAST(SUBSTRING(IdPFisico, 2) AS UNSIGNED)), 0) INTO max_id
+    FROM CadastroPfisico;
+    
+    SET NEW.IdPFisico = CONCAT('P', LPAD(max_id + 1, 5, '0'));
+END//
 
-CREATE TRIGGER trigger_id_CadastroONG
+CREATE TRIGGER apos_insert_user_ong
 BEFORE INSERT ON CadastroONG
 FOR EACH ROW
 BEGIN
-    SET NEW.IdONG = GerarIdPrefixed('O');
-END //
+	DECLARE max_id INT;
+    
+    SELECT COALESCE(MAX(CAST(SUBSTRING(IdONG, 2) AS UNSIGNED)), 0) INTO max_id
+    FROM CadastroONG;
+    
+    SET NEW.IdONG = CONCAT('O', LPAD(max_id + 1, 5, '0'));
+END//
 
-CREATE TRIGGER trigger_id_CadastroBiologo
+CREATE TRIGGER apos_insert_user_bio
 BEFORE INSERT ON CadastroBiologo
 FOR EACH ROW
 BEGIN
-    SET NEW.IdProfissionais = GerarIdPrefixed('B');
-END //
+	DECLARE max_id INT;
+    
+    SELECT COALESCE(MAX(CAST(SUBSTRING(IdProfissionais, 2) AS UNSIGNED)), 0) INTO max_id
+    FROM CadastroBiologo;
+    
+    SET NEW.IdProfissionais = CONCAT('B', LPAD(max_id + 1, 5, '0'));
+END//
 
 DELIMITER ;
 
