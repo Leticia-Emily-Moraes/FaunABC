@@ -44,7 +44,7 @@ export const ContainerButtons = styled.View`
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
-	gap: 50px;
+	gap: 10px;
 `;
 
 

@@ -1,5 +1,6 @@
 export { default as Avatar } from "./elementosPagPerfil/avatar";
 export { default as AccordionOffline } from "./accordionOffline";
+export { default as AccordionOnline } from "./accordionOnline";
 export { default as Button } from "./button";
 export { default as ButtonsRedondos } from "./buttonsRedondos";
 export { default as CardOrgaos } from "./cardNumEmergencia";
@@ -27,3 +28,5 @@ export { default as ToggleTheme } from "./toggleTheme";
 export {default as SetaEsquerda} from "./elementosPagPerfil/iconSetaEsquerda"
 export {default as Bandeirinha} from "./iconBookMark"
 export {default as ButtonGoBack} from "./buttonGoBack"
+export {default as CardChat} from "./cardChats"
+export {default as BubbleMensage} from "./mensagemBubble"

@@ -13,8 +13,8 @@ export const Container = styled.View`
 export const ButtonAccordion = styled(TouchableWithoutFeedback)``;
 
 export const ButtonContainer = styled.View`
-	width: 80%;
-	height: 50px;
+	width: 350px;
+	height: 75px;
 	background-color: ${(props) => props.theme.colors.bgAccordionButton};
 	display: flex;
 	flex-direction: row;
@@ -36,7 +36,7 @@ export const AccordionContainer = styled(Animated.View)`
 	top: -50px;
 	z-index: -1;
 	padding: 0px 10px;
-	width: 80%;
+	width: 350px;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
@@ -53,41 +53,8 @@ export const TextContainer = styled.Text`
 `;
 
 export const TextoTitulo = styled.Text`
-	color: ${(props) => props.theme.colors.textButton};
+	color: ${(props) => props.theme.colors.textButtonActive};
 	font-family: "Inter-Bold";
 	font-size: ${(props) => props.theme.fontsSize.textoNormal};
 	text-transform: uppercase;
-    width: 90%;
-`;
-
-export const TextoNFazer = styled.Text`
-	color: ${(props) => props.theme.colors.textButton};
-	font-family: "Inter-Bold";
-	font-size: ${(props) => props.theme.fontsSize.textoNormal};
-	text-transform: uppercase;
-    width: 90%;
-`;
-
-export const TextoSFazer = styled.Text`
-	color: ${(props) => props.theme.colors.textButton};
-	font-family: "Inter-Bold";
-	font-size: ${(props) => props.theme.fontsSize.textoNormal};
-	text-transform: uppercase;
-    width: 90%;
-`;
-
-export const TextoLocal = styled.Text`
-	color: ${(props) => props.theme.colors.textButton};
-	font-family: "Inter-Bold";
-	font-size: ${(props) => props.theme.fontsSize.textoNormal};
-	text-transform: uppercase;
-    width: 90%;
-`;
-
-export const TextoSintomas = styled.Text`
-	color: ${(props) => props.theme.colors.textButton};
-	font-family: "Inter-Bold";
-	font-size: ${(props) => props.theme.fontsSize.textoNormal};
-	text-transform: uppercase;
-    width: 90%;
 `;

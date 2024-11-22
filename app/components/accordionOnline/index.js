@@ -6,17 +6,20 @@ import {
 	TextButton,
 	TextContainer,
 	Container,
-    TextoTitulo,
-    TextoNFazer,
-    TextoLocal,
-    TextoSFazer,
-    TextoSintomas,
+	TextoTitulo,
 } from "./style";
 import { Animated, Easing } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useTheme } from "../../context/themeContext";
 
-function AccordionOnline({ title, textAccordion }) {
+function AccordionOnline({
+	title,
+	height,
+	localSocorro,
+	naoFazer,
+	deveFazer,
+	sintomas,
+}) {
 	const { theme } = useTheme();
 	const [isOpen, setIsOpen] = useState(false);
 	const [icon, setIcon] = useState("keyboard-arrow-down");
@@ -24,17 +27,16 @@ function AccordionOnline({ title, textAccordion }) {
 
 	const handlePress = () => {
 		setIsOpen((prev) => !prev);
-		if(icon == "keyboard-arrow-down"){
+		if (icon == "keyboard-arrow-down") {
 			setIcon("keyboard-arrow-up");
-		}else{
+		} else {
 			setIcon("keyboard-arrow-down");
 		}
-		
 	};
 
 	useEffect(() => {
 		Animated.timing(animatedHeight, {
-			toValue: isOpen ? 700 : 0,
+			toValue: isOpen ? height : 0,
 			duration: 50,
 			easing: Easing.ease,
 			useNativeDriver: false,
@@ -54,12 +56,14 @@ function AccordionOnline({ title, textAccordion }) {
 				</ButtonContainer>
 			</ButtonAccordion>
 			<AccordionContainer style={{ height: animatedHeight }}>
-                <TextoTitulo>{titlePrincipal}</TextoTitulo>
-                <TextoLocal>{localSocorro}</TextoLocal>
-                <TextoNFazer>{naoFazer}</TextoNFazer>
-                <TextoSFazer>{deveFazer}</TextoSFazer>
-                <TextoSintomas>{sintomas}</TextoSintomas>
-				<TextContainer>{textAccordion}</TextContainer>
+				<TextoTitulo>Local próximo especializado:</TextoTitulo>
+				<TextContainer>{localSocorro}</TextContainer>
+				<TextoTitulo>O que não fazer:</TextoTitulo>
+				<TextContainer>{naoFazer}</TextContainer>
+				<TextoTitulo>O que deve fazer:</TextoTitulo>
+				<TextContainer>{deveFazer}</TextContainer>
+				<TextoTitulo>Sintomas:</TextoTitulo>
+				<TextContainer>{sintomas}</TextContainer>
 			</AccordionContainer>
 		</Container>
 	);

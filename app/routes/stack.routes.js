@@ -23,7 +23,9 @@ import {
 	CriarAlerta,
 	PesquisaAnimais,
 	TelefonesDeEmergencia,
-	Animal
+	Animal,
+	PaginaChats,
+	ChatMensagens
 } from "../pages";
 
 import CustomDrawerContent from "../components/drawerDefault";
@@ -112,6 +114,14 @@ export function Router() {
 			<Stack.Screen
 				name="AnimalDetalhes"
 				component={Animal}
+			/>
+			<Stack.Screen
+				name="PaginaChats"
+				component={PaginaChats}
+			/>
+			<Stack.Screen
+				name="ChatMensagens"
+				component={ChatMensagens}
 			/>
 		</Stack.Navigator>
 	);

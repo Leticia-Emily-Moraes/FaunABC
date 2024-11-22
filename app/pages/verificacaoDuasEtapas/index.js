@@ -40,10 +40,11 @@ const VerificacaoDuasEtapas = ({ navigation, route }) => {
 
 			if (resultado.message === "Verificação concluída com sucesso!") {
 				const idLogin = resultado.idLogin;
+				const idUser = resultado.usuarioID;
 				if (isPasswordReset) {
 					navigation.navigate("Login");
 				} else {
-					setUser(idLogin);
+					setUser(idLogin, idUser);
 					navigation.navigate("DefaultGeral");
 				}
 			} else {

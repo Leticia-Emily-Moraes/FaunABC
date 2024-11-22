@@ -8,6 +8,7 @@ export { default as CadastroDadosUser } from "./cadastroDadosUser";
 export { default as CadastroEndereco } from "./cadastroEndereco";
 export { default as TelefonesOffline } from "./callOffline";
 export { default as ConfirmacaoDeCadastro } from "./confirmacaoCadastro";
+export { default as PaginaChats } from "./chats";
 export { default as Default } from "./defaultApp";
 export { default as DefaultOffline } from "./defaultOff";
 export { default as EscolhaPerfil } from "./escolhaPerfil";
@@ -21,4 +22,5 @@ export { default as TelefonesDeEmergencia } from "./telefonesDeEmergencia";
 export { default as VerificacaoDuasEtapas } from "./verificacaoDuasEtapas";
 export { default as Animal } from "./animal";
 export { default as VerPerfil } from "./perfil";
+export { default as ChatMensagens } from "./chatMensagens";
 

@@ -71,7 +71,7 @@ function NavSuperior() {
 					/>
 				</ButtonInterno> */}
 			</ContainerInput>
-			<ButtonInterno onPress={() => navigation.navigate("")}>
+			<ButtonInterno onPress={() => navigation.navigate("Perfil")}>
 				<MaterialCommunityIcons
 					name="account-circle-outline"
 					size={40}
