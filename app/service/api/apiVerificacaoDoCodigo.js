@@ -4,7 +4,7 @@ import { API_BASE_URL } from "../../config/config";
 export const VerificaCodigo = async (email, codigoInserido) => {
 	try {
 		const response = await axios.post(
-			`${API_BASE_URL}/verificaCodigo`,
+			`${API_BASE_URL}/api/verificaCodigo`,
 			{
 				email,
 				codigoInserido,

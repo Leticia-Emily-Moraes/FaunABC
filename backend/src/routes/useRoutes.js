@@ -31,7 +31,7 @@ router.post("/criarChat", createChat);
 router.get("/verChatsDisponiveis", verChatsDisponiveis);
 router.get("/verChatsAbertos/:userId", verChatsAbertos);
 router.get("/verChatsInativos/:userId", verChatsInativos);
-router.post("/enviarMensagen", AddMensagem);
+router.post("/enviarMensagem", AddMensagem);
 router.get("/verMensagens/:IdChat", verMensagens);
 
 module.exports = router;

@@ -1,9 +1,7 @@
 const db = require("../../config/db");
 
 const AddMensagem = async (req, res) => {
-	const {
-		mensagem: { IdChat, IdRemetente, Mensagem },
-	} = req.body;
+	const {IdChat, IdRemetente, Mensagem } = req.body;
 
 	if (!IdChat || !IdRemetente || !Mensagem) {
 		return res

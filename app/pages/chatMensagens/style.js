@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { ScrollView } from "react-native";
 
-export const Container = styled(ScrollView)`
+export const Container = styled.View`
 	width: 100%;
 	height: 100%;
 	padding: 30px 10px;
@@ -72,14 +72,13 @@ export const TituloDescricao = styled.Text`
 
 export const ContainerMensagem = styled(ScrollView)`
 	width: 100%;
-`;
+  `;
 
 export const ContentMensagem = styled.View`
 	width: 100%;
 	height: 670px;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-end;
 	border: 2.5px solid ${(props) => props.theme.colors.iconThemeColor};
 	padding: 10px;
 	border-radius: 10px;
@@ -110,6 +109,8 @@ export const ButtonPrincipal = styled.TouchableOpacity`
 	justify-content: center;
 	align-items: center;
 	border-radius: 15px;
-	background-color: ${(props) => 
-	props.isActive ? props.theme.colors.bgButtonActive : props.theme.colors.bgButton};
+	background-color: ${(props) =>
+		props.isActive
+			? props.theme.colors.bgButtonActive
+			: props.theme.colors.bgButton};
 `;

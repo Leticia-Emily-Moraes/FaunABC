@@ -4,7 +4,7 @@ import { API_BASE_URL } from "../../config/config";
 export const verMensagens = async (chatId) => {
 	try {
 		const response = await axios.get(
-			`${API_BASE_URL}/verMensagens/${chatId}`,
+			`${API_BASE_URL}/api/verMensagens/${chatId}`,
 			{
 				headers: {
 					"Content-Type": "application/json",

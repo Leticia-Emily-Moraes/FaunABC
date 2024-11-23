@@ -19,7 +19,7 @@ const verChatsAbertos = async (req, res) => {
         LEFT JOIN CadastroPfisico cpf ON c.IdUsuario = cpf.IdPFisico
         LEFT JOIN CadastroBiologo cb ON c.IdBiologo = cb.IdProfissionais
         WHERE 
-            c.IdUsuario = ?
+            (c.IdUsuario = ? || c.IdBiologo = ?)
             AND c.IsAtivo = 1;
     `;
 

@@ -14,6 +14,7 @@ import {
 	verChatsAbertos,
 	verChatsEncerrados,
 } from "../../service/api/apiVerChats";
+import { criarChat } from "../../service/api/apiCriarChat";
 
 const Chats = ({ navigation }) => {
 	const { idUser } = useAuth();
@@ -77,12 +78,32 @@ const Chats = ({ navigation }) => {
 					{error && <TextoAlerta>{error}</TextoAlerta>}
 					{Chats.map((chat) => (
 						<CardChat
-							onPress={() =>
+							onPress={async () => {
+								let chatId = chat.IdChat;
+
+								if (IsChat === "Disponiveis") {
+									try {
+										chatId = await criarChat({
+											chat: {
+												IdBiologo: chat.IdProfissionais,
+												IdUser: idUser, 
+											},
+										});
+
+										console.log(
+											"Chat criado com ID:",
+											chatId
+										);
+									} catch (error) {
+										console.error(
+											"Erro ao criar o chat:",
+											error.message
+										);
+										return;
+									}
+								}
 								navigation.navigate("ChatMensagens", {
-									chatId:
-										IsChat === "Disponiveis"
-											? chat.IdProfissionais
-											: chat.IdChat,
+									chatId,
 									nome:
 										IsChat === "Disponiveis"
 											? `${chat.PrimeiroNome || ""} ${
@@ -90,8 +111,8 @@ const Chats = ({ navigation }) => {
 											  }`.trim()
 											: chat.Biologo?.Nome ||
 											  "Nome indisponível",
-								})
-							}
+								});
+							}}
 							key={
 								IsChat === "Disponiveis"
 									? chat.IdProfissionais

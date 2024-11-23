@@ -1,10 +1,10 @@
 import axios from "axios";
-import { API_BASE_URL } from "../../config/config"
+import { API_BASE_URL } from "../../config/config";
 
 export const enviarDadosBio = async (dadosCadastroProfissional) => {
 	try {
 		const response = await axios.post(
-			`${API_BASE_URL}/addBio`,
+			`${API_BASE_URL}/api/addBio`,
 			dadosCadastroProfissional,
 			{
 				headers: {

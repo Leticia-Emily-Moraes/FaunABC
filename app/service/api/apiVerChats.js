@@ -4,7 +4,7 @@ import { API_BASE_URL } from "../../config/config";
 export const verChatsDisponives = async () => {
 	try {
 		const response = await axios.get(
-			`${API_BASE_URL}/verChatsDisponiveis`,
+			`${API_BASE_URL}/api/verChatsDisponiveis`,
 			{
 				headers: {
 					"Content-Type": "application/json",
@@ -45,7 +45,7 @@ export const verChatsDisponives = async () => {
 export const verChatsAbertos = async (idUsuario) => {
 	try {
 		const response = await axios.get(
-			`${API_BASE_URL}/verChatsAbertos/${idUsuario}`,
+			`${API_BASE_URL}/api/verChatsAbertos/${idUsuario}`,
 			{
 				headers: {
 					"Content-Type": "application/json",
@@ -86,7 +86,7 @@ export const verChatsAbertos = async (idUsuario) => {
 export const verChatsEncerrados = async (idUsuario) => {
 	try {
 		const response = await axios.get(
-			`${API_BASE_URL}/verChatsInativos/${idUsuario}`,
+			`${API_BASE_URL}/api/verChatsInativos/${idUsuario}`,
 			{
 				headers: {
 					"Content-Type": "application/json",

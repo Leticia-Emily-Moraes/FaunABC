@@ -4,7 +4,7 @@ import { API_BASE_URL } from "../../config/config";
 export const Perfil = async (idLogin) => {
 	try {
 		const response = await axios.post(
-			`${API_BASE_URL}/infosUsers`,
+			`${API_BASE_URL}/api/infosUsers`,
 			{ idLogin },
 			{
 				headers: {

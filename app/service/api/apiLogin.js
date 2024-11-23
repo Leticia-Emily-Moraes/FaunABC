@@ -1,10 +1,10 @@
 import axios from "axios";
-import { API_BASE_URL } from "../../config/config"
+import { API_BASE_URL } from "../../config/config";
 
 export const Login = async (email, senha) => {
 	try {
 		const response = await axios.post(
-			`${API_BASE_URL}/loginUser`,
+			`${API_BASE_URL}/api/loginUser`,
 			{
 				email,
 				senha,

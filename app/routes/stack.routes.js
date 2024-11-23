@@ -36,7 +36,7 @@ const Drawer = createDrawerNavigator();
 export function Router() {
 	return (
 		<Stack.Navigator
-			initialRouteName="PrimeiraPagina"
+			initialRouteName="DefaultGeral"
 			screenOptions={{ headerShown: false }}
 		>
 			<Stack.Screen
