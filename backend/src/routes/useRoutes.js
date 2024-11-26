@@ -16,6 +16,7 @@ const {
 	verMensagens,
 	verChatsAbertos,
 	verChatsInativos,
+	Emergencias
 } = require("../controllers");
 
 router.post("/addUser", createCadastroUser);
@@ -26,6 +27,7 @@ router.post("/verificaCodigo", verificarCodigo);
 router.post("/reenviarCodigo", reenviarCodigo);
 router.post("/addAlerta", createAlerta);
 router.get("/getAlertas", getAlertas);
+router.get("/getLocEmergencias", Emergencias);
 router.post("/infosUsers", infosUsers);
 router.post("/criarChat", createChat);
 router.get("/verChatsDisponiveis", verChatsDisponiveis);

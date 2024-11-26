@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
 import { API_BASE_URL } from "../../config/config";
 import { useFocusEffect } from "@react-navigation/native";
+import { KeyboardAvoidingView, Platform } from "react-native";
 import { ButtonGoBack, BubbleMensage } from "../../components";
+import FotoBiologo from "../../assets/imgPerfil/perfilBiologo.png";
 import {
 	Container,
 	ContentChat,
@@ -93,47 +95,58 @@ const ChatMensagens = ({ navigation }) => {
 		}, [chatId])
 	);
 
+	useFocusEffect(
+		React.useCallback(() => {
+			scrollViewRef.current?.scrollToEnd({ animated: true });
+		}, [])
+	);
+
 	return (
-		<Container>
-			<ContainerPrincipal>
-				<ContentChat>
-					<ButtonGoBack />
-					<ContainerView>
-						<ContainerImagem>
-							<Imagem resizeMode="cover" />
-						</ContainerImagem>
-						<ContainerText>
-							<TituloDescricao>{nome}</TituloDescricao>
-						</ContainerText>
-					</ContainerView>
-				</ContentChat>
-				<ContentMensagem>
-					<ContainerMensagem ref={scrollViewRef}>
-						{mensagens.map((mensagem, index) => (
-							<BubbleMensage
-								key={index}
-								text={mensagem.Mensagem}
-								isSender={mensagem.IdRemetente === idLogin}
+		<KeyboardAvoidingView
+			style={{ flex: 1 }}
+			behavior={Platform.OS === "ios" ? "padding" : "height"}
+		>
+			<Container>
+				<ContainerPrincipal>
+					<ContentChat>
+						<ButtonGoBack />
+						<ContainerView>
+							<ContainerImagem>
+								<Imagem resizeMode="cover" source={FotoBiologo}/>
+							</ContainerImagem>
+							<ContainerText>
+								<TituloDescricao>{nome}</TituloDescricao>
+							</ContainerText>
+						</ContainerView>
+					</ContentChat>
+					<ContentMensagem>
+						<ContainerMensagem ref={scrollViewRef}>
+							{mensagens.map((mensagem, index) => (
+								<BubbleMensage
+									key={index}
+									text={mensagem.Mensagem}
+									isSender={mensagem.IdRemetente === idLogin}
+								/>
+							))}
+						</ContainerMensagem>
+						<ContainerEscrever>
+							<Input
+								value={inputEnviarMensagem}
+								onChangeText={setInputEnviarMensagem}
+								placeholder="Digite sua mensagem"
 							/>
-						))}
-					</ContainerMensagem>
-					<ContainerEscrever>
-						<Input
-							value={inputEnviarMensagem}
-							onChangeText={setInputEnviarMensagem}
-							placeholder="Digite sua mensagem"
-						/>
-						<ButtonPrincipal onPress={fetchEnviar}>
-							<Octicons
-								name="paper-airplane"
-								size={25}
-								color="black"
-							/>
-						</ButtonPrincipal>
-					</ContainerEscrever>
-				</ContentMensagem>
-			</ContainerPrincipal>
-		</Container>
+							<ButtonPrincipal onPress={fetchEnviar}>
+								<Octicons
+									name="paper-airplane"
+									size={25}
+									color="black"
+								/>
+							</ButtonPrincipal>
+						</ContainerEscrever>
+					</ContentMensagem>
+				</ContainerPrincipal>
+			</Container>
+		</KeyboardAvoidingView>
 	);
 };
 

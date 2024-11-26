@@ -72,7 +72,7 @@ export const TituloDescricao = styled.Text`
 
 export const ContainerMensagem = styled(ScrollView)`
 	width: 100%;
-  `;
+`;
 
 export const ContentMensagem = styled.View`
 	width: 100%;

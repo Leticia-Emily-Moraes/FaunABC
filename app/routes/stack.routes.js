@@ -25,7 +25,8 @@ import {
 	TelefonesDeEmergencia,
 	Animal,
 	PaginaChats,
-	ChatMensagens
+	ChatMensagens,
+	Mapa
 } from "../pages";
 
 import CustomDrawerContent from "../components/drawerDefault";
@@ -122,6 +123,10 @@ export function Router() {
 			<Stack.Screen
 				name="ChatMensagens"
 				component={ChatMensagens}
+			/>
+			<Stack.Screen
+				name="Mapa"
+				component={Mapa}
 			/>
 		</Stack.Navigator>
 	);

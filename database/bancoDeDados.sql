@@ -127,6 +127,43 @@ CREATE TABLE IF NOT EXISTS Mensagens (
     FOREIGN KEY (IdRemetente) REFERENCES Login(IdLogin) ON DELETE CASCADE
 );
 
+CREATE TABLE NumsEmergencia (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    orgao VARCHAR(255) NOT NULL,
+    logradouro VARCHAR(100) NOT NULL,
+    numero VARCHAR(10) ,
+    bairro VARCHAR(50) NOT NULL,
+    cidade VARCHAR(50) NOT NULL,
+    cep CHAR(8) NOT NULL,
+    telefone VARCHAR(255) NOT NULL,
+    imagem VARCHAR(255) NOT NULL
+);
+
+INSERT INTO NumsEmergencia (orgao, logradouro, numero, bairro, cidade, cep, telefone, imagem) VALUES
+('Bombeiros - Ribeirao Pires', 'Av. Pref. Valdirio Prisco', '86', 'Vila Ugliengo', 'Ribeirao Pires', '09402000', '193', '../assets/imgs/numsEmergencia/bombeiros.png'),
+('Policia Militar - Ribeirao Pires', 'Av. Francisco Monteiro', '254', 'Centro', 'Ribeirao Pires', '09400310', '190', '../assets/imgs/numsEmergencia/policiaMilitar.png'),
+('Policia Civil - Ribeirao Pires', 'Av. Pref. Valdirio Prisco', '245', 'Centro', 'Ribeirao Pires', '09400005', '197', '../assets/imgs/numsEmergencia/policiaCivil.png'),
+('Ambulancia - Ribeirao Pires', 'Estr. da Colonia', '2959', 'Santa Luzia', 'Ribeirao Pires', '09405390', '192', '../assets/imgs/numsEmergencia/ambulancia.png'),
+('Ibama', 'Rodovia Helio Smidt', NULL, 'Cumbica', 'Guarulhos', '07190100', '(11) 3066-2633', '../assets/imgs/numsEmergencia/ibama.png'),
+('DP Fauna', 'Joao Domingues de Oliveira', '320', 'Centro', 'Ribeirao Pires', '09400250', '(11) 97211-1112', '../assets/imgs/numsEmergencia/dpFauna.png'),
+('Pelotao Policia Militar - Rio Grande da Serra', 'R. Pref. Carlos Jose Carlson', '222', 'Centro', 'Rio Grande da Serra', '09450000', '(11) 4820-1530', '../assets/imgs/numsEmergencia/policiaMilitar.png'),
+('Policia Civil - Rio Grande da Serra', 'Avenida Dom Pedro I', '272', 'Centro', 'Rio Grande da Serra', '09450000', '(11) 4820-1530', '../assets/imgs/numsEmergencia/policiaCivil.png'),
+('Corpo de Bombeiros Vila Alzira', 'Av. Santos Dumont', '204', 'Casa Branca', 'Santo Andre', '09015320', '193', '../assets/imgs/numsEmergencia/bombeiros.png'),
+('10º Batalhao de Policia Militar', 'Alameda Sao Caetano', '903', 'Campestre', 'Santo Andre', '09070210', '(11) 4421-9888', '../assets/imgs/numsEmergencia/policiaMilitar.png'),
+('1° Distrito Policial de Santo Andre', 'R. Xavier de Toledo', '48', 'Centro', 'Santo Andre', '09010130', '(11) 4438-1133', '../assets/imgs/numsEmergencia/policiaCivil.png'),
+('Semasa', 'Av. José Caballero', '143', 'Vila Bastos', 'Santo Andre', '09040210', '115', '../assets/imgs/numsEmergencia/semasa.png'),
+('Zoonoses Santo Andre', 'R. Igarapava', '239', 'Vila Valparaíso', 'Santo Andre', '09060170', '(11) 3356-9075', '../assets/imgs/numsEmergencia/ZoonosesSA.png'),
+('Bombeiros Jardim do Mar', 'Avenida Kennedy', '67', 'Jardim do Mar', 'Santo Andre', '09726253', '(11) 4125-1234', '../assets/imgs/numsEmergencia/bombeiros.png'),
+('Sexto Batalhao da Policia Militar Metropolitano', 'R. Giacinto Tognato', '305', 'Baeta Neves', 'Sao Bernardo do Campo', '09760370', '(11) 4121-9077', '../assets/imgs/numsEmergencia/policiaMilitar.png'),
+('3° Distrito Policial de Sao Bernardo do Campo', 'Av. Joao Firmino', '425', 'Vila Marchi', 'Sao Bernardo do Campo', '09812460', '(11) 4352-7246', '../assets/imgs/numsEmergencia/policiaCivil.png'),
+('Pronto Socorro Central Samu', 'R. Joaquim Nabuco', '364416', 'Centro', 'Sao Bernardo do Campo', '09720375', '(11) 2630-3000', '../assets/imgs/numsEmergencia/ambulancia.png'),
+('Zoonoses Sao Bernardo do Campo', 'Av. Dr. Rudge Ramos', '1740 ', 'Rudge Ramos', 'Sao Bernardo do Campo', '09638000', '(11) 4365-3349 / (11) 4367-3306', '../assets/imgs/numsEmergencia/ZoonosesSBC.png'),
+('Samu Diadema', 'R. Pascoa Campi', '390', 'Centro', 'Maua', '09942000', '192', '../assets/imgs/numsEmergencia/ambulancia.png'),
+('Centro de Controle de Zoonoses (CCZ)', 'Av. Vital Brasil Filho', '280', 'Osvaldo Cruz', 'Sao Caetano do Sul', '09541130', '0800 700 0156', '../assets/imgs/numsEmergencia/ambulancia.png'),
+('Guarda Ambiental', 'Rua Justino Paixao', '141', 'Bairro Maua', 'Sao Caetano do Sul', '09580780', '(11) 4233-7516', '../assets/imgs/numsEmergencia/GuardaAmbientalDiadema.png'),
+('Centro de Controle de Zoonoses', 'R. Capela', '380', 'Jardim Yambere', 'Diadema', '09970240', '0800 771 0963', '../assets/imgs/numsEmergencia/GuardaAmbientalDiadema.png');
+
+
 DELIMITER //
 
 CREATE TRIGGER apos_insert_user_padrao

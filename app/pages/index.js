@@ -23,4 +23,5 @@ export { default as VerificacaoDuasEtapas } from "./verificacaoDuasEtapas";
 export { default as Animal } from "./animal";
 export { default as VerPerfil } from "./perfil";
 export { default as ChatMensagens } from "./chatMensagens";
+export { default as Mapa } from "./location";
 

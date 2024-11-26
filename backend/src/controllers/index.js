@@ -13,6 +13,7 @@ const verChatsAbertos = require("./chats/verChatsAbertos");
 const verChatsInativos = require("./chats/verChatsInativos");
 const AddMensagem = require("./chats/addMensagem");
 const verMensagens = require("./chats/verMensagens");
+const Emergencias = require("./alertas/verEmergencias");
 
 module.exports = {
 	createCadastroUser,
@@ -30,4 +31,5 @@ module.exports = {
 	verChatsInativos,
 	AddMensagem,
 	verMensagens,
+	Emergencias
 };

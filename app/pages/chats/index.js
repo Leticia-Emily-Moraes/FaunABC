@@ -8,6 +8,7 @@ import {
 	ContentView,
 	TextoAlerta,
 } from "./style";
+import FotoBiologo from "../../assets/imgPerfil/perfilBiologo.png";
 import { useAuth } from "../../context/authContext";
 import {
 	verChatsDisponives,
@@ -78,6 +79,7 @@ const Chats = ({ navigation }) => {
 					{error && <TextoAlerta>{error}</TextoAlerta>}
 					{Chats.map((chat) => (
 						<CardChat
+						imagemUser={FotoBiologo}
 							onPress={async () => {
 								let chatId = chat.IdChat;
 

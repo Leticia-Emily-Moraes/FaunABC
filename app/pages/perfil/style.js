@@ -18,6 +18,12 @@ export const ViewContent = styled.View`
 	gap: 15px;
 `;
 
+export const ContainerImagem = styled.Image`
+	width: 150px;
+	height: 150px;
+	border-radius: 150px;
+`;
+
 export const ViewText = styled.View`
 	width: 80%;
 	display: flex;

@@ -59,7 +59,7 @@ export const ContainerCard = styled.View`
 `;
 
 export const ContainerImagemCard = styled.View`
-	width: 30%;
+	width: 40%;
 	height: 100%;
 `;
 
