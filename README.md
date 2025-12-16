@@ -1,5 +1,4 @@
-
-![fauna] (imagem/photo)
+<img width="1015" height="572" alt="Captura de tela 2025-12-16 123349" src="https://github.com/user-attachments/assets/18ccd7a6-91f5-4318-976e-09e5b767b710" />
 
 
 # Projeto FaunABC
